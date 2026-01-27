@@ -1,494 +1,237 @@
 ---
 name: review-hypothesis
-description: 對假說進行多角度全面審查
+description: 啟動假設審查循環。Experimentalist 評估可行性，Methodologist 審查方法。
+argument-hint: <hypothesis-id>
+allowed-tools: Read, WebSearch, Bash, Glob, Grep, Write, Task
 ---
 
-# /review-hypothesis [hypothesis-id]
+<review_hypothesis_command>
 
-## 目的
-對指定假說進行全面審查，綜合三位 Senior Postdocs 的專業意見，產出深度評估報告。
+# /review-hypothesis Command
 
-這是比 Lab Meeting 更深入的審查流程，適用於重要假說或需要詳細評估的情況。
+Start multi-agent review cycle for a hypothesis.
 
-## 使用時機
-- 重要假說在推進前需要深度評估
-- 假說遇到問題需要診斷
-- 準備投稿前的內部審查
-- 跨領域假說需要多角度評估
-- 假說排名出現爭議時
+## Workflow
 
-## 審查流程
+```
+User: /review-hypothesis H-001
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 1: Load Hypothesis                │
+    │  - Read hypothesis proposal             │
+    │  - Load domain context                  │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 2: Parallel Review (spawn both)   │
+    │  - Experimentalist: Feasibility         │
+    │  - Methodologist: Methods review        │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 3: Aggregate Feedback             │
+    │  - Combine reviews                      │
+    │  - Identify critical issues             │
+    │  - Prepare revision guidance            │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 4: Present to User                │
+    │  - Show consolidated feedback           │
+    │  - Recommend action                     │
+    │  - Update Elo based on review           │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 5: Route Next Steps               │
+    │  - Approved → Ready for testing         │
+    │  - Revise → Back to Theorist            │
+    │  - Reject → Archive with reason         │
+    └─────────────────────────────────────────┘
+```
 
-### Phase 1: 理論審查 (Theorist)
-**時間**: 20-30 分鐘
+## Execution Steps
 
-**審查重點**:
+### 1. Load Context
 
-#### 1.1 理論基礎
-- 假說的理論基礎是否紮實？
-- 與現有文獻的關係是否清晰？
-- 是否有充分的理論動機？
+```python
+hypothesis_id = args[0]  # e.g., "H-001"
+hypothesis_path = f"hypotheses/proposals/{hypothesis_id}-*.md"
+hypothesis = read(glob(hypothesis_path)[0])
 
-#### 1.2 新穎性評估
-- 與現有理論相比新穎在哪裡？
-- 是否只是已知理論的簡單應用？
-- 新穎性主張是否過度？
+domain_md = read(get_domain_path() + "/DOMAIN.md")
+project_md = read("PROJECT.md")
+```
 
-#### 1.3 理論機制
-- 因果機制是否清晰？
-- 是否有替代機制解釋相同現象？
-- 機制的邊界條件是否明確？
+### 2. Spawn Parallel Reviews
 
-#### 1.4 預測品質
-- 預測是否具體且可操作？
-- 預測是否大膽？（太顯而易見的預測價值低）
-- 是否有反面預測？（假說為假時應看到什麼）
+**To Experimentalist:**
+```markdown
+<task>
+## Hypothesis to Assess
+[Full hypothesis proposal]
 
-#### 1.5 理論貢獻
-- 對該領域的理論貢獻是什麼？
-- 是否開啟新的研究方向？
-- 是否挑戰既有認知？
+## Domain Context
+[From DOMAIN.md]
 
-**輸出**: 理論審查報告
+## Request
+Provide a Feasibility Report following the standard format.
 
----
+Focus on:
+1. Decomposition into testable sub-assumptions
+2. Data requirements and availability
+3. Resource estimate
+4. Technical risks
+5. Overall feasibility verdict
+</task>
+```
 
-### Phase 2: 可行性審查 (Experimentalist)
-**時間**: 20-30 分鐘
+**To Methodologist:**
+```markdown
+<task>
+## Hypothesis to Review
+[Full hypothesis proposal]
 
-**審查重點**:
+## Domain Context
+[From DOMAIN.md]
 
-#### 2.1 可驗證性
-- 每個預測是否可驗證？
-- 驗證方法是否可行？
-- 是否有無法驗證但關鍵的預測？
+## Request
+Provide a Methods Review Report following the standard format.
 
-#### 2.2 數據需求
-- 需要什麼數據？
-- 數據是否可得？
-- 數據品質是否足夠？
-- 數據收集的成本和時間？
+Apply six-dimension verification:
+1. Research question coverage
+2. Measurement validity
+3. Causal inference validity
+4. Statistical appropriateness
+5. Generalizability
+6. Reproducibility
 
-#### 2.3 技術可行性
-- 使用的方法是否成熟？
-- 計算資源是否足夠？
-- 是否需要新技術或新方法？
+Provide clear verdict: APPROVE / REVISE / MAJOR CONCERNS
+</task>
+```
 
-#### 2.4 資源估算
-- 時間估算（各階段）
-- 人力需求
-- 計算資源需求
-- 預算估算（如果適用）
-
-#### 2.5 風險評估
-- 技術風險有哪些？
-- 數據風險有哪些？
-- 時間風險有哪些？
-- 每個風險的緩解方案？
-
-#### 2.6 設計方案
-如果可行，提出具體驗證設計：
-- 數據來源和預處理
-- 分析流程
-- 成功/失敗判斷標準
-- 時間線
-
-**輸出**: 可行性評估報告
-
----
-
-### Phase 3: 方法論審查 (Methodologist)
-**時間**: 20-30 分鐘
-
-**審查重點**:
-
-#### 3.1 方法適當性
-- 提議的方法是否適合驗證該假說？
-- 是否有更好的方法？
-- 方法的假設是否能滿足？
-
-#### 3.2 效度威脅
-
-**內部效度**:
-- 因果推論的威脅有哪些？
-- 混淆變數是否控制？
-- 選擇偏誤風險？
-- 測量誤差問題？
-
-**外部效度**:
-- 結果可推廣嗎？
-- 樣本代表性如何？
-- 邊界條件是否清楚？
-
-**構念效度**:
-- 變數測量是否適當？
-- 操作化定義是否合理？
-
-**統計結論效度**:
-- 統計效力是否足夠？
-- 多重比較問題？
-- 假設檢驗的適當性？
-
-#### 3.3 Reproducibility
-- 分析是否可重現？
-- 數據和程式碼是否可分享？
-- 文檔是否充分？
-
-#### 3.4 領域標準
-- 是否符合該領域的方法論標準？
-- 審稿人可能提出的方法論問題？
-- 該報告的都會報告嗎？
-
-#### 3.5 倫理考量
-- 是否有倫理問題？
-- 數據使用是否合規？
-- 是否需要 IRB 批准？
-
-**輸出**: 方法論審查報告
-
----
-
-### Phase 4: 綜合評估 (Lab Manager)
-**時間**: 10-15 分鐘
-
-**任務**:
-- 整合三方意見
-- 識別共識和分歧
-- 標記關鍵問題
-- 提出綜合建議
-
-**綜合維度**:
-1. 理論價值 (1-5)
-2. 可行性 (1-5)
-3. 方法論嚴謹性 (1-5)
-4. 整體優先級建議
-
-**可能的建議**:
-- ✅ **強烈推薦**: 理論價值高，可行，方法論無重大問題
-- ✅ **推薦**: 整體正面，有小問題但可解決
-- 🔄 **條件推薦**: 需要解決特定問題後再推進
-- ⏸️ **擱置**: 目前時機不對，但未來可能可行
-- ❌ **不推薦**: 有根本性問題
-
-**輸出**: 綜合評估報告
-
----
-
-## 完整輸出格式
-
-### reviews/H-XXX_review_[date].md
+### 3. Aggregate Results
 
 ```markdown
-# Hypothesis Review: H-XXX
-
-**假說**: [標題]
-**審查日期**: [日期]
-**審查人員**: Theorist, Experimentalist, Methodologist, Lab Manager
-
----
-
-## Executive Summary
-
-**綜合評分**:
-- 理論價值: ⭐⭐⭐⭐⭐ (5/5)
-- 可行性: ⭐⭐⭐⭐ (4/5)
-- 方法論嚴謹性: ⭐⭐⭐⭐ (4/5)
-- **整體推薦**: ✅ 強烈推薦
-
-**關鍵優勢**:
-1. [優勢 1]
-2. [優勢 2]
-3. [優勢 3]
-
-**主要疑慮**:
-1. [疑慮 1]
-2. [疑慮 2]
-
-**建議**:
-[綜合建議]
-
----
-
-## Part 1: 理論審查 (Theorist)
-
-### 1.1 理論基礎
-**評分**: [1-5]
-
-[詳細評估]
-
-### 1.2 新穎性
-**評分**: [1-5]
-
-[詳細評估]
-
-### 1.3 理論機制
-**評分**: [1-5]
-
-[詳細評估]
-
-### 1.4 預測品質
-**評分**: [1-5]
-
-[詳細評估]
-
-### 1.5 理論貢獻
-**評分**: [1-5]
-
-[詳細評估]
-
-### 理論審查總結
-**優勢**:
-- [優勢 1]
-- [優勢 2]
-
-**疑慮**:
-- [疑慮 1]
-- [疑慮 2]
-
-**建議**:
-- [建議 1]
-- [建議 2]
-
----
-
-## Part 2: 可行性審查 (Experimentalist)
-
-### 2.1 可驗證性評估
-**整體可行性**: [1-5]
-
-| 預測 | 可驗證 | 方法 | 難度 |
-|------|--------|------|------|
-| P1 | ✅ | [方法] | 中 |
-| P2 | ⚠️ | [方法] | 高 |
-
-### 2.2 數據需求
-[詳細說明]
-
-### 2.3 技術可行性
-[詳細說明]
-
-### 2.4 資源估算
-- **總時間**: 8-12 週
-- **人力**: 1 RA, 0.5 Postdoc
-- **計算**: [需求]
-- **預算**: [如適用]
-
-### 2.5 風險評估
-
-| 風險 | 可能性 | 影響 | 緩解方案 |
-|------|--------|------|----------|
-| [風險1] | 中 | 高 | [方案] |
-| [風險2] | 低 | 中 | [方案] |
-
-### 2.6 驗證設計方案
-[如果可行，提供具體設計]
-
-#### 階段 1: 數據準備 (2 週)
-- [任務]
-
-#### 階段 2: 初步分析 (3 週)
-- [任務]
-
-#### 階段 3: 穩健性檢查 (2 週)
-- [任務]
-
-#### 階段 4: 結果整理 (1 週)
-- [任務]
-
-### 可行性審查總結
-**整體評估**: [可行/部分可行/不可行]
-
-**推薦方案**: [描述]
-
----
-
-## Part 3: 方法論審查 (Methodologist)
-
-### 3.1 方法適當性
-**評分**: [1-5]
-
-[詳細評估]
-
-### 3.2 效度威脅
-
-#### 內部效度
-**評分**: [1-5]
-
-**主要威脅**:
-1. [威脅 1]: [如何緩解]
-2. [威脅 2]: [如何緩解]
-
-#### 外部效度
-**評分**: [1-5]
-
-[詳細評估]
-
-#### 構念效度
-**評分**: [1-5]
-
-[詳細評估]
-
-#### 統計結論效度
-**評分**: [1-5]
-
-[詳細評估]
-
-### 3.3 Reproducibility
-**評分**: [1-5]
-
-[詳細評估]
-
-### 3.4 領域標準符合度
-**評分**: [1-5]
-
-**預期審稿人問題**:
-1. [問題 1]: [如何回應]
-2. [問題 2]: [如何回應]
-
-### 3.5 倫理考量
-[評估]
-
-### 方法論審查總結
-**必須解決的問題**:
-1. [問題 1]
-2. [問題 2]
-
-**建議改進**:
-1. [建議 1]
-2. [建議 2]
-
----
-
-## Part 4: 綜合評估 (Lab Manager)
-
-### 共識點
-- [共識 1]
-- [共識 2]
-
-### 分歧點
-- [分歧 1]: Theorist 認為 [X], Experimentalist 認為 [Y]
-- [分歧 2]: ...
-
-### 關鍵問題
-1. [問題 1] - 需要: [PI 決定/團隊討論/更多資訊]
-2. [問題 2] - 需要: [...]
-
-### 綜合評分
-
-| 維度 | 分數 | 權重 | 加權分 |
-|------|------|------|--------|
-| 理論價值 | 5 | 0.4 | 2.0 |
-| 可行性 | 4 | 0.3 | 1.2 |
-| 方法論 | 4 | 0.3 | 1.2 |
-| **總分** | - | - | **4.4/5** |
-
-### 最終建議
-**推薦級別**: ✅ 強烈推薦
-
-**理由**: [詳細理由]
-
-**條件**: [如果有條件]
-
-**下一步行動**:
-1. [行動 1] - 負責人: [X] - 截止: [日期]
-2. [行動 2] - 負責人: [Y] - 截止: [日期]
-
-### Elo 排名建議
-**建議變化**:
-- 如果推進: Elo +50 (相對於同類假說)
-- 如果有比較對象: [具體比較]
-
----
-
-## 附錄
-
-### A. 關鍵文獻清單
-1. [文獻 1]
-2. [文獻 2]
-
-### B. 技術細節
-[任何需要記錄但不適合主報告的技術細節]
-
-### C. 審查過程記錄
-- 審查開始: [時間]
-- Theorist 審查: [時長]
-- Experimentalist 審查: [時長]
-- Methodologist 審查: [時長]
-- 總耗時: [時長]
-
----
-
-**審查完成**: [日期時間]
-**下次審查**: [如果需要後續審查]
+# Review Aggregation
+
+## Feasibility Assessment (Experimentalist)
+**Verdict**: [GREEN/YELLOW/RED]
+**Key Issues**: [List]
+**Showstoppers**: [Any?]
+
+## Methods Review (Methodologist)
+**Verdict**: [APPROVE/REVISE/MAJOR CONCERNS]
+**Critical Issues**: [List]
+**Dimension Scores**: [Summary]
+
+## Consolidated Verdict
+
+| Criterion | Status | Notes |
+|-----------|--------|-------|
+| Feasibility | [Status] | [Brief] |
+| Methods | [Status] | [Brief] |
+| Overall | [READY/REVISE/REJECT] | [Rationale] |
 ```
 
----
+### 4. Output Presentation
 
-## 審查後行動
+```markdown
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ REVIEW ► H-001: [Hypothesis Title]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 1. 更新假說文件
-根據審查結果更新 `hypotheses/H-XXX.md`:
-- 加入審查日期和結果
-- 更新狀態
-- 記錄需要解決的問題
+## Feasibility Assessment
+**Verdict**: 🟢 GREEN / 🟡 YELLOW / 🔴 RED
 
-### 2. 更新排名
-如果審查影響排名，Lab Manager 更新 Elo 分數
+[Summary of key points]
 
-### 3. 分配任務
-根據「下一步行動」創建具體任務和責任人
+## Methods Review  
+**Verdict**: ✅ APPROVE / ⚠️ REVISE / ❌ MAJOR CONCERNS
 
-### 4. 追蹤進度
-Lab Manager 在後續 Lab Meeting 中追蹤行動項目完成情況
+[Summary of key points]
 
----
+─────────────────────────────────────────────────────
 
-## 使用範例
+## Critical Issues to Address
 
-```bash
-# 基本使用
-/review-hypothesis H-003
+1. **[Issue]**: [Description]
+   - Impact: [What this affects]
+   - Fix: [Suggested resolution]
 
-# 快速審查（簡化版，適合初步篩選）
-/review-hypothesis H-003 --quick
+2. **[Issue]**: [Description]
+   - Impact: [What this affects]
+   - Fix: [Suggested resolution]
 
-# 投稿前審查（最嚴格）
-/review-hypothesis H-003 --pre-submission
+─────────────────────────────────────────────────────
 
-# 跨領域審查（需要額外說明領域背景）
-/review-hypothesis H-003 --cross-domain
+## Recommendation: [APPROVE / REVISE / REJECT]
+
+[Rationale for recommendation]
+
+## Elo Update
+Previous: [Old Elo] → New: [New Elo] ([+/-] [points])
+Reason: [Review outcome]
+
+─────────────────────────────────────────────────────
+
+## Next Steps
+
+[If APPROVE]:
+✅ Hypothesis approved for testing
+→ `/execute-analysis H-001` to proceed
+
+[If REVISE]:
+⚠️ Revisions needed before proceeding
+→ "Revise H-001" to send back to Theorist with feedback
+→ Or address specific issues: "Fix issue 1 and 2"
+
+[If REJECT]:
+❌ Hypothesis not viable in current form
+→ "Archive H-001" to document and move on
+→ Or "Salvage H-001" to extract useful elements
 ```
 
----
+### 5. State Update
 
-## 最佳實踐
+```markdown
+# Update STATE.md
 
-### 審查時機
-- 假說提出後 1-2 週內進行初步審查
-- 驗證設計完成後進行第二次審查
-- 結果產出後進行投稿前審查
+## Hypothesis Pipeline
 
-### 審查深度
-- 初步假說：快速審查即可
-- 重要假說：完整審查
-- 準備投稿：最嚴格審查
+### Under Review → [New Status]
+| ID | Title | Review Outcome | Next Step |
+|----|-------|----------------|-----------|
+| H-001 | [Title] | [APPROVE/REVISE/REJECT] | [Action] |
 
-### 處理分歧
-- 記錄不同意見，不強求共識
-- 分歧通常揭示問題的複雜性
-- 需要 PI 介入時明確標記
+## Elo Rankings
+[Update based on review outcome]
+```
 
-### 建設性批評
-- 指出問題的同時提供解決方案
-- 肯定優勢，平衡批評
-- 專注於改進，而非否定
+## Review Outcome Actions
 
----
+| Outcome | Elo Change | Action |
+|---------|------------|--------|
+| APPROVE (both) | +30 | Move to Ready for Testing |
+| APPROVE (one), REVISE (one) | +10 | Minor revisions, keep in review |
+| REVISE (both) | -10 | Send back to Theorist |
+| REJECT (any) | -30 | Archive with reason |
 
-## 注意事項
-- 審查要全面但不要過度批評
-- 目標是改進假說，不是否定假說
-- 所有審查意見都應該是建設性的
-- 如果假說有根本性問題，要明確指出，不要模稜兩可
-- 審查報告是重要的知識累積，要保存好
-- 未來類似假說可以參考過往審查報告
+## Revision Loop
+
+If REVISE:
+```
+1. Consolidate feedback for Theorist
+2. Theorist revises hypothesis
+3. Re-run /review-hypothesis
+4. Repeat until APPROVE or REJECT
+```
+
+Maximum iterations: 3 (then escalate to PI)
+
+</review_hypothesis_command>
