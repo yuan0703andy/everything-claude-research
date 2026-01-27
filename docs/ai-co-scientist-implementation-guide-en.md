@@ -2,29 +2,171 @@
 
 ## Introduction
 
-This manual teaches you how to use the AI Co-Scientist system for research hypothesis development. Whether you're working on statistical theory, policy research, biomedical science, or any other research domain, this guide will help you generate, test, and refine hypotheses systematically.
+This manual teaches you how to use the **domain-agnostic** AI Co-Scientist system for research hypothesis development. The system works across any research field - statistical theory, policy research, biomedical science, economics, psychology, or any domain you configure.
+
+**Key insight**: The framework provides universal research workflows (hypothesis generation, verification, evolution) that automatically adapt to your field's specific standards through DOMAIN.md configuration.
 
 **What you'll learn**:
+- How to configure DOMAIN.md for your research field
 - How to use the three core commands (/hypothesize, /stress-test, /evolve)
+- How the system adapts to different research domains
 - Complete workflows for different research types
-- How commands integrate together
 - Troubleshooting common issues
 - Best practices from real research projects
 
 **Time to read**: 30-45 minutes
 
+**Supported domains**: Any research field - just configure DOMAIN.md with your standards
+
 ---
 
 ## Table of Contents
 
-1. [Getting Started](#getting-started)
-2. [The Three Commands](#the-three-commands)
-3. [Complete Workflows](#complete-workflows)
-4. [Domain-Specific Guides](#domain-specific-guides)
-5. [Integration Patterns](#integration-patterns)
-6. [Troubleshooting](#troubleshooting)
-7. [Best Practices](#best-practices)
-8. [Advanced Usage](#advanced-usage)
+1. [Domain Configuration](#domain-configuration)
+2. [Getting Started](#getting-started)
+3. [The Three Commands](#the-three-commands)
+4. [Complete Workflows](#complete-workflows)
+5. [Domain-Specific Guides](#domain-specific-guides)
+6. [Integration Patterns](#integration-patterns)
+7. [Troubleshooting](#troubleshooting)
+8. [Best Practices](#best-practices)
+9. [Advanced Usage](#advanced-usage)
+
+---
+
+## Domain Configuration
+
+**Most important section**: Read this first to understand how the system adapts to your field.
+
+### The Domain-Agnostic Design
+
+This framework provides **universal research workflows** that work across any field:
+
+- **Hypothesis generation** → Adapted to your field's theoretical frameworks
+- **Verification** → Adapted to your field's quality standards
+- **Evolution** → Adapted to your field's common issues
+
+The adaptation happens through a single configuration file: `DOMAIN.md`
+
+### What DOMAIN.md Contains
+
+Each research domain has a DOMAIN.md file defining:
+
+1. **Core Theoretical Frameworks** - The foundations of your field
+   - Stats: Minimax theory, empirical processes, information theory
+   - Policy: Causal inference, institutional theory, policy diffusion
+   - Biomedical: Molecular pathways, clinical trial design, drug discovery
+
+2. **Evidence Quality Tiers** - What counts as strong evidence in your field
+   - Tier 1 (Gold): Field-specific gold standard (peer-reviewed proofs, RCTs, etc.)
+   - Tier 2 (Silver): Strong supporting evidence
+   - Tier 3 (Bronze): Preliminary evidence
+   - Tier 4 (Exploratory): Speculative or anecdotal
+
+3. **Ranking Dimensions** - How to evaluate hypotheses in your field
+   - Universal: Novelty, importance, testability
+   - Domain-specific: Proof completeness (stats), identification clarity (policy), clinical relevance (biomedicine)
+
+4. **Verification Standards** - What makes a hypothesis "ready" in your field
+   - Stats: Lower bound + upper bound + explicit assumptions
+   - Policy: Clear identification + confounder analysis + robustness
+   - Biomedical: Mechanism validation + pathway plausibility + safety
+
+5. **Common Pitfalls** - Field-specific issues to watch for
+   - Stats: Missing lower bounds, unrealistic assumptions
+   - Policy: Weak identification, selection bias
+   - Biomedical: Mechanism not validated, clinical relevance unclear
+
+### Setting Up Your Domain
+
+**Option 1**: Use existing domain configuration
+```bash
+# Copy existing domain as starting point
+cd /Users/andyhou/research
+cp -r domains/stats-theory domains/[your-field]
+```
+
+**Option 2**: Create new domain from template
+```bash
+# Start with stats-theory as template
+cp domains/stats-theory/DOMAIN.md domains/[your-field]/DOMAIN.md
+
+# Edit to customize:
+# 1. Replace "minimax theory" with your core frameworks
+# 2. Update evidence tiers (what's Tier 1 in your field?)
+# 3. Define ranking dimensions (what matters in your field?)
+# 4. Specify verification standards (when is hypothesis ready?)
+# 5. List common pitfalls (what goes wrong in your field?)
+```
+
+**Included domains**:
+- `stats-theory/` - Statistical theory, minimax rates, asymptotic analysis
+- `policy-research/` - Causal inference, policy adoption, institutional analysis
+- `biomedical/` - Drug discovery, disease mechanisms, clinical translation
+
+### How Commands Use DOMAIN.md
+
+```bash
+# When you run:
+/hypothesize "Your question"
+
+# System does:
+1. Read DOMAIN.md for your project
+2. Load theoretical frameworks from DOMAIN.md
+3. Generate hypotheses using domain-appropriate approaches
+4. Rank using domain-specific dimensions
+
+# When you run:
+/stress-test H-001-A
+
+# System does:
+1. Read DOMAIN.md verification standards
+2. Apply domain-specific checks
+3. Use domain evidence tiers for novelty assessment
+4. Flag domain-specific pitfalls
+
+# When you run:
+/evolve H-001-A
+
+# System does:
+1. Read DOMAIN.md common issues
+2. Apply domain-specific fix strategies
+3. Preserve domain-important aspects
+```
+
+### Example: Same Command, Different Domains
+
+**Statistical Theory** (uses `stats-theory/DOMAIN.md`):
+```bash
+/hypothesize "Optimal estimation problem"
+# → Generates: Information-theoretic, computational, robust approaches
+# → Focus: Minimax rates, lower bounds, assumptions
+
+/stress-test H-001-A
+# → Checks: Lower bound proof, assumption realism, rate optimality
+```
+
+**Policy Research** (uses `policy-research/DOMAIN.md`):
+```bash
+/hypothesize "Policy adoption variation"
+# → Generates: Institutional, political economy, diffusion mechanisms
+# → Focus: Causal identification, observable implications
+
+/stress-test H-001-A
+# → Checks: Identification strategy, confounders, selection bias
+```
+
+**Biomedical** (uses `biomedical/DOMAIN.md`):
+```bash
+/hypothesize "Therapeutic target discovery"
+# → Generates: Pathway A, B, C interventions
+# → Focus: Mechanism, druggability, clinical relevance
+
+/stress-test H-001-A
+# → Checks: Pathway validation, mechanism plausibility, safety
+```
+
+**The commands are identical. The domain configuration makes them adapt.**
 
 ---
 
@@ -32,104 +174,174 @@ This manual teaches you how to use the AI Co-Scientist system for research hypot
 
 ### Your First Hypothesis Generation
 
-Let's walk through a simple example to understand the system.
+Let's walk through a simple example. **The commands are the same regardless of domain** - only DOMAIN.md differs.
 
 **Step 1: Generate hypotheses**
 
 ```bash
-/hypothesize "Explain why adaptive thresholding improves sparse regression rates"
+# The command is identical across all domains
+/hypothesize "[Your research question in any field]"
 ```
 
 **What happens**:
-- System generates 3-5 hypotheses from different theoretical angles
+- System reads DOMAIN.md for your field
+- Generates 3-5 hypotheses using domain-appropriate frameworks
 - Each hypothesis includes mechanism, predictions, and key references
-- System ranks them automatically and recommends top candidate
+- System ranks using domain-specific dimensions
 
-**Output example**:
+**Output example** (adapts to domain):
+
+**Statistical Theory** (from stats-theory/DOMAIN.md):
 ```
-Generated 3 hypotheses:
-
 H-001-A: Information-theoretic approach
-  Mechanism: Adaptive threshold exploits local sparsity structure
-  Novelty: 8.5/10
-  Feasibility: 8/10
+  Framework: Fano's method for lower bound
+  Novelty: 8.5/10 (New regime)
+  Proof completeness: 8/10 (Lower bound strategy clear)
   Status: TOP CANDIDATE
 
-H-001-B: Computational approach
-  Mechanism: Polynomial-time algorithm with data-dependent tuning
-  Novelty: 7/10
-  Feasibility: 9/10
+H-001-B: Computational complexity approach
+  Framework: Oracle complexity lower bound
+  Novelty: 7/10 (Extends existing)
+  Feasibility: 9/10 (Constructive proof)
 
 H-001-C: Robust statistics approach
-  Mechanism: Heavy-tail tolerance via adaptive clipping
-  Novelty: 9/10
-  Feasibility: 5/10
-
-Recommendation: Focus on H-001-A
+  Framework: Contamination model
+  Novelty: 9/10 (Novel framework)
+  Feasibility: 5/10 (Proof challenging)
 ```
+
+**Policy Research** (from policy-research/DOMAIN.md):
+```
+H-001-A: Institutional diffusion mechanism
+  Framework: Policy diffusion + institutional theory
+  Novelty: 8.5/10 (New mechanism)
+  Identification: 8/10 (Spatial RDD viable)
+  Status: TOP CANDIDATE
+
+H-001-B: Political economy mechanism
+  Framework: Interest group competition
+  Novelty: 7/10 (Known framework)
+  Identification: 6/10 (Selection concerns)
+
+H-001-C: Fiscal federalism mechanism
+  Framework: Vertical competition
+  Novelty: 9/10 (Novel angle)
+  Identification: 4/10 (Weak identification)
+```
+
+**Same /hypothesize command, different domain standards applied.**
 
 **Step 2: Verify quality**
 
 ```bash
+# Identical command across domains
 /stress-test H-001-A
 ```
 
 **What happens**:
-- System checks novelty vs existing literature
-- Verifies all assumptions are stated and realistic
-- Tests whether hypothesis explains known observations
-- Returns verdict with specific gaps if any
+- System reads DOMAIN.md verification standards
+- Applies domain-specific quality checks
+- Uses domain evidence tiers for novelty assessment
+- Returns verdict with domain-relevant gaps
 
-**Output example**:
+**Output example** (adapts to domain):
+
+**Statistical Theory**:
 ```
 Stress Test Results: H-001-A
 
 Overall Score: 7.2/10 - GAPS IDENTIFIED
 
 Novelty: 8.5/10 (Strong)
-  - Novel mechanism: adaptive thresholding in this regime
-  - Builds on Donoho & Johnstone but extends to new setting
+  - Novel: Adaptive thresholding in heavy-tail regime
+  - Builds on: Donoho & Johnstone (1994)
 
-Assumptions: 7.0/10 (Issues found)
-  Gap: Incoherence assumption (μ(X) < 0.1) too strong
-  Gap: Signal strength β_min not explicitly stated
+Proof Completeness: 7.0/10 (Issues found)
+  Gap: Lower bound proof incomplete (Fano construction missing)
+  Gap: Moment assumptions not explicit (E|ε|^p for which p?)
 
-Observations: 6.0/10 (Partial support)
-  Gap: Heavy-tail robustness claimed but not tested
+Assumptions: 6.0/10 (Too strong)
+  Gap: Incoherence μ(X) < 0.1 unrealistic
+  Gap: Restricted eigenvalue condition not justified
 
-Verdict: GAPS - Use /evolve to fix issues
+Verdict: GAPS - Use /evolve to fix
 ```
+
+**Policy Research**:
+```
+Stress Test Results: H-001-A
+
+Overall Score: 7.0/10 - GAPS IDENTIFIED
+
+Novelty: 8.0/10 (Strong)
+  - Novel: Diffusion + polarization interaction
+  - Builds on: Shipan & Volden (2008)
+
+Identification: 6.5/10 (Issues found)
+  Gap: Spatial RDD continuity assumption not verified
+  Gap: Timing of diffusion unclear (selection bias?)
+
+Confounders: 6.0/10 (Incomplete)
+  Gap: Federal pressure omitted
+  Gap: State fiscal capacity not controlled
+
+Verdict: GAPS - Use /evolve to fix
+```
+
+**Same command, domain-specific checks applied.**
 
 **Step 3: Fix issues**
 
 ```bash
+# Identical command across domains
 /evolve H-001-A
 ```
 
 **What happens**:
-- System reads all gaps from stress-test
-- Generates improved version addressing each issue
-- Preserves core insight while fixing problems
-- Creates change log
+- System reads DOMAIN.md common pitfalls
+- Reads all gaps from stress-test
+- Applies domain-appropriate fix strategies
+- Preserves domain-important aspects
 
-**Output example**:
+**Output example** (adapts to domain):
+
+**Statistical Theory**:
 ```
 Evolution Complete: H-001-A → H-001-A-v2
 
-Fixes applied:
-  1. Relaxed incoherence to μ(X) ≤ C (more realistic)
-  2. Made signal strength explicit: β_min ≥ (2+ε)σ√(log p / n)
-  3. Removed heavy-tail claim (out of scope)
+Domain-specific fixes:
+  1. Added complete Fano lower bound derivation
+  2. Made moment assumption explicit: E|ε|^p < ∞ for p ≥ 2
+  3. Relaxed incoherence: μ(X) ≤ C (literature standard)
+  4. Justified restricted eigenvalue via sparse eigenvalue
 
 Core preserved:
-  - Adaptive thresholding mechanism unchanged
-  - Rate optimality claim unchanged
-  - Proof structure preserved
+  - Minimax rate n^(-2β/(2β+1)) unchanged
+  - Adaptive thresholding mechanism intact
+  - Upper bound construction preserved
 
 Predicted re-test score: 9.2/10 (PASS likely)
-
-Next: /stress-test H-001-A-v2
 ```
+
+**Policy Research**:
+```
+Evolution Complete: H-001-A → H-001-A-v2
+
+Domain-specific fixes:
+  1. Added spatial RDD identification strategy
+  2. Included continuity tests at state borders
+  3. Added federal pressure control variable
+  4. Included event study for timing
+
+Core preserved:
+  - Diffusion + polarization mechanism intact
+  - Observable implications unchanged
+  - Theory-driven predictions preserved
+
+Predicted re-test score: 8.8/10 (GAPS → near PASS)
+```
+
+**Same command, domain-specific evolution strategies.**
 
 **Step 4: Re-verify**
 
@@ -1405,31 +1617,57 @@ hypotheses/evolution/H-001-A-evolution-log.md
 
 ### Practice 6: Update DOMAIN.md Regularly
 
-**Why**: System adapts to your field's standards.
+**Why**: DOMAIN.md is how the system adapts to your field. It's the single most important configuration file.
 
 **What to include in DOMAIN.md**:
-- Publication standards (journal requirements)
-- Key theoretical frameworks
-- Recent major papers
-- Common methodological issues
-- Domain-specific terminology
+1. **Core Theoretical Frameworks** - Foundations of your field
+   - Stats: Minimax theory, empirical processes, information theory
+   - Policy: Causal inference, institutional theory, policy diffusion
+   - Your field: [Your frameworks]
+
+2. **Evidence Quality Tiers** - What's strong evidence in your field
+   - Tier 1 (Gold): Peer-reviewed proofs, RCTs, meta-analyses
+   - Tier 2-4: Adapt to your field
+
+3. **Ranking Dimensions** - How to evaluate work in your field
+   - Universal: Novelty, importance, testability
+   - Domain-specific: Add your criteria
+
+4. **Verification Standards** - When hypothesis is "ready"
+   - Stats: Lower bound + upper bound + assumptions
+   - Policy: Identification + confounders + robustness
+   - Your field: [Your standards]
+
+5. **Common Pitfalls** - What goes wrong in your field
+   - Stats: Missing lower bounds, unrealistic assumptions
+   - Policy: Weak identification, selection bias
+   - Your field: [Your pitfalls]
 
 **Update frequency**:
-- New major paper published → Add to DOMAIN.md
-- Reviewer feedback highlights standard → Add to DOMAIN.md
-- Field consensus changes → Update DOMAIN.md
+- Starting new domain → Create DOMAIN.md first
+- New major paper → Add to frameworks section
+- Reviewer feedback → Add to pitfalls section
+- Field consensus shifts → Update standards section
 
-**Impact**:
+**Impact on system behavior**:
 ```bash
 # Without DOMAIN.md:
-/hypothesize → Generic hypotheses
+/hypothesize → Generic, field-agnostic hypotheses
+/stress-test → Generic quality checks
+/evolve → Generic fix strategies
 
 # With basic DOMAIN.md:
-/hypothesize → Domain-appropriate hypotheses
+/hypothesize → Domain-appropriate theoretical angles
+/stress-test → Domain-specific quality checks
+/evolve → Domain-aware fix strategies
 
-# With updated DOMAIN.md:
-/hypothesize → Hypotheses meeting current standards
+# With comprehensive, updated DOMAIN.md:
+/hypothesize → Hypotheses meeting current field standards
+/stress-test → Checks aligned with top journals
+/evolve → Fixes addressing known field issues
 ```
+
+**Template**: See `domains/stats-theory/DOMAIN.md` for comprehensive example.
 
 ---
 
@@ -1675,13 +1913,37 @@ hypothesize → stress-test → evolve → stress-test → PASS → Execute
 - System not working as expected? Review "Best Practices"
 
 **System Files**:
-- Commands: /Users/andyhou/research/commands/*.md
+- Commands: /Users/andyhou/research/commands/*.md (domain-agnostic)
 - Your hypotheses: /Users/andyhou/research/hypotheses/
-- Domain standards: /Users/andyhou/research/DOMAIN.md
+- Domain configuration: /Users/andyhou/research/domains/[your-field]/DOMAIN.md (domain-specific)
+
+**Domain Configuration Examples**:
+- Statistical Theory: /Users/andyhou/research/domains/stats-theory/DOMAIN.md
+- Policy Research: /Users/andyhou/research/domains/policy-research/DOMAIN.md
+- Biomedical: /Users/andyhou/research/domains/biomedical/DOMAIN.md
 
 ---
 
-*This manual documents the AI Co-Scientist system implementing workflows from Google's research paper, adapted for general scientific research.*
+## Key Insight: Domain-Agnostic Design
+
+This system implements **universal research workflows** that adapt to any field:
+
+**Universal (same across all domains)**:
+- Commands: /hypothesize, /stress-test, /evolve
+- Workflow: generate → verify → fix → verify → PASS
+- Quality gates: PASS (9+), GAPS (6-9), BLOCKED (<6)
+
+**Domain-specific (configured in DOMAIN.md)**:
+- Theoretical frameworks (minimax vs causal inference vs molecular pathways)
+- Evidence tiers (proofs vs RCTs vs pathway validation)
+- Verification standards (lower bounds vs identification vs mechanism)
+- Common pitfalls (missing assumptions vs selection bias vs safety)
+
+**Result**: Same commands work for proving theorems, designing policies, or discovering drugs. Only DOMAIN.md differs.
+
+---
+
+*This manual documents the AI Co-Scientist system implementing workflows from Google's research paper, adapted as a domain-agnostic framework for scientific research across all fields.*
 
 *Last Updated: 2026-01-27*
-*Version: 2.0 - User Manual Edition*
+*Version: 2.0 - Domain-Agnostic Edition*

@@ -2,13 +2,55 @@
 
 ## What You Can Do
 
-This system helps you generate, test, and refine research hypotheses using three simple commands:
+This **domain-agnostic** system helps you generate, test, and refine research hypotheses using three simple commands:
 
 - **/hypothesize** - Generate multiple research hypotheses automatically
 - **/stress-test** - Verify hypothesis quality (novelty, assumptions, predictions)
 - **/evolve** - Refine hypotheses based on identified issues
 
+**Works across any research domain**: Statistical theory, policy research, biomedical science, economics, psychology, and more. The system adapts to your field's standards through DOMAIN.md configuration.
+
 No technical knowledge required. Just describe your research goal and let the system guide you.
+
+---
+
+## Domain Configuration: Making the System Work for Your Field
+
+The framework is **domain-agnostic** by design. It adapts to your research field through a single configuration file: `DOMAIN.md`
+
+### What DOMAIN.md Does
+
+DOMAIN.md maps generic research concepts to your field's specifics:
+
+- **Evidence tiers** → Your field's standards (e.g., "Tier 1" = peer-reviewed papers in stats, clinical trials in biomedicine, archived datasets in policy)
+- **Ranking dimensions** → Field-appropriate metrics (novelty, rigor, feasibility customized to domain)
+- **Verification checks** → Domain standards (proof completeness for theory, identification strategies for causal inference, pathway validation for biomedicine)
+- **Terminology** → Field-specific language and notation
+
+### Quick Setup for Your Domain
+
+```bash
+# 1. Copy template
+cp domains/stats-theory/DOMAIN.md domains/[your-field]/DOMAIN.md
+
+# 2. Customize sections:
+# - Core Theoretical Frameworks (your field's foundations)
+# - Proof/Validation Techniques (your methods)
+# - Publication Standards (your journals)
+# - Notation and Terminology (your conventions)
+
+# 3. The system automatically adapts
+/hypothesize "Your question"  # Uses your DOMAIN.md
+/stress-test H-001-A           # Applies your standards
+/evolve H-001-A                # Fixes domain-specific issues
+```
+
+**Example domains included**:
+- `stats-theory/` - Minimax theory, convergence rates, asymptotic analysis
+- `policy-research/` - Causal inference, identification strategies, institutional analysis
+- `biomedical/` - Molecular pathways, clinical validation, druggability
+
+See `domains/stats-theory/DOMAIN.md` for a complete example.
 
 ---
 
@@ -24,15 +66,28 @@ No technical knowledge required. Just describe your research goal and let the sy
 - Identifies the top candidate to pursue
 - Optional: Runs expert debate to refine the best hypothesis
 
-**Example**:
+**Example** (adapts to any domain):
 ```bash
-/hypothesize "Explain why sparse regression can achieve better rates with adaptive thresholding"
+# Statistical Theory Example
+/hypothesize "Derive optimal convergence rates for high-dimensional estimation"
+# → H-001-A: Information-theoretic (Fano's method)
+# → H-001-B: Computational complexity approach
+# → H-001-C: Robust estimation framework
 
-# Output: 3 hypotheses
-# - H-001-A: Information-theoretic approach (recommended)
-# - H-001-B: Computational approach
-# - H-001-C: Robust statistics approach
+# Policy Research Example
+/hypothesize "Explain variation in policy adoption across jurisdictions"
+# → H-001-A: Institutional theory approach
+# → H-001-B: Political economy mechanism
+# → H-001-C: Policy diffusion model
+
+# Biomedical Example
+/hypothesize "Identify therapeutic targets for disease X"
+# → H-001-A: Pathway A intervention
+# → H-001-B: Pathway B modulation
+# → H-001-C: Combination therapy
 ```
+
+The system automatically generates hypotheses appropriate to your domain based on DOMAIN.md configuration.
 
 **Decision Guide**: When should I generate hypotheses?
 
@@ -64,18 +119,30 @@ START
 - Tests whether hypothesis explains/predicts observed phenomena
 - Returns verdict: PASS / GAPS / BLOCKED
 
-**Example**:
+**Example** (domain-specific checks):
 ```bash
 /stress-test H-001-A
 
-# Output:
-# Confidence: 7.2/10 - GAPS IDENTIFIED
-# - Novelty: 8.5/10 (Strong)
-# - Assumptions: 7.0/10 (Some unstated assumptions)
-# - Observations: 6.0/10 (Partial support)
-#
-# Recommendation: Fix gaps with /evolve H-001-A
+# Statistical Theory Output:
+# Confidence: 7.2/10 - GAPS
+# - Novelty: 8.5/10 (New regime)
+# - Assumptions: 7.0/10 (Moment conditions not explicit)
+# - Proof: 6.0/10 (Lower bound missing)
+
+# Policy Research Output:
+# Confidence: 7.0/10 - GAPS
+# - Novelty: 8.0/10 (New mechanism)
+# - Assumptions: 7.5/10 (Identification strategy unclear)
+# - Evidence: 5.5/10 (Weak empirical support)
+
+# Biomedical Output:
+# Confidence: 6.8/10 - GAPS
+# - Novelty: 9.0/10 (Novel target)
+# - Mechanism: 6.0/10 (Pathway not fully validated)
+# - Clinical: 5.5/10 (Safety concerns)
 ```
+
+Checks adapt to domain standards defined in DOMAIN.md.
 
 **Decision Guide**: When should I stress-test?
 
@@ -113,17 +180,30 @@ Ready to write paper?
 - Preserves your core insight while fixing problems
 - Creates audit trail showing what changed and why
 
-**Example**:
+**Example** (domain-specific fixes):
 ```bash
 /evolve H-001-A
 
-# Output: H-001-A-v2
-# - Fixed: Incoherence assumption made explicit
-# - Fixed: Added missing proof step for lower bound
-# - Preserved: Core adaptive thresholding mechanism
-#
-# Predicted re-test score: 9.2/10 (PASS likely)
+# Statistical Theory:
+# → H-001-A-v2
+# - Fixed: Added Fano lower bound derivation
+# - Fixed: Made moment conditions explicit (E|ε|^p < ∞)
+# - Preserved: Core minimax optimality claim
+
+# Policy Research:
+# → H-001-A-v2
+# - Fixed: Added spatial RDD identification strategy
+# - Fixed: Addressed confounding via controls
+# - Preserved: Core diffusion mechanism
+
+# Biomedical:
+# → H-001-A-v2
+# - Fixed: Added pathway validation evidence
+# - Fixed: Included safety data from related compounds
+# - Preserved: Core therapeutic hypothesis
 ```
+
+Evolution strategy adapts to domain-specific issues.
 
 **Decision Guide**: When should I evolve?
 
@@ -241,79 +321,105 @@ START: What do you want to do?
 
 ## Real Examples by Research Type
 
+**Note**: These examples show how the same commands adapt to different domains through DOMAIN.md configuration.
+
 ### Statistical Theory Research
+
+**DOMAIN.md defines**:
+- Evidence Tier 1 = Peer-reviewed proofs (Annals, JRSSB)
+- Key check = Lower bound completeness
+- Standard = Minimax optimality framework
 
 ```bash
 # Generate hypothesis about minimax rates
 /hypothesize "Derive optimal rates for sparse PCA under heavy-tailed noise"
 
-# Output: 3 hypotheses
+# System uses stats-theory DOMAIN.md to generate:
 # - H-001-A: Information-theoretic (Fano's method)
 # - H-001-B: Computational (polynomial-time)
 # - H-001-C: Robust approach (contamination model)
 
-# Test top candidate
+# Stress-test applies stats standards
 /stress-test H-001-A
+# Checks: Lower bound? Proof complete? Assumptions explicit?
 
-# Gap found: Missing lower bound proof
+# Gap found: Missing lower bound proof (stats-specific)
 /evolve H-001-A
+# Adds: Fano lower bound derivation
 
-# Re-test improved version
+# Re-test with stats standards
 /stress-test H-001-A-v2
-# Result: PASS - Ready to write paper
+# Result: PASS - Meets Annals standards
 ```
 
-**Common gaps in stats theory**: Missing lower bounds, unstated assumptions, incomplete proofs
+**Domain-specific gaps**: Missing lower bounds, unstated moment conditions, incomplete proofs
 
 ---
 
 ### Policy Research
 
+**DOMAIN.md defines**:
+- Evidence Tier 1 = Causal inference with clear identification (APSR, AJPS)
+- Key check = Identification strategy clarity
+- Standard = RDD/IV/DID framework
+
 ```bash
 # Generate hypothesis about policy adoption
 /hypothesize "Explain why some states adopt climate policies and others don't" --debate
 
-# Output: H-002-A (debate-refined)
-# Mechanism: Political polarization + policy diffusion
+# System uses policy-research DOMAIN.md to generate:
+# → H-002-A (debate-refined)
+# → Mechanism: Political polarization + policy diffusion
+# → Includes identification strategy sketch
 
-# Test hypothesis
+# Stress-test applies causal inference standards
 /stress-test H-002-A --observations data/state_policies.csv
+# Checks: Identification clear? Confounders addressed? Selection bias?
 
-# Gap found: Identification strategy unclear
+# Gap found: RDD continuity assumption not verified (policy-specific)
 /evolve H-002-A
+# Adds: Spatial RDD identification + continuity tests
 
-# Re-test
+# Re-test with policy standards
 /stress-test H-002-A-v2
-# Result: PASS - Clear RDD identification strategy
+# Result: PASS - Meets APSR causal inference standards
 ```
 
-**Common gaps in policy**: Weak identification, confounders, selection bias
+**Domain-specific gaps**: Weak identification, omitted confounders, selection bias, weak instruments
 
 ---
 
 ### Biomedical Research
 
+**DOMAIN.md defines**:
+- Evidence Tier 1 = Clinical trials + mechanistic validation (Nature Medicine, NEJM)
+- Key check = Pathway plausibility + clinical relevance
+- Standard = Translational pathway from bench to bedside
+
 ```bash
 # Generate drug target hypotheses
 /hypothesize "Identify novel drug targets for AML treatment"
 
-# Output: 3 mechanisms
-# - H-003-A: CXCR1/2 inhibitor
-# - H-003-B: MEK pathway
+# System uses biomedical DOMAIN.md to generate:
+# - H-003-A: CXCR1/2 inhibitor (immune pathway)
+# - H-003-B: MEK pathway modulation
 # - H-003-C: Epigenetic modifiers
+# Each includes: molecular mechanism + clinical rationale
 
-# Test novelty (high priority in biomedical)
+# Stress-test applies biomedical standards
 /stress-test H-003-A
+# Checks: Pathway validated? Mechanism plausible? Clinical relevance? Safety?
 
-# Gap found: Mechanism not fully supported by observations
+# Gap found: Immune mechanism in AML not well-established (biomedical-specific)
 /evolve H-003-A
+# Adds: CXCR1/2 expression data in AML + immune trafficking mechanism
 
-# Re-test
+# Re-test with biomedical standards
 /stress-test H-003-A-v2
 # Result: PASS - Ready for wet lab validation
 ```
 
-**Common gaps in biomedical**: Weak mechanistic support, pathway plausibility, clinical relevance
+**Domain-specific gaps**: Weak mechanistic evidence, pathway implausibility, poor druggability, safety concerns
 
 ---
 
@@ -517,6 +623,32 @@ TYPICAL CYCLE
 
 ---
 
-*This system implements research workflows from Google's AI Co-Scientist paper, adapted for general scientific research across domains.*
+## Summary: Domain-Agnostic Design
+
+**Universal Commands**:
+- `/hypothesize` - Generate hypotheses (same command, all domains)
+- `/stress-test` - Verify quality (same command, all domains)
+- `/evolve` - Fix issues (same command, all domains)
+
+**Domain Adaptation**:
+- Configure `DOMAIN.md` with your field's standards
+- System automatically adapts to your domain
+- Same workflow works for stats theory, policy, biomedical, etc.
+
+**Included Domains**:
+- `stats-theory/` - Minimax rates, lower bounds, proof techniques
+- `policy-research/` - Causal inference, identification, institutional theory
+- `biomedical/` - Drug discovery, pathways, clinical translation
+
+**Create Your Own**:
+```bash
+cp domains/stats-theory/DOMAIN.md domains/[your-field]/DOMAIN.md
+# Edit to customize for your research domain
+```
+
+---
+
+*This system implements domain-agnostic research workflows inspired by Google's AI Co-Scientist paper.*
 
 *Last Updated: 2026-01-27*
+*Version: 2.0 - Domain-Agnostic Quick Start*

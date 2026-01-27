@@ -43,7 +43,7 @@ task verifier-enhanced --mode=assumption "Decompose H-001"
 
 ## What is this?
 
-**Everything Claude Research** is a framework that turns [Claude Code](https://claude.ai/code) into a virtual research team, complete with:
+**Everything Claude Research** is a domain-agnostic framework that turns [Claude Code](https://claude.ai/code) into a virtual research team, complete with:
 
 - 🧑‍🔬 **Senior Postdoc Agents**: Theorist, Experimentalist, Methodologist (now with enhanced modes)
 - 🔬 **Hypothesis Management**: Elo ranking system + scientific debate
@@ -51,6 +51,7 @@ task verifier-enhanced --mode=assumption "Decompose H-001"
 - 📚 **Domain Knowledge System**: Three-tier architecture (Global/Domain/Project)
 - ✅ **Quality Assurance**: Integrated verification loops and eval harness
 - 🆕 **AI Co-Scientist**: Multi-hypothesis generation, debate, deep verification
+- 🌍 **Domain Agnostic**: Works across statistical theory, policy research, biomedical science, and more
 
 ---
 
@@ -116,29 +117,44 @@ See [SETUP.md](SETUP.md) for detailed installation instructions.
 
 ### 3. Your First AI Co-Scientist Workflow
 
+**Domain-agnostic example** (works for any research field):
+
 ```bash
 # Start a new research project
 cd ~/research  # or your research directory
 
-# Generate multiple hypothesis candidates
-task theorist-enhanced --mode=multi "
-Goal: Discover novel therapeutic targets for ALS
-Generate 3 hypotheses with different mechanisms
-"
-# Output: H-001-A (mitochondrial), H-001-B (RNA), H-001-C (proteostasis)
+# Example 1: Statistical Theory
+/hypothesize "Derive minimax optimal rates for sparse PCA under heavy-tailed noise"
+# Output: H-001-A (information-theoretic), H-001-B (computational), H-001-C (robust)
 
-# Check novelty of top candidate
-task verifier-enhanced --mode=novelty "Check novelty of H-001-B"
-# Output: Novelty score 4/5, novel aspects identified
+/stress-test H-001-A
+# Output: Score 7.5/10 - GAPS (missing lower bound, assumptions unclear)
 
-# Refine through expert debate
-task theorist-enhanced --mode=debate "Refine hypothesis H-001-B"
-# Output: H-001-B-refined with 5-turn expert discussion
+/evolve H-001-A
+# Output: H-001-A-v2 (added Fano lower bound, explicit moment conditions)
 
-# Full verification suite
-task verifier-enhanced --mode=assumption "Decompose H-001-B-refined"
-task experimentalist "Assess feasibility of H-001-B-refined"
-task methodologist "Methodological review of H-001-B-refined"
+/stress-test H-001-A-v2
+# Output: Score 9.2/10 - PASS
+
+# Example 2: Policy Research
+/hypothesize "Explain why some states adopt climate policies and others don't"
+# Output: H-002-A (political polarization + diffusion)
+
+/stress-test H-002-A --observations data/state_policies.csv
+# Output: GAPS (identification strategy unclear)
+
+/evolve H-002-A
+# Output: H-002-A-v2 (added spatial RDD identification)
+
+# Example 3: Biomedical Research
+/hypothesize "Identify novel drug targets for AML treatment"
+# Output: H-003-A (CXCR1/2), H-003-B (MEK pathway), H-003-C (epigenetic)
+
+/stress-test H-003-A
+# Output: GAPS (mechanism not fully supported)
+
+/evolve H-003-A
+# Output: H-003-A-v2 (added pathway details, safety data)
 ```
 
 ---
@@ -253,52 +269,47 @@ task verifier-enhanced --mode=assumption "Decompose H-001"
 
 ## 🆕 AI Co-Scientist Workflow Example
 
+**Domain-agnostic workflow** (same steps work for any field):
+
 ```bash
 # Week 1: Multi-hypothesis generation
-task theorist-enhanced --mode=multi "
-Goal: Discover novel therapeutic targets for ALS
-Generate 3 hypotheses with different mechanisms
-"
-# Output: H-001-A (mitochondrial), H-001-B (RNA), H-001-C (proteostasis)
+/hypothesize "[Your research question in any domain]"
+# Stats example: "Derive minimax rates for sparse estimation"
+# Policy example: "Explain policy adoption variation"
+# Biomedical example: "Identify therapeutic targets for disease X"
+# Output: H-001-A, H-001-B, H-001-C (different theoretical angles)
 
-# Week 2: Novelty screening (parallel)
-task verifier-enhanced --mode=novelty "Check H-001-A" &
-task verifier-enhanced --mode=novelty "Check H-001-B" &
-task verifier-enhanced --mode=novelty "Check H-001-C" &
-wait
-# Result: H-001-B has highest novelty score
+# Week 2: Initial screening
+/stress-test H-001-A --quick
+/stress-test H-001-B --quick
+/stress-test H-001-C --quick
+# Result: H-001-A has highest score
 
-# Week 3: Observation matching
-task verifier-enhanced --mode=observation "
-Hypothesis: H-001-B
-Known observations:
-- TDP-43 mislocalization
-- RNA metabolism defects
-- Motor neuron-specific death
-"
-# Result: H-001-B provides 2 'missing piece' explanations ✅
+# Week 3: Full verification
+/stress-test H-001-A
+# Stats: Checks lower bound, assumptions, proof completeness
+# Policy: Checks identification, confounders, robustness
+# Biomedical: Checks mechanism, pathway, clinical relevance
+# Result: 7.5/10 - GAPS identified
 
-# Week 4: Scientific debate refinement
-task theorist-enhanced --mode=debate "Refine H-001-B"
-# Output: H-001-B-refined (5-turn expert discussion)
+# Week 4: Fix issues
+/evolve H-001-A
+# Stats: Adds missing lower bound, explicit assumptions
+# Policy: Adds RDD identification, confounder controls
+# Biomedical: Adds pathway validation, safety data
+# Output: H-001-A-v2
 
-# Week 5: Assumption decomposition
-task verifier-enhanced --mode=assumption "Decompose H-001-B-refined"
-# Output: 4 assumptions identified, A1 & A2 critical
+# Week 5: Re-verify
+/stress-test H-001-A-v2
+# Result: 9.2/10 - PASS
 
-# Week 6: Feasibility assessment
-task experimentalist "Assess H-001-B-refined"
-
-# Week 7: Methodological review
-task methodologist "Review H-001-B-refined"
-
-# Week 8: Evolution (if needed)
-task theorist-enhanced --mode=evolve "
-Original: H-001-B-refined
-Critique: [Methodologist feedback]
-Output: H-001-B-v2
-"
+# Week 6+: Execute research
+# - Run experiments (if empirical)
+# - Write proofs (if theoretical)
+# - Collect data (if applied)
 ```
+
+**Key insight**: Same commands (`/hypothesize`, `/stress-test`, `/evolve`) work across all domains. Domain-specific adaptation happens through DOMAIN.md configuration.
 
 ---
 
@@ -373,15 +384,16 @@ Hypothesis prioritization:
 
 ## Domain Knowledge System
 
-Three-tier architecture for knowledge management:
+Three-tier architecture for knowledge management across any research domain:
 
 ### Global Layer (`~/.claude/`)
 - Agents, commands, rules
-- Universal across all projects
+- Universal across all projects and domains
 
 ### Domain Layer (`domains/`)
-- Field-specific knowledge (e.g., stats-theory, policy-making)
+- Field-specific knowledge (e.g., stats-theory, policy-research, biomedical)
 - Shared across projects in same domain
+- **Configure via DOMAIN.md** to map generic concepts to your field
 
 ### Project Layer (`projects/`)
 - Specific research questions and data
@@ -390,14 +402,20 @@ Three-tier architecture for knowledge management:
 ```
 domains/
 ├── stats-theory/
-│   ├── DOMAIN.md              # Core theories, methods, standards
-│   ├── literature/            # Key papers
+│   ├── DOMAIN.md              # Minimax theory, proof techniques, publication standards
+│   ├── literature/            # Key papers (Donoho, Wainwright, etc.)
 │   └── terminology.md         # Domain-specific terms
 │
-└── policy-making/
-    ├── DOMAIN.md
-    └── literature/
+├── policy-research/
+│   ├── DOMAIN.md              # Causal inference, identification strategies
+│   └── literature/            # Policy diffusion, institutional theory
+│
+└── biomedical/
+    ├── DOMAIN.md              # Molecular pathways, clinical trial design
+    └── literature/            # Disease mechanisms, drug discovery
 ```
+
+**Key insight**: The framework is domain-agnostic. Evidence tiers (1-4), ranking dimensions, and verification standards automatically adapt to your field when you configure DOMAIN.md.
 
 ---
 
