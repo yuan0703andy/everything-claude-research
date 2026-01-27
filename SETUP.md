@@ -6,7 +6,7 @@ Complete installation guide for Everything Claude Research.
 
 ## Prerequisites
 
-### 1. Claude Code CLI
+### Claude Code CLI Only!
 
 Install Claude Code if you haven't already:
 
@@ -19,21 +19,11 @@ Verify installation:
 claude --version
 ```
 
-### 2. everything-claude-code Plugin
-
-This framework requires the core skills from everything-claude-code:
-
-```bash
-# In Claude Code, run:
-/plugin marketplace add affaan-m/everything-claude-code
-/plugin install everything-claude-code@everything-claude-code
-```
-
-This provides the core skills:
-- `iterative-retrieval`
-- `verification-loop`
-- `eval-harness`
-- `strategic-compact`
+**That's it!** No additional plugins needed. This framework is completely self-contained and includes:
+- 4 core skills (iterative-retrieval, verification-loop, eval-harness, strategic-compact)
+- 12 research commands
+- 4 specialized research agents
+- Complete documentation and templates
 
 ---
 
@@ -46,26 +36,27 @@ This provides the core skills:
 git clone https://github.com/YOUR_USERNAME/everything-claude-research.git
 cd everything-claude-research
 
-# 2. Copy agents to Claude config
+# 2. Copy the complete framework to Claude config
 cp -r .claude/agents ~/.claude/
-
-# 3. Copy commands
 cp -r .claude/commands ~/.claude/
-
-# 4. Copy rules
+cp -r .claude/skills ~/.claude/
 cp -r .claude/rules ~/.claude/
+cp -r .claude/contexts ~/.claude/
 
-# 5. Create your research workspace
+# 3. Create your research workspace
 mkdir -p ~/research
 cp -r domains ~/research/
 cp -r shared ~/research/
 
-# 6. Verify installation
+# 4. Verify installation
 ls ~/.claude/agents/senior-postdocs/
 # Should show: theorist.md, experimentalist.md, methodologist.md
 
 ls ~/.claude/commands/
-# Should show: brainstorm.md, lab-meeting.md, review-hypothesis.md
+# Should show: 12 command files including brainstorm.md, lab-meeting.md, etc.
+
+ls ~/.claude/skills/
+# Should show: iterative-retrieval, verification-loop, eval-harness, strategic-compact
 ```
 
 ### Option 2: Manual Setup
@@ -87,19 +78,35 @@ cp .claude/agents/lab-manager/*.md ~/.claude/agents/lab-manager/
 #### Step 2: Commands
 
 ```bash
-# Copy research commands
+# Copy all research commands
 cp .claude/commands/*.md ~/.claude/commands/
 ```
 
-#### Step 3: Rules
+#### Step 3: Skills
 
 ```bash
-# Copy research principles
-mkdir -p ~/.claude/rules
-cp .claude/rules/research-principles.md ~/.claude/rules/
+# Copy core skills
+mkdir -p ~/.claude/skills
+cp -r .claude/skills/* ~/.claude/skills/
 ```
 
-#### Step 4: Research Workspace
+#### Step 4: Rules
+
+```bash
+# Copy research rules
+mkdir -p ~/.claude/rules
+cp .claude/rules/*.md ~/.claude/rules/
+```
+
+#### Step 5: Contexts
+
+```bash
+# Copy research contexts
+mkdir -p ~/.claude/contexts
+cp .claude/contexts/*.md ~/.claude/contexts/
+```
+
+#### Step 6: Research Workspace
 
 ```bash
 # Set up research directory
@@ -128,7 +135,15 @@ ls ~/.claude/agents/lab-manager/
 
 # Verify commands are installed
 ls ~/.claude/commands/
-# Expected: brainstorm.md, lab-meeting.md, review-hypothesis.md
+# Expected: 12 files including brainstorm.md, lab-meeting.md, checkpoint.md, eval.md, etc.
+
+# Verify skills are installed
+ls ~/.claude/skills/
+# Expected: iterative-retrieval, verification-loop, eval-harness, strategic-compact
+
+# Verify contexts are installed
+ls ~/.claude/contexts/
+# Expected: research.md, hypothesis.md, peer-review.md
 ```
 
 ### 2. Test Commands
@@ -136,15 +151,17 @@ ls ~/.claude/commands/
 Start Claude Code and try:
 
 ```bash
-# Should show your research commands
-/brainstorm
-/lab-meeting
-/review-hypothesis
-
-# Should also work (from everything-claude-code plugin)
-/checkpoint
-/eval
-/verify
+# Should show all your commands (type /help to see full list)
+/brainstorm           # Research-specific
+/lab-meeting          # Research-specific
+/review-hypothesis    # Research-specific
+/execute-analysis     # GSD-inspired
+/verify-results       # GSD-inspired
+/progress             # GSD-inspired
+/update-state         # GSD-inspired
+/checkpoint           # From everything-claude-code
+/eval                 # From everything-claude-code
+/verify               # From everything-claude-code
 ```
 
 ### 3. Check Research Workspace
@@ -356,13 +373,20 @@ description: What it does
 ls ~/.claude/commands/
 ```
 
-### Agents not working
+### Skills not loading
 
 ```bash
-# Verify plugin is installed
-/plugin list
+# Verify skills are installed
+ls ~/.claude/skills/
 
-# Should show: everything-claude-code@everything-claude-code
+# Should show:
+# - iterative-retrieval
+# - verification-loop
+# - eval-harness
+# - strategic-compact
+
+# If missing, copy them:
+cp -r .claude/skills/* ~/.claude/skills/
 ```
 
 ### Domain knowledge not loading

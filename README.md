@@ -22,19 +22,26 @@ Transform Claude Code into your AI research team with specialized postdoc agents
 
 ## Relationship to everything-claude-code
 
-This project is **inspired by and builds upon** the excellent work of [@affaanmustafa](https://x.com/affaanmustafa)'s [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
+This project is **inspired by and built upon** the excellent work of [@affaanmustafa](https://x.com/affaanmustafa)'s [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
 
-### What we reuse:
-- ✅ Core skills: `iterative-retrieval`, `verification-loop`, `eval-harness`, `strategic-compact`
-- ✅ Hook system architecture
-- ✅ Plugin philosophy
+### What we adapted:
+- ✅ **Core skills** (included in this repo): `iterative-retrieval`, `verification-loop`, `eval-harness`, `strategic-compact`
+- ✅ **Some commands** (adapted for research): `checkpoint`, `eval`, `verify`
+- ✅ **Architecture patterns**: Hook system, modular design philosophy
 
 ### What's different:
 - 🎯 **Target audience**: Academic researchers instead of software developers
-- 👥 **Agents**: Research team (Theorist, Experimentalist, Methodologist) instead of dev team
-- 🔄 **Workflows**: Hypothesis generation, lab meetings, peer review instead of TDD/code review
-- 📚 **Knowledge system**: Three-tier domain knowledge architecture
+- 👥 **Agents**: Research team (Theorist, Experimentalist, Methodologist, Lab Manager) instead of dev team
+- 🔄 **Workflows**: Hypothesis generation, lab meetings, peer review, GSD-inspired phase workflow
+- 📚 **Knowledge system**: Three-tier domain knowledge architecture (Global/Domain/Project)
 - 🏆 **Elo ranking**: Hypothesis prioritization system
+- 📊 **State management**: STATE.md for cross-session continuity (GSD-inspired)
+- 📝 **Phase tracking**: .planning/ directory for research phases
+
+### Complete & Standalone
+- ✅ **No plugin dependencies** - Everything is included
+- ✅ **Self-contained** - All skills, commands, agents in this repo
+- ✅ **Easy setup** - One clone, copy to ~/.claude/, done!
 
 **If you're a software developer**, use [everything-claude-code](https://github.com/affaan-m/everything-claude-code).
 **If you're an academic researcher**, this framework is for you.
@@ -46,7 +53,7 @@ This project is **inspired by and builds upon** the excellent work of [@affaanmu
 ### 1. Prerequisites
 
 - [Claude Code CLI](https://claude.ai/code) installed
-- [everything-claude-code plugin](https://github.com/affaan-m/everything-claude-code) (for core skills)
+- **No additional plugins required** - This is a complete, standalone framework!
 
 ### 2. Installation
 
@@ -55,18 +62,21 @@ This project is **inspired by and builds upon** the excellent work of [@affaanmu
 git clone https://github.com/YOUR_USERNAME/everything-claude-research.git
 cd everything-claude-research
 
-# Copy agents to your Claude config
+# Copy the complete framework to your Claude config
 cp -r .claude/agents ~/.claude/
-
-# Copy commands
 cp -r .claude/commands ~/.claude/
-
-# Copy rules
+cp -r .claude/skills ~/.claude/
 cp -r .claude/rules ~/.claude/
+cp -r .claude/contexts ~/.claude/
 
 # Copy templates (optional)
 cp -r shared/templates ~/research-templates/
 ```
+
+**That's it!** The framework includes everything you need:
+- 4 core skills (iterative-retrieval, verification-loop, eval-harness, strategic-compact)
+- 12 commands for research workflows
+- All rules, contexts, and agents
 
 See [SETUP.md](SETUP.md) for detailed installation instructions.
 
