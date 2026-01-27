@@ -37,11 +37,11 @@ git clone https://github.com/YOUR_USERNAME/everything-claude-research.git
 cd everything-claude-research
 
 # 2. Copy the complete framework to Claude config
-cp -r .claude/agents ~/.claude/
-cp -r .claude/commands ~/.claude/
-cp -r .claude/skills ~/.claude/
-cp -r .claude/rules ~/.claude/
-cp -r .claude/contexts ~/.claude/
+cp -r agents ~/.claude/
+cp -r commands ~/.claude/
+cp -r skills ~/.claude/
+cp -r rules ~/.claude/
+cp -r contexts ~/.claude/
 
 # 3. Create your research workspace
 mkdir -p ~/research
@@ -49,11 +49,11 @@ cp -r domains ~/research/
 cp -r shared ~/research/
 
 # 4. Verify installation
-ls ~/.claude/agents/senior-postdocs/
-# Should show: theorist.md, experimentalist.md, methodologist.md
+ls ~/.claude/agents/
+# Should show: theorist.md, experimentalist.md, methodologist.md, coordinator.md
 
 ls ~/.claude/commands/
-# Should show: 12 command files including brainstorm.md, lab-meeting.md, etc.
+# Should show: 11 command files including brainstorm.md, lab-meeting.md, etc.
 
 ls ~/.claude/skills/
 # Should show: iterative-retrieval, verification-loop, eval-harness, strategic-compact
@@ -63,60 +63,28 @@ ls ~/.claude/skills/
 
 If you prefer to set up manually or already have a research directory:
 
-#### Step 1: Agents
+#### Step 1: Framework Components
 
 ```bash
-# Create agent directories
-mkdir -p ~/.claude/agents/senior-postdocs
-mkdir -p ~/.claude/agents/lab-manager
-
-# Copy agent definitions
-cp .claude/agents/senior-postdocs/*.md ~/.claude/agents/senior-postdocs/
-cp .claude/agents/lab-manager/*.md ~/.claude/agents/lab-manager/
+# Copy all framework components
+cp -r agents ~/.claude/
+cp -r commands ~/.claude/
+cp -r skills ~/.claude/
+cp -r rules ~/.claude/
+cp -r contexts ~/.claude/
 ```
 
-#### Step 2: Commands
-
-```bash
-# Copy all research commands
-cp .claude/commands/*.md ~/.claude/commands/
-```
-
-#### Step 3: Skills
-
-```bash
-# Copy core skills
-mkdir -p ~/.claude/skills
-cp -r .claude/skills/* ~/.claude/skills/
-```
-
-#### Step 4: Rules
-
-```bash
-# Copy research rules
-mkdir -p ~/.claude/rules
-cp .claude/rules/*.md ~/.claude/rules/
-```
-
-#### Step 5: Contexts
-
-```bash
-# Copy research contexts
-mkdir -p ~/.claude/contexts
-cp .claude/contexts/*.md ~/.claude/contexts/
-```
-
-#### Step 6: Research Workspace
+#### Step 2: Research Workspace
 
 ```bash
 # Set up research directory
 mkdir -p ~/research/domains
 mkdir -p ~/research/projects
-mkdir -p ~/research/shared/templates
+mkdir -p ~/research/templates
 
 # Copy domains and templates
 cp -r domains/* ~/research/domains/
-cp -r shared/templates/* ~/research/shared/templates/
+cp -r templates/* ~/research/templates/
 ```
 
 ---
@@ -127,15 +95,12 @@ cp -r shared/templates/* ~/research/shared/templates/
 
 ```bash
 # Verify agents are installed
-ls ~/.claude/agents/senior-postdocs/
-# Expected: theorist.md, experimentalist.md, methodologist.md
-
-ls ~/.claude/agents/lab-manager/
-# Expected: coordinator.md
+ls ~/.claude/agents/
+# Expected: theorist.md, experimentalist.md, methodologist.md, coordinator.md
 
 # Verify commands are installed
 ls ~/.claude/commands/
-# Expected: 12 files including brainstorm.md, lab-meeting.md, checkpoint.md, eval.md, etc.
+# Expected: 11 files including brainstorm.md, lab-meeting.md, checkpoint.md, eval.md, etc.
 
 # Verify skills are installed
 ls ~/.claude/skills/

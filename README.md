@@ -63,20 +63,21 @@ git clone https://github.com/YOUR_USERNAME/everything-claude-research.git
 cd everything-claude-research
 
 # Copy the complete framework to your Claude config
-cp -r .claude/agents ~/.claude/
-cp -r .claude/commands ~/.claude/
-cp -r .claude/skills ~/.claude/
-cp -r .claude/rules ~/.claude/
-cp -r .claude/contexts ~/.claude/
+cp -r agents ~/.claude/
+cp -r commands ~/.claude/
+cp -r skills ~/.claude/
+cp -r rules ~/.claude/
+cp -r contexts ~/.claude/
 
 # Copy templates (optional)
-cp -r shared/templates ~/research-templates/
+cp -r templates ~/research-templates/
 ```
 
 **That's it!** The framework includes everything you need:
+- 4 research agents (Theorist, Experimentalist, Methodologist, Lab Manager)
 - 4 core skills (iterative-retrieval, verification-loop, eval-harness, strategic-compact)
-- 12 commands for research workflows
-- All rules, contexts, and agents
+- 11 commands for research workflows
+- 5 research rules, 3 contexts, and project templates
 
 See [SETUP.md](SETUP.md) for detailed installation instructions.
 
