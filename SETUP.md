@@ -22,7 +22,7 @@ claude --version
 **That's it!** No additional plugins needed. This framework is completely self-contained and includes:
 - 4 core skills (iterative-retrieval, verification-loop, eval-harness, strategic-compact)
 - 12 research commands
-- 4 specialized research agents
+- 6 specialized research agents (including AI Co-Scientist enhanced versions)
 - Complete documentation and templates
 
 ---
@@ -50,7 +50,8 @@ cp -r shared ~/research/
 
 # 4. Verify installation
 ls ~/.claude/agents/
-# Should show: theorist.md, experimentalist.md, methodologist.md, coordinator.md
+# Should show: theorist.md, theorist-enhanced-en.md, experimentalist.md,
+#              methodologist.md, coordinator.md, verifier.md, verifier-enhanced-en.md
 
 ls ~/.claude/commands/
 # Should show: 11 command files including brainstorm.md, lab-meeting.md, etc.
@@ -96,7 +97,8 @@ cp -r templates/* ~/research/templates/
 ```bash
 # Verify agents are installed
 ls ~/.claude/agents/
-# Expected: theorist.md, experimentalist.md, methodologist.md, coordinator.md
+# Expected: theorist.md, theorist-enhanced-en.md, verifier.md, verifier-enhanced-en.md,
+#           experimentalist.md, methodologist.md, coordinator.md
 
 # Verify commands are installed
 ls ~/.claude/commands/
@@ -129,6 +131,28 @@ Start Claude Code and try:
 /verify               # From everything-claude-code
 ```
 
+**🆕 AI Co-Scientist Enhanced Agents:**
+
+```bash
+# Multi-Hypothesis Generation (3-5 competing hypotheses)
+task theorist-enhanced --mode=multi "Research goal: Identify drug repurposing candidates for AML"
+
+# Scientific Debate Mode (expert panel simulation)
+task theorist-enhanced --mode=debate "Refine hypothesis H-001"
+
+# Evolution Mode (iterate based on feedback)
+task theorist-enhanced --mode=evolve "Evolve H-001 based on Methodologist critique"
+
+# Novelty Verification (5-point scale with literature comparison)
+task verifier-enhanced --mode=novelty "Check hypothesis H-001"
+
+# Observation-Hypothesis Matching (scoring system)
+task verifier-enhanced --mode=observation "Match H-001 with experimental data"
+
+# Assumption Decomposition (systematic validation)
+task verifier-enhanced --mode=assumption "Decompose H-001 assumptions"
+```
+
 ### 3. Check Research Workspace
 
 ```bash
@@ -143,6 +167,72 @@ tree -L 2 ~/research/
 # └── shared/
 #     └── templates/
 ```
+
+---
+
+## 🆕 AI Co-Scientist Workflow (Optional)
+
+If you want to use the enhanced AI Co-Scientist features for multi-hypothesis generation and deep verification:
+
+### Week 1: Multi-Hypothesis Exploration
+
+```bash
+cd ~/research/projects/my-project
+
+# Generate 3-5 competing hypotheses
+task theorist-enhanced --mode=multi "Research goal: [Your goal here]"
+# Output: H-001-A, H-001-B, H-001-C
+```
+
+### Week 2: Verify All Hypotheses
+
+```bash
+# Check novelty of each hypothesis
+task verifier-enhanced --mode=novelty "Check H-001-A"
+task verifier-enhanced --mode=novelty "Check H-001-B"
+task verifier-enhanced --mode=novelty "Check H-001-C"
+
+# Output: Identifies which hypothesis has highest novelty
+```
+
+### Week 3: Deep Refinement via Debate
+
+```bash
+# Simulate expert panel discussion for best hypothesis
+task theorist-enhanced --mode=debate "Refine hypothesis H-001-B"
+# Output: H-001-B-v2 (refined through multi-turn expert debate)
+```
+
+### Week 4: Methodologist Review
+
+```bash
+# Standard methodologist review
+task methodologist H-001-B-v2
+# Output: "Major Revision" with specific critique points
+```
+
+### Week 5: Evolution Based on Feedback
+
+```bash
+# Evolve hypothesis to address critiques
+task theorist-enhanced --mode=evolve "Evolve H-001-B-v2 based on critique"
+# Output: H-001-B-v3 (with addressed critique points)
+```
+
+### Week 6: Final Verification
+
+```bash
+# Final methodologist approval
+task methodologist H-001-B-v3
+# Output: "Accept" ✅
+
+# Deep verification of assumptions
+task verifier-enhanced --mode=assumption "Decompose H-001-B-v3"
+```
+
+**For detailed workflows and examples, see:**
+- `docs/ai-co-scientist-implementation-guide-en.md` - Complete usage guide
+- `docs/ai-co-scientist-analysis-summary-en.md` - Technical analysis
 
 ---
 
@@ -219,6 +309,9 @@ cd ~/research/projects/my-first-project
 │   ├── agents/
 │   │   ├── senior-postdocs/
 │   │   │   ├── theorist.md              ✅
+│   │   │   ├── theorist-enhanced-en.md  ✅ 🆕 (AI Co-Scientist)
+│   │   │   ├── verifier.md              ✅
+│   │   │   ├── verifier-enhanced-en.md  ✅ 🆕 (AI Co-Scientist)
 │   │   │   ├── experimentalist.md       ✅
 │   │   │   └── methodologist.md         ✅
 │   │   └── lab-manager/
@@ -237,6 +330,10 @@ cd ~/research/projects/my-first-project
 │           └── everything-claude-code/  ✅ (plugin)
 │
 └── research/                   # Your research workspace
+    ├── docs/                          🆕 (AI Co-Scientist guides)
+    │   ├── ai-co-scientist-implementation-guide-en.md
+    │   └── ai-co-scientist-analysis-summary-en.md
+    │
     ├── domains/
     │   ├── stats-theory/
     │   │   ├── DOMAIN.md                ✅
@@ -405,9 +502,10 @@ rm ~/.claude/rules/research-principles.md
 
 1. Read the [README](README.md) for an overview
 2. Review the example domain: `domains/stats-theory/DOMAIN.md`
-3. Create your first project using templates
-4. Run `/brainstorm` to generate hypotheses
-5. Hold your first `/lab-meeting`
+3. **🆕 NEW:** Explore AI Co-Scientist features in `docs/ai-co-scientist-implementation-guide-en.md`
+4. Create your first project using templates
+5. Run `/brainstorm` to generate hypotheses (or try AI Co-Scientist multi-hypothesis mode)
+6. Hold your first `/lab-meeting`
 
 ---
 
