@@ -1,140 +1,140 @@
 # Research Plan
 
-> 專案：[專案名稱]
-> 建立日期：[YYYY-MM-DD]
-> 最後更新：[YYYY-MM-DD]
+> Project: [Project Name]
+> Created: [YYYY-MM-DD]
+> Last Updated: [YYYY-MM-DD]
 
 ## Phase Overview
 
-| Phase | 狀態 | 開始 | 完成 | 主要目標 |
-|-------|------|------|------|---------|
-| 1. Context | ✅ | [日期] | [日期] | 文獻回顧、定義問題 |
-| 2. Hypothesis | 🔄 | [日期] | - | 生成和審查假說 |
-| 3. Analysis | 📝 | - | - | 數據分析和驗證 |
-| 4. Writeup | 📝 | - | - | 撰寫論文 |
+| Phase | Status | Start | Complete | Main Objective |
+|-------|--------|-------|----------|----------------|
+| 1. Context | ✅ | [Date] | [Date] | Literature review, problem definition |
+| 2. Hypothesis | 🔄 | [Date] | - | Hypothesis generation and review |
+| 3. Analysis | 📝 | - | - | Data analysis and verification |
+| 4. Writeup | 📝 | - | - | Paper writing |
 
 ## Phase 1: Context (Literature Review & Problem Definition)
 
-### 目標
-- 理解現有文獻
-- 識別研究缺口
-- 定義研究問題
+### Objectives
+- Understand existing literature
+- Identify research gaps
+- Define research questions
 
-### 計畫
-1. 系統性文獻回顧
-   - 使用 Theorist + iterative-retrieval
-   - 覆蓋 [領域/主題]
-   - 識別關鍵論文
-2. 定義研究問題
-   - 明確研究問題
-   - 確定研究範圍
-   - 設定成功標準
+### Plan
+1. Systematic literature review
+   - Use Theorist + iterative-retrieval
+   - Cover [domain/topic]
+   - Identify key papers
+2. Define research questions
+   - Clarify research questions
+   - Determine research scope
+   - Set success criteria
 
-### 輸出
-- [ ] `literature_review.md` - 文獻回顧摘要
-- [ ] `research_gap.md` - 識別的研究缺口
-- [ ] `PROJECT.md` - 完整的專案定義
-- [ ] `.planning/phases/phase-1-CONTEXT.md` - 討論記錄
-- [ ] `.planning/phases/phase-1-SUMMARY.md` - 階段總結
+### Outputs
+- [ ] `literature_review.md` - Literature review summary
+- [ ] `research_gap.md` - Identified research gaps
+- [ ] `PROJECT.md` - Complete project definition
+- [ ] `.planning/phases/phase-1-CONTEXT.md` - Discussion record
+- [ ] `.planning/phases/phase-1-SUMMARY.md` - Phase summary
 
-### 完成標準
-- [ ] 至少回顧 20 篇核心文獻
-- [ ] 研究問題清晰且可測試
-- [ ] 研究缺口明確
+### Completion Criteria
+- [ ] At least 20 core papers reviewed
+- [ ] Research question clear and testable
+- [ ] Research gap clearly defined
 
 ---
 
 ## Phase 2: Hypothesis (Generation & Review)
 
-### 目標
-- 生成多個研究假說
-- 評估假說可行性
-- 排序假說優先級
+### Objectives
+- Generate multiple research hypotheses
+- Assess hypothesis feasibility
+- Prioritize hypotheses
 
-### 計畫
-1. 假說生成 (`/brainstorm`)
-   - Theorist 發散思考
-   - Experimentalist 可行性篩選
-   - 產出 5-10 個初步假說
+### Plan
+1. Hypothesis Generation (`/brainstorm`)
+   - Theorist divergent thinking
+   - Experimentalist feasibility screening
+   - Generate 5-10 preliminary hypotheses
 
-2. 假說深度審查 (`/review-hypothesis`)
-   - Theorist: 理論基礎
-   - Experimentalist: 可行性
-   - Methodologist: 方法論
-   - Elo 排名系統
+2. In-depth Hypothesis Review (`/review-hypothesis`)
+   - Theorist: Theoretical foundation
+   - Experimentalist: Feasibility
+   - Methodologist: Methodology
+   - Elo ranking system
 
-3. 驗證設計 (`/eval define`)
-   - 定義成功標準
-   - 設計驗證方案
-   - 準備數據和工具
+3. Verification Design (`/eval define`)
+   - Define success criteria
+   - Design verification plan
+   - Prepare data and tools
 
-### 輸出
-- [ ] `hypotheses/HYPOTHESES.md` - 假說總表
-- [ ] `hypotheses/H-001.md` 到 `H-00N.md` - 個別假說
-- [ ] `reviews/H-XXX_review.md` - 審查報告
-- [ ] `.planning/phases/phase-2-PLAN.md` - 執行計畫
-- [ ] `.planning/phases/phase-2-SUMMARY.md` - 階段總結
+### Outputs
+- [ ] `hypotheses/HYPOTHESES.md` - Hypothesis master table
+- [ ] `hypotheses/H-001.md` through `H-00N.md` - Individual hypotheses
+- [ ] `reviews/H-XXX_review.md` - Review reports
+- [ ] `.planning/phases/phase-2-PLAN.md` - Execution plan
+- [ ] `.planning/phases/phase-2-SUMMARY.md` - Phase summary
 
-### 完成標準
-- [ ] 至少 3 個經過完整審查的假說
-- [ ] Top 2 假說 Elo > 1400
-- [ ] 每個假說都有驗證設計
+### Completion Criteria
+- [ ] At least 3 fully reviewed hypotheses
+- [ ] Top 2 hypotheses Elo > 1400
+- [ ] Each hypothesis has verification design
 
 ---
 
 ## Phase 3: Analysis (Execute & Verify)
 
-### 目標
-- 執行分析驗證假說
-- 確保結果穩健可靠
-- 通過驗證檢查
+### Objectives
+- Execute analysis to verify hypotheses
+- Ensure robust and reliable results
+- Pass verification checks
 
-### 計畫
-1. 數據準備
-   - 數據清理和驗證
-   - 探索性數據分析
-   - 假設檢查
+### Plan
+1. Data Preparation
+   - Data cleaning and validation
+   - Exploratory data analysis
+   - Assumption checking
 
-2. 主要分析 (`/execute-analysis`)
-   - 執行預先指定的分析
-   - 記錄所有分析步驟
-   - 保存中間結果
+2. Main Analysis (`/execute-analysis`)
+   - Execute pre-specified analysis
+   - Record all analysis steps
+   - Save intermediate results
 
 3. Robustness Checks
-   - 敏感性分析
-   - 替代規格
-   - 子樣本分析
+   - Sensitivity analysis
+   - Alternative specifications
+   - Subsample analysis
 
-4. 驗證 (`/verify-results`)
+4. Verification (`/verify-results`)
    - 3-phase verification
-   - pass@k 指標
-   - 可重現性測試
+   - pass@k metrics
+   - Reproducibility testing
 
-### 輸出
-- [ ] `data/processed/` - 清理後數據
-- [ ] `analysis/*.R` 或 `*.py` - 分析腳本
-- [ ] `results/` - 分析結果
-- [ ] `figures/` - 圖表
-- [ ] `reviews/verification_report.md` - 驗證報告
-- [ ] `.planning/phases/phase-3-SUMMARY.md` - 階段總結
+### Outputs
+- [ ] `data/processed/` - Cleaned data
+- [ ] `analysis/*.R` or `*.py` - Analysis scripts
+- [ ] `results/` - Analysis results
+- [ ] `figures/` - Figures
+- [ ] `reviews/verification_report.md` - Verification report
+- [ ] `.planning/phases/phase-3-SUMMARY.md` - Phase summary
 
-### 完成標準
-- [ ] 所有假說驗證完成
+### Completion Criteria
+- [ ] All hypothesis verification complete
 - [ ] pass@3 ≥ 90%
-- [ ] 結果可在獨立環境重現
-- [ ] Robustness checks 通過
+- [ ] Results reproducible in independent environment
+- [ ] Robustness checks passed
 
 ---
 
 ## Phase 4: Writeup (Publication)
 
-### 目標
-- 撰寫論文
-- 準備投稿材料
-- 通過內部審查
+### Objectives
+- Write paper
+- Prepare submission materials
+- Pass internal review
 
-### 計畫
-1. 論文結構
+### Plan
+1. Paper Structure
    - Introduction
    - Literature Review
    - Methodology
@@ -142,27 +142,27 @@
    - Discussion
    - Conclusion
 
-2. 內部審查
-   - Methodologist 方法論審查
-   - 團隊 review
-   - 修改完善
+2. Internal Review
+   - Methodologist methodological review
+   - Team review
+   - Revisions
 
-3. 投稿準備
-   - 選擇目標期刊
-   - 格式調整
-   - 補充材料
+3. Submission Preparation
+   - Select target journal
+   - Format adjustments
+   - Supplementary materials
 
-### 輸出
-- [ ] `writeup/manuscript.tex` - 論文稿
-- [ ] `writeup/supplement.pdf` - 補充材料
-- [ ] `writeup/response_to_reviewers.md` - 審稿回應（如需要）
-- [ ] `.planning/phases/phase-4-SUMMARY.md` - 階段總結
+### Outputs
+- [ ] `writeup/manuscript.tex` - Paper draft
+- [ ] `writeup/supplement.pdf` - Supplementary materials
+- [ ] `writeup/response_to_reviewers.md` - Reviewer response (if needed)
+- [ ] `.planning/phases/phase-4-SUMMARY.md` - Phase summary
 
-### 完成標準
-- [ ] 論文完整草稿
-- [ ] 通過內部審查
-- [ ] 所有圖表完成
-- [ ] 投稿材料準備完成
+### Completion Criteria
+- [ ] Complete paper draft
+- [ ] Passed internal review
+- [ ] All figures complete
+- [ ] Submission materials ready
 
 ---
 
@@ -177,32 +177,32 @@ Phase 4 (Writeup)        ░░░░░░░░░░░░░░░░░░�
                          Month 1      Month 2      Month 3      Month 4
 ```
 
-預計總時間：[X] 個月
+Expected Total Time: [X] months
 
 ## Milestones
 
-- [ ] **M1**: Literature review 完成 - [目標日期]
-- [ ] **M2**: 假說排名確定 - [目標日期]
-- [ ] **M3**: 主要分析完成 - [目標日期]
-- [ ] **M4**: 論文初稿完成 - [目標日期]
-- [ ] **M5**: 投稿 - [目標日期]
+- [ ] **M1**: Literature review complete - [Target date]
+- [ ] **M2**: Hypothesis ranking finalized - [Target date]
+- [ ] **M3**: Main analysis complete - [Target date]
+- [ ] **M4**: Paper first draft complete - [Target date]
+- [ ] **M5**: Submission - [Target date]
 
 ## Risks & Mitigation
 
-| 風險 | 影響 | 機率 | 緩解策略 |
-|------|------|------|---------|
-| 數據不可得 | 高 | 中 | 備用數據源，調整假說 |
-| 樣本量不足 | 中 | 低 | Power analysis，調整效果量預期 |
-| 結果不顯著 | 中 | 中 | 探索性分析，調整假說 |
+| Risk | Impact | Probability | Mitigation Strategy |
+|------|--------|-------------|---------------------|
+| Data unavailable | High | Medium | Backup data sources, adjust hypotheses |
+| Insufficient sample size | Medium | Low | Power analysis, adjust expected effect sizes |
+| Non-significant results | Medium | Medium | Exploratory analysis, adjust hypotheses |
 
 ## Resource Requirements
 
-- **數據**: [列出所需數據]
-- **計算**: [計算資源需求]
-- **軟件**: [軟件工具清單]
-- **人力**: [團隊成員和分工]
-- **時間**: [預計時間投入]
+- **Data**: [List required data]
+- **Computing**: [Computing resource requirements]
+- **Software**: [Software tools list]
+- **Personnel**: [Team members and division of labor]
+- **Time**: [Expected time investment]
 
 ## Notes
 
-[其他重要資訊和提醒]
+[Other important information and reminders]

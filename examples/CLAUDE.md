@@ -9,7 +9,7 @@ Tech stack: R, Python (numpy, scipy), LaTeX
 
 ## Domain
 
-使用領域知識：domains/stats-theory/
+Use domain knowledge: domains/stats-theory/
 
 ## Critical Rules
 
@@ -84,22 +84,22 @@ Tech stack: R, Python (numpy, scipy), LaTeX
 ```markdown
 # H-001: [Title]
 
-## 假說陳述
+## Hypothesis Statement
 [Clear, testable statement]
 
-## 理論基礎
+## Theoretical Basis
 [Why this might be true]
 
-## 驗證計畫
+## Verification Plan
 [How to test it]
 
-## 預期結果
+## Expected Results
 [What would support/refute this]
 
-## 狀態
-[提案/審查中/實驗中/已驗證/擱置]
+## Status
+[Proposal/Review/Experiment/Verified/Shelved]
 
-## Elo 排名
+## Elo Ranking
 [Current score and rank]
 ```
 
@@ -134,8 +134,20 @@ write_csv(results, "results/analysis_output.csv")
 
 Research commands:
 - `/brainstorm` - Structured hypothesis generation
-- `/lab-meeting` - Virtual lab meeting
+- `/lab-meeting` - Virtual lab meeting (with Elo tournament)
 - `/review-hypothesis H-XXX` - Deep hypothesis review
+- `/execute-analysis H-XXX` - Execute analysis with domain standards
+- `/verify-results H-XXX` - Goal-backward verification with domain compliance
+- `/progress` - Quick status overview
+- `/update-state` - Update research state
+
+🆕 AI Co-Scientist workflows:
+- Multi-hypothesis: Use Task tool with theorist-enhanced (mode: multi)
+- Scientific debate: Use Task tool with theorist-enhanced (mode: debate)
+- Evolution: Use Task tool with theorist-enhanced (mode: evolve)
+- Novelty check: Use Task tool with verifier-enhanced (mode: novelty)
+- Observation matching: Use Task tool with verifier-enhanced (mode: observation)
+- Assumption analysis: Use Task tool with verifier-enhanced (mode: assumption)
 
 Quality assurance (from plugin):
 - `/checkpoint` - Save research checkpoint
@@ -149,6 +161,11 @@ Quality assurance (from plugin):
 - **Theorist**: Hypothesis generation, literature review
 - **Experimentalist**: Feasibility assessment, verification design
 - **Methodologist**: Methodology review, formal evaluation
+- **Verifier**: Goal-backward verification, domain compliance checking
+
+### 🆕 AI Co-Scientist Enhanced Agents (Opus)
+- **theorist-enhanced**: Multi-hypothesis generation, scientific debate, evolution modes
+- **verifier-enhanced**: Novelty verification, observation-hypothesis matching, assumption decomposition
 
 ### Lab Manager (Sonnet)
 - Progress tracking
@@ -205,9 +222,48 @@ Avoid compaction during:
 - Multi-round literature search
 - Complex theoretical derivations
 
+## 🆕 AI Co-Scientist Workflow Example
+
+### Week 1: Multi-Hypothesis Exploration
+```
+Use Task tool with theorist-enhanced agent:
+Mode: Multi-Hypothesis Generation
+Goal: Derive minimax optimal rates for sparse regression
+
+Output: H-001-A, H-001-B, H-001-C (3 competing hypotheses)
+```
+
+### Week 2: Verify All Candidates
+```
+Use Task tool with verifier-enhanced agent (mode: novelty):
+- Check H-001-A novelty
+- Check H-001-B novelty
+- Check H-001-C novelty
+
+Output: H-001-B has highest novelty and feasibility
+```
+
+### Week 3: Deep Refinement via Debate
+```
+Use Task tool with theorist-enhanced agent:
+Mode: Scientific Debate
+Target: H-001-B
+
+Output: H-001-B-v2 (refined through 5-turn expert panel)
+```
+
+### Week 4-5: Execute and Verify
+```
+/execute-analysis H-001-B-v2 (with domain standards)
+/verify-results H-001-B-v2 (domain compliance check)
+
+If gaps found: Use theorist-enhanced (mode: evolve)
+```
+
 ## Notes
 
 - This project uses R 4.3+ with {tidyverse}
 - Python 3.10+ for numerical computations
 - LaTeX for writeups (TeXLive 2023)
 - Results are reproducible with `renv` lockfile
+- AI Co-Scientist features available via enhanced agents (see README.md)

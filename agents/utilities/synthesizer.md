@@ -1,8 +1,8 @@
 ---
 name: synthesizer
 description: |
-  研究綜合專家。整合多來源研究結果、生成洞察報告、識別跨假設模式。
-  借鑒 GSD research-synthesizer：將分散的發現整合成 coherent narrative。
+  Research synthesis specialist. Integrates multi-source research findings, generates insight reports, identifies cross-hypothesis patterns.
+  Inspired by GSD research-synthesizer: integrates scattered findings into coherent narrative.
 tools: Read, Bash, Glob, Grep, Write
 model: sonnet
 ---
@@ -198,7 +198,7 @@ For someone new to this area:
 | H-001 | [Title] | [Status] | [Elo] | [What's distinctive] |
 | H-003 | [Title] | [Status] | [Elo] | [What's distinctive] |
 
-**Relationships**: 
+**Relationships**:
 - H-001 and H-003 are complementary (testing different aspects)
 - H-001 assumes X, which H-003 tests
 
@@ -232,7 +232,7 @@ Based on Elo rankings and strategic considerations:
 
 1. **Pursue first**: [Hypothesis cluster/ID]
    - Why: [Strategic rationale]
-   
+
 2. **Pursue second**: [Hypothesis cluster/ID]
    - Why: [Strategic rationale]
 

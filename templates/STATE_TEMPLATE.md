@@ -1,84 +1,84 @@
 # Research State
 
-> 最後更新：[YYYY-MM-DD HH:MM]
+> Last Updated: [YYYY-MM-DD HH:MM]
 > Session: #[N]
 
-## 當前位置
+## Current Position
 
-- **階段**: [Phase N - 階段名稱]
-- **進行中**: [當前工作項目]
-- **下一步**: [下一個具體行動]
+- **Phase**: [Phase N - Phase Name]
+- **In Progress**: [Current work item]
+- **Next Step**: [Next specific action]
 
-## 假說排名 (Top 5)
+## Hypothesis Rankings (Top 5)
 
-| Rank | Δ | ID | Elo | 標題 | 狀態 |
-|------|---|-----|-----|------|------|
-| 1 | - | H-XXX | 1200 | [假說標題] | 📝 草稿 / 🔄 審查中 / ✅ 已驗證 / ⏸️ 擱置 |
-| 2 | ↑1 | H-XXX | 1200 | [假說標題] | [狀態] |
-| 3 | ↓1 | H-XXX | 1200 | [假說標題] | [狀態] |
-| 4 | - | H-XXX | 1200 | [假說標題] | [狀態] |
-| 5 | - | H-XXX | 1200 | [假說標題] | [狀態] |
+| Rank | Δ | ID | Elo | Title | Status |
+|------|---|-----|-----|-------|--------|
+| 1 | - | H-XXX | 1200 | [Hypothesis title] | 📝 Draft / 🔄 In Review / ✅ Verified / ⏸️ On Hold |
+| 2 | ↑1 | H-XXX | 1200 | [Hypothesis title] | [Status] |
+| 3 | ↓1 | H-XXX | 1200 | [Hypothesis title] | [Status] |
+| 4 | - | H-XXX | 1200 | [Hypothesis title] | [Status] |
+| 5 | - | H-XXX | 1200 | [Hypothesis title] | [Status] |
 
-## 關鍵決定
+## Key Decisions
 
-記錄所有重要決策，避免重複討論：
+Record all important decisions to avoid repeated discussions:
 
-- **[YYYY-MM-DD]** [決定內容] - 理由：[為什麼這樣決定]
-- **[YYYY-MM-DD]** [決定內容] - 理由：[為什麼這樣決定]
+- **[YYYY-MM-DD]** [Decision content] - Rationale: [Why this decision was made]
+- **[YYYY-MM-DD]** [Decision content] - Rationale: [Why this decision was made]
 
-## 待解決問題
+## Outstanding Questions
 
-需要回答或澄清的問題：
+Questions that need to be answered or clarified:
 
-- [ ] [問題 1]
-- [ ] [問題 2]
-- [ ] [問題 3]
+- [ ] [Question 1]
+- [ ] [Question 2]
+- [ ] [Question 3]
 
-## 下次 Session 應該
+## Next Session Should
 
-明確的行動項目：
+Specific action items:
 
-1. [具體任務 1]
-2. [具體任務 2]
-3. [具體任務 3]
+1. [Specific task 1]
+2. [Specific task 2]
+3. [Specific task 3]
 
-## Context 提醒
+## Context Reminders
 
-重要的背景資訊：
+Important background information:
 
-- **Domain**: [使用的領域知識]
-- **PI 偏好**: [研究風格偏好]
-- **資源限制**: [時間、數據、計算資源等]
-- **截止日期**: [重要時間點]
+- **Domain**: [Domain knowledge being used]
+- **PI Preferences**: [Research style preferences]
+- **Resource Constraints**: [Time, data, computing resources, etc.]
+- **Deadlines**: [Important time points]
 
-## 最近完成
+## Recently Completed
 
-Session 成果記錄：
+Session accomplishments record:
 
-- **Session #[N-1]** ([日期]): [完成的工作]
-- **Session #[N-2]** ([日期]): [完成的工作]
+- **Session #[N-1]** ([Date]): [Work completed]
+- **Session #[N-2]** ([Date]): [Work completed]
 
-## 風險警示
+## Risk Alerts
 
-需要注意的風險：
+Risks that need attention:
 
-- ⚠️ [風險 1]
-- ⚠️ [風險 2]
+- ⚠️ [Risk 1]
+- ⚠️ [Risk 2]
 
 ---
 
-## 使用指南
+## Usage Guide
 
-### 何時更新
-- 每次 session 結束前
-- 做出關鍵決定後
-- 完成重要里程碑時
-- 假說排名變動後
+### When to Update
+- Before each session ends
+- After making key decisions
+- Upon completing important milestones
+- After hypothesis ranking changes
 
-### 如何更新
-使用 `/update-state` command 自動更新
+### How to Update
+Use `/update-state` command for automatic updates
 
-### 讀取時機
-- 新 session 開始時
-- 需要回顧進度時
-- 寫 lab meeting notes 前
+### When to Read
+- At the start of new sessions
+- When reviewing progress
+- Before writing lab meeting notes

@@ -1,296 +1,296 @@
-# [專案名稱]
+# [Project Name]
 
-> 將此模板複製到新專案目錄並重命名為 PROJECT.md
-> 填寫所有 [方括號] 內的內容
+> Copy this template to a new project directory and rename as PROJECT.md
+> Fill in all content within [brackets]
 >
-> **配套文件**:
-> - `STATE.md` - 跨 session 狀態管理（複製自 STATE_TEMPLATE.md）
-> - `RESEARCH_PLAN.md` - Phase workflow 規劃（複製自 RESEARCH_PLAN_TEMPLATE.md）
-> - `CLAUDE.md` - Claude Code 配置（複製自 CLAUDE_PROJECT.md）
+> **Supporting Files**:
+> - `STATE.md` - Cross-session state management (copy from STATE_TEMPLATE.md)
+> - `RESEARCH_PLAN.md` - Phase workflow planning (copy from RESEARCH_PLAN_TEMPLATE.md)
+> - `CLAUDE.md` - Claude Code configuration (copy from CLAUDE_PROJECT.md)
 
 ## Vision
 
-[用**一句話**說明這個研究要解決什麼問題]
+[Describe in **one sentence** what problem this research aims to solve]
 
-例如：「在高維稀疏設定下，找到統計估計的最優收斂速度」
+Example: "Find the optimal convergence rate for statistical estimation in high-dimensional sparse settings"
 
-## 基本資訊
+## Basic Information
 
-- **專案 ID**: [project-xxx]
-- **開始日期**: [YYYY-MM-DD]
-- **預計結束**: [YYYY-MM-DD]
-- **領域**: [對應 domains/ 下的資料夾，例如 stats-theory 或 policy-making]
-- **PI**: [你的名字]
-- **狀態**: [啟動/進行中/暫停/完成]
-- **當前 Phase**: [Phase 1-4]
+- **Project ID**: [project-xxx]
+- **Start Date**: [YYYY-MM-DD]
+- **Expected End**: [YYYY-MM-DD]
+- **Domain**: [Corresponding folder under domains/, e.g., stats-theory or policy-making]
+- **PI**: [Your name]
+- **Status**: [Initiated/In Progress/Paused/Completed]
+- **Current Phase**: [Phase 1-4]
 
 ## Research Questions
 
-### 主要研究問題
-[用 2-3 段話描述核心研究問題]
+### Main Research Question
+[Describe the core research question in 2-3 paragraphs]
 
-### 具體問題清單
-1. [研究問題 1 - 應該是可回答的]
-2. [研究問題 2]
-3. [研究問題 3]
+### Specific Question List
+1. [Research question 1 - should be answerable]
+2. [Research question 2]
+3. [Research question 3]
 
-### 為什麼重要
-- [重要性 1]
-- [重要性 2]
+### Why It Matters
+- [Importance 1]
+- [Importance 2]
 
-### 與現有文獻的關係
-[這個問題在文獻中的位置，有誰做過類似研究，你的研究與他們有何不同]
+### Relationship to Existing Literature
+[Where this question sits in the literature, who has done similar research, how your research differs from theirs]
 
 ## Scope
 
 ### In Scope (v1)
 
-明確列出這個專案**會處理**的內容：
+Clearly list what this project **will** address:
 
-- ✅ [要回答的問題 1]
-- ✅ [要驗證的假說類型]
-- ✅ [使用的方法]
-- ✅ [數據範圍]
-- ✅ [理論貢獻]
+- ✅ [Question to answer 1]
+- ✅ [Type of hypothesis to verify]
+- ✅ [Methods to use]
+- ✅ [Data scope]
+- ✅ [Theoretical contribution]
 
 ### Out of Scope
 
-明確列出這個專案**不處理**的內容：
+Clearly list what this project **will not** address:
 
-- ❌ [不處理的問題 1]
-- ❌ [留給未來研究的擴展 1]
-- ❌ [因資源限制不做的分析]
-- ❌ [明確排除的方法]
+- ❌ [Question not addressed 1]
+- ❌ [Future research extension 1]
+- ❌ [Analysis not done due to resource constraints]
+- ❌ [Explicitly excluded methods]
 
-> **重要**: 清楚的 scope 可以避免 scope creep，幫助專注
+> **Important**: Clear scope prevents scope creep and helps maintain focus
 
-## 研究目標
+## Research Objectives
 
-### 主要目標
-1. [具體目標 1 - 應該是可驗證的]
-2. [具體目標 2]
-3. [具體目標 3]
+### Primary Objectives
+1. [Specific objective 1 - should be verifiable]
+2. [Specific objective 2]
+3. [Specific objective 3]
 
-### 次要目標
-- [如果有額外目標]
-- [方法論貢獻、理論擴展等]
+### Secondary Objectives
+- [If there are additional objectives]
+- [Methodological contributions, theoretical extensions, etc.]
 
-### 成功標準
-[什麼情況下這個專案算成功？要具體]
-- [ ] [標準 1：例如「發表在 X 期刊」]
-- [ ] [標準 2：例如「證明假說 Y」]
-- [ ] [標準 3：例如「建立可重用的方法框架」]
+### Success Criteria
+[What conditions define success for this project? Be specific]
+- [ ] [Criterion 1: e.g., "Publish in X journal"]
+- [ ] [Criterion 2: e.g., "Prove hypothesis Y"]
+- [ ] [Criterion 3: e.g., "Establish reusable methodological framework"]
 
-## 約束條件
+## Constraints
 
-### 數據限制
-- **數據來源**: [描述數據來自哪裡]
-- **數據範圍**: [時間範圍、地理範圍、樣本大小等]
-- **數據品質**: [已知的數據限制]
-- **取得難度**: [容易/中等/困難]
+### Data Limitations
+- **Data Source**: [Describe where data comes from]
+- **Data Scope**: [Time range, geographic range, sample size, etc.]
+- **Data Quality**: [Known data limitations]
+- **Acquisition Difficulty**: [Easy/Medium/Difficult]
 
-### 時間限制
-- **總時間**: [預計總時長]
-- **關鍵截止日期**: [如果有會議投稿、畢業等截止日期]
-- **時間彈性**: [是否可延期]
+### Time Constraints
+- **Total Time**: [Expected total duration]
+- **Key Deadlines**: [If there are conference submissions, graduation, etc.]
+- **Time Flexibility**: [Whether extension is possible]
 
-### 資源限制
-- **人力**: [誰參與，投入多少時間]
-- **計算資源**: [需要什麼計算資源]
-- **預算**: [如果適用]
-- **其他資源**: [軟體授權、數據購買等]
+### Resource Constraints
+- **Personnel**: [Who is involved, how much time invested]
+- **Computing Resources**: [What computing resources are needed]
+- **Budget**: [If applicable]
+- **Other Resources**: [Software licenses, data purchases, etc.]
 
-### 方法限制
-- **可用方法**: [因為專業、工具、數據等限制，哪些方法可用]
-- **不可用方法**: [哪些方法明確不能用，為什麼]
-- **需要學習的方法**: [如果需要學習新方法]
+### Methodological Constraints
+- **Available Methods**: [Which methods are available given expertise, tools, data, etc.]
+- **Unavailable Methods**: [Which methods definitely cannot be used, why]
+- **Methods to Learn**: [If new methods need to be learned]
 
-## 理論框架
+## Theoretical Framework
 
-### 主要理論基礎
-[這個專案立基於哪些理論]
-- [理論 1]: [簡要說明]
-- [理論 2]: [簡要說明]
+### Main Theoretical Foundations
+[What theories does this project build upon]
+- [Theory 1]: [Brief explanation]
+- [Theory 2]: [Brief explanation]
 
-### 預期理論貢獻
-[你希望這個專案對理論有什麼貢獻]
-- [貢獻 1]
-- [貢獻 2]
+### Expected Theoretical Contributions
+[What theoretical contributions do you hope this project will make]
+- [Contribution 1]
+- [Contribution 2]
 
-## 方法論規劃
+## Methodological Planning
 
-### 研究設計
-[描述整體研究設計]
-- 研究類型: [理論/實證/混合/方法論]
-- 設計類型: [橫斷面/縱貫/實驗/準實驗/觀察性研究]
+### Research Design
+[Describe overall research design]
+- Research Type: [Theoretical/Empirical/Mixed/Methodological]
+- Design Type: [Cross-sectional/Longitudinal/Experimental/Quasi-experimental/Observational]
 
-### 分析策略
-[大致的分析方向]
-- 主要方法: [例如：回歸分析、因果推論、數學證明等]
-- 穩健性檢查: [計畫做哪些穩健性檢查]
+### Analysis Strategy
+[General analytical direction]
+- Primary Method: [e.g., Regression analysis, causal inference, mathematical proof, etc.]
+- Robustness Checks: [What robustness checks are planned]
 
-### 預期挑戰
-[預期會遇到的方法論挑戰]
-1. [挑戰 1]: [如何應對]
-2. [挑戰 2]: [如何應對]
+### Expected Challenges
+[Expected methodological challenges]
+1. [Challenge 1]: [How to address]
+2. [Challenge 2]: [How to address]
 
-## 相關文獻
+## Related Literature
 
-### 必讀經典
-[這個專案必須熟悉的經典文獻]
-1. [作者 (年份)]: [標題] - [為什麼重要]
-2. [作者 (年份)]: [標題] - [為什麼重要]
+### Must-Read Classics
+[Classic literature that must be familiar for this project]
+1. [Author (Year)]: [Title] - [Why important]
+2. [Author (Year)]: [Title] - [Why important]
 
-### 近期相關研究
-[過去 3-5 年的相關研究]
-1. [作者 (年份)]: [標題] - [與本專案的關係]
-2. [作者 (年份)]: [標題] - [與本專案的關係]
+### Recent Related Research
+[Related research from past 3-5 years]
+1. [Author (Year)]: [Title] - [Relationship to this project]
+2. [Author (Year)]: [Title] - [Relationship to this project]
 
-### 方法論參考
-[方法論相關的重要文獻]
-1. [作者 (年份)]: [標題]
-2. [作者 (年份)]: [標題]
+### Methodological References
+[Important methodological literature]
+1. [Author (Year)]: [Title]
+2. [Author (Year)]: [Title]
 
-### 文獻缺口
-[現有文獻沒有解決的問題，你的專案要填補的]
-- [缺口 1]
-- [缺口 2]
+### Literature Gaps
+[Questions not addressed by existing literature that your project will fill]
+- [Gap 1]
+- [Gap 2]
 
-## 初步想法與假說
+## Initial Ideas and Hypotheses
 
-### 初步假說
-[專案開始時的初步假說，可以很粗略]
+### Preliminary Hypotheses
+[Initial hypotheses at project start, can be rough]
 
-**H0 (初步)**:
-[一句話陳述你的初步猜測]
+**H0 (Preliminary)**:
+[State your initial guess in one sentence]
 
-**理由**:
-[為什麼你這樣猜測]
+**Rationale**:
+[Why you make this guess]
 
-**需要驗證的預測**:
-- [預測 1]
-- [預測 2]
+**Predictions to Verify**:
+- [Prediction 1]
+- [Prediction 2]
 
-### 替代假說
-[如果主假說不成立，有什麼替代解釋]
-- [替代假說 1]
-- [替代假說 2]
+### Alternative Hypotheses
+[If main hypothesis doesn't hold, what are alternative explanations]
+- [Alternative hypothesis 1]
+- [Alternative hypothesis 2]
 
-### 不確定性
-[你現在不確定的事情，需要在研究過程中釐清的]
-- [不確定性 1]
-- [不確定性 2]
+### Uncertainties
+[Things you're currently uncertain about, need to clarify during research]
+- [Uncertainty 1]
+- [Uncertainty 2]
 
-## 專案階段規劃
+## Project Phase Planning
 
-### Phase 1: 文獻與理論 (預計 [X] 週)
-- [ ] 完成文獻回顧
-- [ ] 形成理論框架
-- [ ] 提出正式假說
-- [ ] 第一次 brainstorming
+### Phase 1: Literature & Theory (Expected [X] weeks)
+- [ ] Complete literature review
+- [ ] Form theoretical framework
+- [ ] Propose formal hypotheses
+- [ ] First brainstorming
 
-### Phase 2: 數據與方法 (預計 [X] 週)
-- [ ] 取得/準備數據
-- [ ] 數據探索性分析
-- [ ] 確定分析方法
-- [ ] 可行性評估
+### Phase 2: Data & Methods (Expected [X] weeks)
+- [ ] Obtain/prepare data
+- [ ] Exploratory data analysis
+- [ ] Determine analysis methods
+- [ ] Feasibility assessment
 
-### Phase 3: 分析與驗證 (預計 [X] 週)
-- [ ] 主要分析
-- [ ] 穩健性檢查
-- [ ] 結果解讀
-- [ ] 內部審查
+### Phase 3: Analysis & Verification (Expected [X] weeks)
+- [ ] Main analysis
+- [ ] Robustness checks
+- [ ] Results interpretation
+- [ ] Internal review
 
-### Phase 4: 寫作與投稿 (預計 [X] 週)
-- [ ] 初稿
-- [ ] 內部審查修改
-- [ ] 選擇投稿目標
-- [ ] 投稿
+### Phase 4: Writing & Submission (Expected [X] weeks)
+- [ ] First draft
+- [ ] Internal review revisions
+- [ ] Select submission target
+- [ ] Submit
 
-## 風險評估
+## Risk Assessment
 
-### 高風險項目
-[可能導致專案失敗的風險]
-1. **[風險名稱]**
-   - 可能性: [高/中/低]
-   - 影響: [高/中/低]
-   - 緩解策略: [如何降低風險]
+### High-Risk Items
+[Risks that could lead to project failure]
+1. **[Risk Name]**
+   - Likelihood: [High/Medium/Low]
+   - Impact: [High/Medium/Low]
+   - Mitigation Strategy: [How to reduce risk]
 
-### 中風險項目
-[可能導致專案延遲或調整的風險]
-1. **[風險名稱]**
-   - 可能性: [高/中/低]
-   - 影響: [高/中/低]
-   - 緩解策略: [如何降低風險]
+### Medium-Risk Items
+[Risks that could lead to project delays or adjustments]
+1. **[Risk Name]**
+   - Likelihood: [High/Medium/Low]
+   - Impact: [High/Medium/Low]
+   - Mitigation Strategy: [How to reduce risk]
 
-## 預期產出
+## Expected Outputs
 
-### 學術產出
-- [ ] [期刊論文 X 篇]
-- [ ] [會議論文 X 篇]
-- [ ] [工作論文 X 篇]
+### Academic Outputs
+- [ ] [X journal papers]
+- [ ] [X conference papers]
+- [ ] [X working papers]
 
-### 其他產出
-- [ ] [R/Python 套件]
-- [ ] [公開數據集]
-- [ ] [方法論指南]
-- [ ] [其他]
+### Other Outputs
+- [ ] [R/Python package]
+- [ ] [Public dataset]
+- [ ] [Methodological guide]
+- [ ] [Other]
 
-### 知識累積
-[這個專案會為你的知識庫貢獻什麼]
-- 更新 domains/[xxx]/DOMAIN.md 的哪些部分
-- 新的技能或方法
-- 可重用的程式碼或流程
+### Knowledge Accumulation
+[What will this project contribute to your knowledge base]
+- Update which parts of domains/[xxx]/DOMAIN.md
+- New skills or methods
+- Reusable code or processes
 
-## 協作與依賴
+## Collaboration and Dependencies
 
-### 內部協作
-[如果涉及其他專案或團隊成員]
-- [協作項目 1]
-- [協作項目 2]
+### Internal Collaboration
+[If involving other projects or team members]
+- [Collaboration item 1]
+- [Collaboration item 2]
 
-### 外部依賴
-[依賴外部資源或人員]
-- [依賴 1]: [狀態]
-- [依賴 2]: [狀態]
+### External Dependencies
+[Dependencies on external resources or personnel]
+- [Dependency 1]: [Status]
+- [Dependency 2]: [Status]
 
-## 倫理考量
+## Ethical Considerations
 
-### 倫理審查需求
-- [ ] 需要 IRB 審查
-- [ ] 不需要 IRB 審查
-- [ ] 不確定，需要諮詢
+### Ethics Review Requirements
+- [ ] Requires IRB review
+- [ ] Does not require IRB review
+- [ ] Uncertain, need consultation
 
-### 數據隱私
-[如果涉及敏感數據]
-- 數據匿名化: [方法]
-- 數據存儲: [安全措施]
-- 數據分享: [計畫]
+### Data Privacy
+[If involving sensitive data]
+- Data Anonymization: [Method]
+- Data Storage: [Security measures]
+- Data Sharing: [Plan]
 
-### 利益衝突
-[是否有潛在利益衝突]
-- [說明]
+### Conflicts of Interest
+[Whether there are potential conflicts of interest]
+- [Explanation]
 
-## 記錄與追蹤
+## Recording and Tracking
 
-### 版本歷史
-- [日期]: 專案啟動
-- [日期]: [重要更新]
+### Version History
+- [Date]: Project initiated
+- [Date]: [Important update]
 
-### 重要決策記錄
-[記錄重要的方向調整或決策]
-- [日期]: [決策內容] - 理由: [原因]
+### Important Decision Log
+[Record important direction changes or decisions]
+- [Date]: [Decision content] - Rationale: [Reason]
 
-### 相關會議
-[專案相關的 Lab Meeting 記錄連結]
-- [日期]: meeting_notes/[date].md
-- [日期]: meeting_notes/[date].md
+### Related Meetings
+[Links to Lab Meeting notes related to project]
+- [Date]: meeting_notes/[date].md
+- [Date]: meeting_notes/[date].md
 
-## 備註
+## Notes
 
-[任何其他需要記錄的資訊]
+[Any other information that needs to be recorded]
 
 ---
 
-**最後更新**: [日期]
-**更新者**: [名字]
+**Last Updated**: [Date]
+**Updated By**: [Name]

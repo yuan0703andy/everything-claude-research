@@ -52,16 +52,25 @@ You are assisting an academic researcher focused on [your field, e.g., statistic
 
 ### Research Team (everything-claude-research)
 
-Agents:
+Core Agents:
 - Theorist (Opus) - Hypothesis generation, theory development
 - Experimentalist (Opus) - Feasibility, verification design
 - Methodologist (Opus) - Quality control, formal evaluation
+- Verifier (Opus) - Goal-backward verification, domain compliance
 - Lab Manager (Sonnet) - Progress tracking, coordination
+
+🆕 AI Co-Scientist Enhanced Agents (Opus):
+- theorist-enhanced - Multi-hypothesis generation, scientific debate, evolution
+- verifier-enhanced - Novelty verification, observation matching, assumption decomposition
 
 Commands:
 - `/brainstorm` - Hypothesis generation
-- `/lab-meeting` - Progress review and planning
+- `/lab-meeting` - Progress review, Elo tournament, planning
 - `/review-hypothesis` - Multi-angle review
+- `/execute-analysis` - Domain-aware execution
+- `/verify-results` - Goal-backward + domain verification
+- `/progress` - Quick status check
+- `/update-state` - State tracking
 
 ### Development Team (everything-claude-code)
 
@@ -197,6 +206,40 @@ When I say:
 - Writing in focused blocks
 - Lab meetings: [Your preferred day/time]
 
+## 🆕 AI Co-Scientist Usage Patterns
+
+### When to Use Multi-Hypothesis Mode
+- Starting new research direction (need multiple angles)
+- After literature review (generate diverse candidates)
+- When research question has multiple valid approaches
+
+### When to Use Scientific Debate Mode
+- High-stakes hypothesis (major grant, key publication)
+- Need deep refinement and quality assurance
+- Multiple team members need alignment
+
+### When to Use Evolution Mode
+- Received "Major Revision" from Methodologist
+- Verifier found critical gaps
+- Need to iterate based on feedback
+
+### When to Use Novelty Verification
+- Before starting execution (check if already done)
+- After hypothesis generation (prioritize novel ones)
+- Before manuscript submission (literature gap check)
+
+### When to Use Observation-Hypothesis Matching
+- Have experimental data, need theoretical explanation
+- Multiple hypotheses competing, need scoring
+- Check if hypothesis predicts observed phenomena
+
+### When to Use Assumption Decomposition
+- Before execution (validate all assumptions)
+- When proof has logical gaps
+- Reviewer questions assumption validity
+
 ## Notes
 
 This is a living document. Update as your research practices evolve.
+
+For AI Co-Scientist detailed workflows, see project-level CLAUDE.md or docs/ai-co-scientist-implementation-guide-en.md
