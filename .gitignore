@@ -1,0 +1,53 @@
+# Personal research projects and data
+projects/*
+!projects/.gitkeep
+!projects/example-project/
+
+# Data files
+*.csv
+*.xlsx
+*.dat
+*.rds
+*.RData
+
+# Results
+results/
+output/
+figures/
+
+# Personal domain knowledge (if contains proprietary info)
+# domains/*/literature/*.pdf
+
+# Git
+.git/
+
+# macOS
+.DS_Store
+._*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# R
+.Rhistory
+.RData
+.Rproj.user
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.egg-info/
+
+# Logs
+*.log
+*.out
+
+# Temporary files
+tmp/
+temp/
