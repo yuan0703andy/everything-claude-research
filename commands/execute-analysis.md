@@ -1,199 +1,578 @@
 ---
 name: execute-analysis
-description: 執行分析並記錄過程（對應 GSD execute-phase）
+description: Execute analysis and document process (corresponds to GSD execute-phase). Domain-aware execution with field-specific validation.
+argument-hint: <hypothesis-id>
+allowed-tools: Read, Bash, Glob, Grep, Write, Task
 ---
 
-# /execute-analysis
+<execute_analysis_command>
 
-執行研究分析，記錄完整過程。
+# /execute-analysis Command
 
-## 目的
+Execute research analysis with complete process documentation.
 
-在明確的計畫下執行分析：
-- 遵循預先定義的分析計畫
-- 記錄所有步驟和決策
-- 保存中間結果
-- 產生階段總結
+## Purpose
 
-## 前置條件
+Execute analysis under a clear plan:
+- Follow pre-defined analysis plan
+- Record all steps and decisions
+- Preserve intermediate results
+- Generate phase summary
+- **Apply domain-specific execution standards**
 
-- [ ] 已完成 `/review-hypothesis`（有明確的驗證計畫）
-- [ ] 數據已準備完成
-- [ ] 分析腳本已規劃
-- [ ] 驗證標準已定義（`/eval define`）
+## Prerequisites
 
-## 流程
+- [ ] Completed `/review-hypothesis` (with clear verification plan)
+- [ ] Data prepared
+- [ ] Analysis scripts planned
+- [ ] Verification standards defined (`/eval define`)
+- [ ] Domain-specific requirements understood
 
-### 1. 確認分析計畫
+## Workflow
 
-Lab Manager 讀取並確認：
 ```
-- 讀取 hypotheses/H-XXX.md 的驗證計畫
-- 讀取 STATE.md 確認當前階段
-- 檢查 .planning/phases/phase-N-PLAN.md
+User: /execute-analysis H-001
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 1: Load Context                   │
+    │  - Read hypothesis verification plan    │
+    │  - Load DOMAIN.md for domain standards  │
+    │  - Check current phase in STATE.md      │
+    │  - Verify prerequisites met              │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 2: Spawn Experimentalist          │
+    │  - Inject domain knowledge              │
+    │  - Provide verification plan            │
+    │  - Execute analysis with domain checks  │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 3: Document Execution             │
+    │  - Record all steps                     │
+    │  - Save results and artifacts           │
+    │  - Generate phase-N-EXECUTE.md          │
+    │  - Note domain-specific outcomes        │
+    └─────────────────────────────────────────┘
+          │
+          ▼
+    ┌─────────────────────────────────────────┐
+    │  Step 4: Update State                   │
+    │  - Update STATE.md                      │
+    │  - Update hypothesis file               │
+    │  - Prepare for verification             │
+    └─────────────────────────────────────────┘
 ```
 
-詢問：
-- 這次要執行哪個假說的分析？
-- 是主要分析還是 robustness check？
+---
 
-### 2. 執行分析
+## Execution Steps
 
-**Experimentalist** 主導執行：
+### Step 1: Context Loading (Automatic Execution)
 
-#### 數據驗證
-```r
-# 檢查數據品質
-- 樣本量符合預期？
-- 無異常缺失值？
-- 變數分佈合理？
-- 假設前提滿足？
-```
-
-#### 主要分析
-```
-- 執行預先指定的分析
-- 記錄所有參數選擇
-- 保存中間結果
-- 產生圖表
-```
-
-#### Robustness Checks
-```
-- 替代規格
-- 子樣本分析
-- 敏感性分析
-```
-
-### 3. 記錄過程
-
-Lab Manager 產生 `.planning/phases/phase-N-EXECUTE.md`：
+**CRITICAL**: Before executing any analysis, load full context including domain knowledge.
 
 ```markdown
-# Phase N - Execute: H-XXX 分析
+# STEP 1A: Identify hypothesis and domain
+Read hypothesis file: hypotheses/proposals/H-XXX-*.md
+Extract domain field from hypothesis frontmatter
+Extract verification plan from hypothesis
 
-**開始時間**: [YYYY-MM-DD HH:MM]
-**結束時間**: [YYYY-MM-DD HH:MM]
-**執行者**: Experimentalist
+# STEP 1B: Load domain knowledge (MUST READ FULL FILE)
+Read /Users/andyhou/research/domains/{domain}/DOMAIN.md
 
-## 分析目標
-[本次分析要驗證什麼]
+This file contains (600+ lines):
+- Core theoretical frameworks
+- Verification standards
+- Domain-specific success criteria
+- Common pitfalls
+- Execution best practices
 
-## 數據驗證
+# STEP 1C: Load project context
+Read PROJECT.md for project constraints
+Read STATE.md for current status
 
-### 檢查項目
-- [x] 樣本量: N = 1000（符合預期）
-- [x] 缺失值: 0.5%（可接受）
-- [x] 變數分佈: 正常
+# STEP 1D: Verify prerequisites
+Check that:
+- Hypothesis has been reviewed and approved
+- Verification plan is complete
+- Data/materials are ready
+- Domain-specific prerequisites met
+```
 
-### 發現的問題
-- [問題描述]
-- 解決方式: [如何處理]
+**Output**: Context package containing:
+- Complete hypothesis with verification plan
+- Full DOMAIN.md content (600+ lines)
+- Project constraints
+- Current project state
+- Domain-specific execution requirements
 
-## 執行步驟
+### Step 2: Execute Analysis with Domain Awareness
 
-### 1. 數據準備
-- [x] 讀取原始數據
-- [x] 清理和轉換
-- [x] 產生分析數據集
+**Spawn Experimentalist** with domain knowledge injection:
 
-### 2. 主要分析
-- [x] 描述性統計
-- [x] 主要迴歸
-- [x] 產生表格和圖
+```markdown
+<task>
+## Domain Knowledge (AUTO-INJECTED - FULL CONTENT)
+
+[INJECT COMPLETE DOMAIN.md FILE HERE - ALL 600+ LINES]
+
+This includes:
+- Verification standards (e.g., what makes a valid proof for stats, what constitutes credible identification for policy)
+- Common pitfalls in the domain
+- Best practices for execution
+- Quality standards
+
+## Hypothesis to Execute
+
+**Hypothesis ID**: H-XXX
+**Domain**: [stats-theory | policy-making]
+**Verification Plan**: [From hypothesis file]
+
+[Complete hypothesis proposal from hypotheses/proposals/H-XXX.md]
+
+## Project Context
+
+[From PROJECT.md - constraints, timeline, resources]
+
+## Request
+
+Execute the analysis according to the verification plan, applying domain-specific standards.
+
+### For Statistical Theory Projects:
+
+**Execution Requirements**:
+1. **Proof Implementation**:
+   - Implement estimator exactly as theorem specifies
+   - Code all proof steps that claim "constructive"
+   - Document all assumptions in code comments
+
+2. **Simulation Design**:
+   - Test parameter regimes specified in theorem
+   - Include regimes where assumptions break down
+   - Verify theoretical rate empirically
+   - Check constants in rates (not just asymptotic order)
+
+3. **Numerical Validation**:
+   - Convergence checks for iterative algorithms
+   - Stability analysis for numerical procedures
+   - Compare against theoretical predictions
+   - Verify lower bound tightness
+
+4. **Domain-Specific Checks**:
+   - Does simulation match theorem statement?
+   - Are all assumptions tested empirically?
+   - Does empirical rate match theoretical rate?
+   - Is computational complexity as claimed?
+
+### For Policy Research Projects:
+
+**Execution Requirements**:
+1. **Data Validation**:
+   - Verify data matches identification requirements
+   - Check for manipulation at cutoff (if RDD)
+   - Validate measurement of key constructs
+   - Confirm sample has required variation
+
+2. **Identification Strategy Execution**:
+   - Implement identification as specified
+   - Test identifying assumptions
+   - Run robustness checks for threats to validity
+   - Document deviations from plan
+
+3. **Mechanism Testing**:
+   - Test observable implications of mechanism
+   - Check intermediate steps (X → M → Y)
+   - Rule out alternative mechanisms
+   - Validate measurement of mediator
+
+4. **Domain-Specific Checks**:
+   - Is identification strategy correctly implemented?
+   - Are robustness checks comprehensive?
+   - Is mechanism evidence convincing?
+   - Are scope conditions tested?
+
+**Output Format**: execution_report following standard structure (see below)
+</task>
+```
+
+#### 2.1 Data Validation (Domain-Specific)
+
+```r
+# General Checks
+- Sample size meets requirements?
+- No unexpected missing values?
+- Variable distributions reasonable?
+- Assumptions satisfied?
+
+# Stats Theory Checks
+- Parameter regimes cover theorem scope?
+- Boundary cases included?
+- Assumptions testable in simulation?
+
+# Policy Research Checks
+- Identifying variation present?
+- No evidence of manipulation?
+- Constructs measured validly?
+- Confounders available in data?
+```
+
+#### 2.2 Main Analysis
+
+```
+- Execute pre-specified analysis
+- Record all parameter choices
+- Save intermediate results
+- Generate figures
+- **Apply domain-specific validation**
+```
+
+#### 2.3 Robustness Checks (Domain-Aware)
+
+```
+General:
+- Alternative specifications
+- Subsample analysis
+- Sensitivity analysis
+
+Stats Theory:
+- Different starting values (if iterative)
+- Different parameter regimes
+- Boundary case testing
+- Compare to naive methods
+
+Policy Research:
+- Alternative identifying assumptions
+- Different confounder sets
+- Subsample by scope conditions
+- Placebo tests
+```
+
+### Step 3: Document Process
+
+Lab Manager generates `.planning/phases/phase-N-EXECUTE.md`:
+
+```markdown
+# Phase N - Execute: H-XXX Analysis
+
+**Start Time**: [YYYY-MM-DD HH:MM]
+**End Time**: [YYYY-MM-DD HH:MM]
+**Executor**: Experimentalist
+**Domain**: [stats-theory | policy-making]
+
+## Analysis Goal
+[What this analysis aims to verify]
+
+## Domain Context
+**Domain Standards Applied**: [Annals of Statistics | APSR | etc.]
+**Domain-Specific Requirements**: [List key requirements from DOMAIN.md]
+
+## Data Validation
+
+### General Checks
+- [x] Sample size: N = 1000 (meets requirements)
+- [x] Missing values: 0.5% (acceptable)
+- [x] Variable distributions: Normal
+
+### Domain-Specific Checks
+
+**For Stats Theory**:
+- [x] Parameter regimes: Covers n=100 to n=10000, sparsity s=1 to s=sqrt(n)
+- [x] Assumptions: Gaussian noise, sub-Gaussian covariates verified
+- [x] Boundary cases: Included s=1 and s=sqrt(n)
+
+**For Policy Research**:
+- [x] Identifying variation: Policy threshold at 50, observations on both sides
+- [x] McCrary test: No evidence of manipulation (p=0.45)
+- [x] Balance tests: Covariates balanced at threshold
+- [x] Mechanism measurement: Validated survey instrument
+
+### Identified Issues
+- [Issue description]
+- Resolution: [How it was handled]
+
+## Execution Steps
+
+### 1. Data Preparation
+- [x] Load raw data
+- [x] Clean and transform
+- [x] Generate analysis dataset
+
+### 2. Main Analysis
+- [x] Descriptive statistics
+- [x] Main regression/estimation
+- [x] Generate tables and figures
 
 ### 3. Robustness Checks
-- [x] 替代規格 1: [結果]
-- [x] 替代規格 2: [結果]
-- [x] 子樣本分析: [結果]
+- [x] Alternative specification 1: [Result]
+- [x] Alternative specification 2: [Result]
+- [x] Subsample analysis: [Result]
 
-## 初步結果
+### 4. Domain-Specific Validation
 
-### 主要發現
-1. [發現 1]: [描述和統計量]
-2. [發現 2]: [描述和統計量]
+**For Stats Theory**:
+- [x] Empirical rate: n^(-0.4) matches theoretical n^(-2/5) ✓
+- [x] Lower bound gap: 5% (tight)
+- [x] Computational complexity: O(n log n) as claimed ✓
+- [x] Assumptions: Verified in all tested regimes ✓
 
-### 與預期的比較
-- ✅ 與假說預測一致
-- ⚠️ 效果量小於預期
-- ❌ 某個預測未得到支持
+**For Policy Research**:
+- [x] Identification: RDD estimates stable around threshold ✓
+- [x] Robustness: Effect persists with alternative bandwidths ✓
+- [x] Mechanism: Mediator analysis supports X → M → Y ✓
+- [x] Placebo tests: No effect at false thresholds ✓
+
+## Preliminary Results
+
+### Main Findings
+1. [Finding 1]: [Description and statistics]
+2. [Finding 2]: [Description and statistics]
+
+### Comparison to Predictions
+- ✅ Consistent with hypothesis predictions
+- ⚠️ Effect size smaller than expected
+- ❌ One prediction not supported
+
+### Domain-Specific Assessment
+
+**Stats Theory**:
+- **Minimax optimality**: Empirical rate matches theoretical (within constants)
+- **Lower bound**: Gap ~5%, likely due to finite sample
+- **Proof validation**: All constructive steps implemented and verified
+
+**Policy Research**:
+- **Causal identification**: RDD assumptions hold
+- **Mechanism**: Evidence supports proposed pathway
+- **External validity**: Effects heterogeneous as predicted by theory
 
 ### Robustness
-- 結果在不同規格下穩健
-- 子樣本分析結果一致
+- Results stable across different specifications
+- Subsample analysis consistent
+- Domain-specific robustness checks pass
 
-## 產生的檔案
+## Generated Files
 
-- `analysis/01_main_analysis.R` - 主要分析腳本
-- `results/main_results.csv` - 主要結果
-- `results/robustness_results.csv` - Robustness 結果
-- `figures/fig1_main_effect.png` - 主要效果圖
-- `figures/fig2_robustness.png` - Robustness 圖
+- `analysis/01_main_analysis.R` - Main analysis script
+- `results/main_results.csv` - Main results
+- `results/robustness_results.csv` - Robustness results
+- `results/domain_checks.csv` - Domain-specific validation
+- `figures/fig1_main_effect.png` - Main effect figure
+- `figures/fig2_robustness.png` - Robustness figure
 
-## 遇到的問題
+## Issues Encountered
 
-### 問題 1: [描述]
-- **嚴重性**: 低/中/高
-- **如何解決**: [解決方法]
-- **影響**: [對結果的影響]
+### Issue 1: [Description]
+- **Severity**: Low/Medium/High
+- **Resolution**: [How it was resolved]
+- **Impact**: [Effect on results]
+- **Domain implication**: [If relevant]
 
 ## Code Quality
 
-- [x] 隨機種子已設定
-- [x] 代碼有註釋
-- [x] 結果可重現
-- [x] 無硬編碼值
+- [x] Random seed set
+- [x] Code commented
+- [x] Results reproducible
+- [x] No hard-coded values
+- [x] Domain assumptions documented in code
 
-## 下一步
+## Domain Compliance Check
 
-- [ ] 進入 `/verify-results` 階段
-- [ ] 需要額外的 robustness check？
-- [ ] 是否需要調整假說？
+### Stats Theory (if applicable)
+| Criterion | Status | Notes |
+|-----------|--------|-------|
+| Estimator matches theorem | ✓ | Implemented exactly as specified |
+| Simulation covers regimes | ✓ | n=100 to n=10000, s=1 to sqrt(n) |
+| Rate empirically verified | ✓ | n^(-0.4) observed, n^(-2/5) predicted |
+| Lower bound gap small | ✓ | ~5% gap, likely finite-sample |
+| Assumptions tested | ✓ | Verified in all regimes |
 
-## 備註
+### Policy Research (if applicable)
+| Criterion | Status | Notes |
+|-----------|--------|-------|
+| Identification strategy implemented | ✓ | RDD at threshold=50 |
+| Assumptions testable | ✓ | McCrary, balance tests pass |
+| Robustness comprehensive | ✓ | Bandwidth, placebo tests |
+| Mechanism tested | ✓ | Mediator analysis supports theory |
+| Scope conditions checked | ✓ | Heterogeneity as predicted |
 
-[其他重要資訊]
+## Next Steps
+
+- [ ] Proceed to `/verify-results` phase
+- [ ] Additional robustness checks needed? [If yes, specify]
+- [ ] Hypothesis revision needed? [If yes, why]
+- [ ] Domain concerns to address? [If any]
+
+## Notes
+
+[Other important information, especially domain-specific observations]
 ```
 
-### 4. 更新狀態
+### Step 4: Update State
 
-自動執行：
+Automatic execution:
 ```
-- 更新 STATE.md（記錄完成的分析）
-- 更新 hypotheses/H-XXX.md（記錄執行狀態）
-- 在 .planning/phases/ 創建 phase-N-EXECUTE.md
+- Update STATE.md (record completed analysis)
+- Update hypotheses/H-XXX.md (record execution status)
+- Create phase-N-EXECUTE.md in .planning/phases/
+- Flag domain compliance status
 ```
 
-## 輸出
+---
 
-1. **Phase 執行記錄**: `.planning/phases/phase-N-EXECUTE.md`
-2. **分析結果**: `results/` 目錄下的文件
-3. **圖表**: `figures/` 目錄下的文件
-4. **更新的 STATE.md**
+## Output
 
-## 成功標準
+1. **Phase Execution Record**: `.planning/phases/phase-N-EXECUTE.md`
+2. **Analysis Results**: Files in `results/` directory
+3. **Figures**: Files in `figures/` directory
+4. **Domain Validation**: Domain-specific checks documented
+5. **Updated STATE.md**
 
-- [ ] 所有計畫的分析都已執行
-- [ ] 結果記錄完整
-- [ ] 產生的文件都已保存
-- [ ] 問題和解決方法都已記錄
-- [ ] 代碼可重現
+---
 
-## 與其他 Commands 的關係
+## Success Criteria (Domain-Aware)
+
+### General Criteria
+- [ ] All planned analyses executed
+- [ ] Results recorded completely
+- [ ] Generated files saved
+- [ ] Issues and resolutions documented
+- [ ] Code reproducible
+
+### Domain-Specific Criteria
+
+**Stats Theory**:
+- [ ] Estimator implements theorem exactly
+- [ ] Simulation covers all required parameter regimes
+- [ ] Empirical rate matches theoretical rate
+- [ ] Lower bound gap quantified
+- [ ] Assumptions verified empirically
+- [ ] Computational complexity confirmed
+
+**Policy Research**:
+- [ ] Identification strategy correctly implemented
+- [ ] Identifying assumptions tested
+- [ ] Robustness checks comprehensive
+- [ ] Mechanism evidence collected
+- [ ] Scope conditions tested
+- [ ] Threats to validity addressed
+
+---
+
+## Integration with Other Commands
 
 ```
-/review-hypothesis        定義驗證計畫
+/review-hypothesis        Define verification plan
         ↓
-/eval define H-XXX       設定成功標準
+/eval define H-XXX       Set success criteria
         ↓
-/execute-analysis        ← 當前步驟
+/execute-analysis        ← Current step (with domain awareness)
         ↓
-/verify-results          驗證分析結果
+/verify-results          Verify analysis results (domain-aware)
         ↓
-/update-state            更新研究狀態
+/update-state            Update research state
 ```
 
-## 使用範例
+---
 
+## Usage Example
+
+```bash
+# Basic usage
+/execute-analysis H-001
+
+# System automatically:
+# 1. Identifies domain from H-001 metadata (e.g., stats-theory)
+# 2. Loads /Users/andyhou/research/domains/stats-theory/DOMAIN.md
+# 3. Injects domain knowledge into Experimentalist context
+# 4. Executes analysis with domain-specific validation
+# 5. Documents domain compliance in execution record
+
+# User sees progress:
+"Loading H-001 verification plan..."
+"Domain: stats-theory"
+"Loading domain standards from DOMAIN.md (640 lines)..."
+"Spawning Experimentalist with domain knowledge..."
+"Executing analysis with minimax optimality checks..."
+"Simulation covering n=100 to n=10000..."
+"Empirical rate: n^(-0.4), theoretical: n^(-2/5) ✓"
+"Lower bound gap: 5% (acceptable) ✓"
+"Domain compliance: PASS"
+"Documentation saved to .planning/phases/phase-3-EXECUTE.md"
 ```
-User: /execute-analysis
+
+---
+
+## Domain-Specific Best Practices
+
+### For Stats Theory Execution
+
+**Simulation Design**:
+- Test at least 5 different sample sizes (n)
+- Cover full range of sparsity (s)
+- Include boundary cases where assumptions barely hold
+- Run enough Monte Carlo reps (≥1000) for stable estimates
+
+**Rate Verification**:
+- Plot log(error) vs log(n) to verify rate visually
+- Estimate slope via OLS, compare to theoretical rate
+- Report confidence interval for empirical rate
+- Quantify gap to lower bound
+
+**Assumptions Testing**:
+- For each assumption, design test showing when it breaks
+- Report simulation performance when assumptions violated
+- This validates that assumptions are not vacuous
+
+### For Policy Research Execution
+
+**RDD Implementation**:
+- Run McCrary density test at threshold
+- Check balance of covariates at threshold
+- Vary bandwidth (0.5x to 2x optimal)
+- Placebo tests at false thresholds
+- Report results visually (RDD plot)
+
+**Mechanism Testing**:
+- Estimate X → M and M → Y separately
+- Mediation analysis (Baron & Kenny or modern methods)
+- Collect direct mechanism evidence when possible
+- Check mechanism operates as theorized
+
+**Robustness**:
+- Alternative identifying assumptions (if possible)
+- Different confounder specifications
+- Subsample by scope conditions
+- Time placebo (if panel data)
+
+---
+
+## Important Notes
+
+⚠️ **Follow the plan**
+- Don't deviate from pre-specified analysis without documentation
+- If changes needed, document reason and get approval
+
+⚠️ **Domain standards are requirements, not suggestions**
+- A stats paper without rate verification is incomplete
+- A policy paper without identification tests is incomplete
+- These are not "nice to have" - they are publication requirements
+
+⚠️ **Document everything**
+- Future you will thank present you
+- Reviewers will ask for details
+- Reproducibility requires complete documentation
+
+⚠️ **Quality over speed**
+- Take time to verify domain standards are met
+- Rushing through execution creates more work later
+- Most revisions are due to insufficient validation
+
+⚠️ **When in doubt, ask Methodologist**
+- Domain standards can be subtle
+- Better to clarify before executing than to redo later
+
+</execute_analysis_command>

@@ -1,338 +1,338 @@
 ---
 name: update-state
-description: 更新 STATE.md，記錄當前研究狀態
+description: Update STATE.md to record current research status
 ---
 
 # /update-state
 
-更新專案的 STATE.md 檔案，記錄研究進度和狀態。
+Update the project's STATE.md file to record research progress and status.
 
-## 目的
+## Purpose
 
-維護跨 session 的狀態連續性：
-- 記錄本次 session 完成的工作
-- 更新假說排名
-- 記錄關鍵決定
-- 列出下次應做的事
-- 提醒重要 context
+Maintain state continuity across sessions:
+- Record work completed in this session
+- Update hypothesis rankings
+- Record key decisions
+- List tasks for next time
+- Remind important context
 
-## 何時使用
+## When to Use
 
-**建議時機**：
-- ✅ Session 結束前（最常用）
-- ✅ 完成重要里程碑後
-- ✅ 做出關鍵決定後
-- ✅ 假說排名變動後
-- ✅ Phase 轉換時
+**Recommended timing**:
+- ✅ Before ending a session (most common)
+- ✅ After completing important milestones
+- ✅ After making key decisions
+- ✅ After hypothesis ranking changes
+- ✅ During phase transitions
 
-**不建議時機**：
-- ❌ 工作進行到一半
-- ❌ 還在思考問題時
-- ❌ 沒有實質進展時
+**Not recommended timing**:
+- ❌ In the middle of work
+- ❌ While still thinking through problems
+- ❌ When there's no substantial progress
 
-## 流程
+## Process
 
-### 1. 讀取當前狀態
+### 1. Read Current State
 
-Lab Manager 讀取：
+Lab Manager reads:
 ```
-- STATE.md（當前狀態）
-- hypotheses/HYPOTHESES.md（假說排名）
-- .planning/phases/（最近的 phase 記錄）
-```
-
-### 2. 收集本次 Session 資訊
-
-Lab Manager 詢問或自動檢測：
-
-**完成的工作**：
-```
-Q: 本次 session 完成了什麼？
-A: [用戶描述，或從工具調用歷史推斷]
-
-例如：
-- 完成了 H-003 的 Experimentalist 審查
-- 執行了主要迴歸分析
-- 更新了文獻回顧
-- 修正了數據清理腳本
+- STATE.md (current state)
+- hypotheses/HYPOTHESES.md (hypothesis rankings)
+- .planning/phases/ (recent phase records)
 ```
 
-**關鍵決定**：
-```
-Q: 是否做出了重要決定？
-A: [用戶描述]
+### 2. Collect Session Information
 
-例如：
-- 決定使用 diff-in-diff 而非 RDD
-- 決定排除 2008 年前的數據
-- 決定暫緩 H-002（數據不可得）
-```
+Lab Manager asks or automatically detects:
 
-**假說排名變化**：
+**Completed work**:
 ```
-檢查是否有：
-- 新增假說
-- 假說狀態變化（草稿 → 審查中 → 已驗證）
-- Elo 分數更新
+Q: What was completed in this session?
+A: [User describes, or inferred from tool call history]
+
+Examples:
+- Completed Experimentalist review for H-003
+- Executed main regression analysis
+- Updated literature review
+- Fixed data cleaning script
 ```
 
-**待解決問題**：
+**Key decisions**:
 ```
-Q: 遇到了哪些需要解決的問題？
-A: [用戶描述]
+Q: Were any important decisions made?
+A: [User describes]
 
-例如：
-- H-003 樣本量是否足夠？需要 power analysis
-- 應該用 cluster SE 還是 robust SE？
-```
-
-**下次應做的事**：
-```
-Q: 下次 session 應該做什麼？
-A: [用戶描述或從計畫推斷]
-
-例如：
-1. 完成 H-003 的 Methodologist 審查
-2. 更新 Elo 排名
-3. 開始 H-007 的深度審查
+Examples:
+- Decided to use diff-in-diff instead of RDD
+- Decided to exclude data before 2008
+- Decided to postpone H-002 (data unavailable)
 ```
 
-### 3. 檢查假說狀態
+**Hypothesis ranking changes**:
+```
+Check for:
+- New hypotheses added
+- Hypothesis status changes (draft → under review → verified)
+- Elo score updates
+```
 
-自動讀取 `hypotheses/HYPOTHESES.md`：
+**Issues to resolve**:
+```
+Q: What issues were encountered that need resolution?
+A: [User describes]
+
+Examples:
+- Is H-003 sample size sufficient? Need power analysis
+- Should we use cluster SE or robust SE?
+```
+
+**Tasks for next time**:
+```
+Q: What should be done in the next session?
+A: [User describes or inferred from plans]
+
+Examples:
+1. Complete Methodologist review for H-003
+2. Update Elo rankings
+3. Start deep review of H-007
+```
+
+### 3. Check Hypothesis Status
+
+Automatically read `hypotheses/HYPOTHESES.md`:
 
 ```markdown
-## 當前假說排名
+## Current Hypothesis Rankings
 
-| Rank | Δ | ID | Elo | 標題 | 狀態 | 上次更新 |
-|------|---|-----|-----|------|------|---------|
-| 1 | - | H-003 | 1580 | [標題] | 🔄 審查中 | 2024-01-27 |
-| 2 | ↑1 | H-001 | 1520 | [標題] | ✅ 已驗證 | 2024-01-25 |
-| 3 | ↓1 | H-007 | 1450 | [標題] | 📝 草稿 | 2024-01-26 |
-| 4 | - | H-005 | 1380 | [標題] | 🔄 審查中 | 2024-01-24 |
-| 5 | - | H-002 | 1200 | [標題] | ⏸️ 擱置 | 2024-01-20 |
+| Rank | Δ | ID | Elo | Title | Status | Last Updated |
+|------|---|-----|-----|-------|--------|-------------|
+| 1 | - | H-003 | 1580 | [Title] | 🔄 Under Review | 2024-01-27 |
+| 2 | ↑1 | H-001 | 1520 | [Title] | ✅ Verified | 2024-01-25 |
+| 3 | ↓1 | H-007 | 1450 | [Title] | 📝 Draft | 2024-01-26 |
+| 4 | - | H-005 | 1380 | [Title] | 🔄 Under Review | 2024-01-24 |
+| 5 | - | H-002 | 1200 | [Title] | ⏸️ On Hold | 2024-01-20 |
 ```
 
-計算 Δ（排名變化）：與上次 STATE.md 比較
+Calculate Δ (ranking change): Compare with last STATE.md
 
-### 4. 檢查 Context 提醒
+### 4. Check Context Reminders
 
-確認是否有需要提醒的資訊：
+Confirm information that needs reminding:
 ```
-- Domain 設定
-- PI 偏好
-- 資源限制（數據、時間、計算）
-- 即將到來的截止日期
-- 風險警示
+- Domain settings
+- PI preferences
+- Resource constraints (data, time, compute)
+- Upcoming deadlines
+- Risk warnings
 ```
 
-### 5. 生成更新的 STATE.md
+### 5. Generate Updated STATE.md
 
 ```markdown
 # Research State
 
-> 最後更新：2024-01-27 15:30
+> Last updated: 2024-01-27 15:30
 > Session: #12
 
-## 當前位置
+## Current Position
 
-- **階段**: Phase 2 - 假說驗證
-- **進行中**: H-003 完成 Experimentalist 審查，待 Methodologist
-- **下一步**: Methodologist 審查 H-003 → 更新 Elo → 審查 H-007
+- **Phase**: Phase 2 - Hypothesis Verification
+- **In Progress**: H-003 completed Experimentalist review, awaiting Methodologist
+- **Next Steps**: Methodologist review H-003 → Update Elo → Review H-007
 
-## 假說排名 (Top 5)
+## Hypothesis Rankings (Top 5)
 
-| Rank | Δ | ID | Elo | 標題 | 狀態 |
-|------|---|-----|-----|------|------|
-| 1 | - | H-003 | 1580 | 高維稀疏迴歸的 minimax rate | 🔄 審查中 |
-| 2 | ↑1 | H-001 | 1520 | 自適應估計的收斂速度 | ✅ 已驗證 |
-| 3 | ↓1 | H-007 | 1450 | 非參數回歸的最優帶寬 | 📝 草稿 |
-| 4 | - | H-005 | 1380 | 變點檢測的漸近性質 | 🔄 審查中 |
-| 5 | - | H-002 | 1200 | 因果效應的識別 | ⏸️ 擱置 |
+| Rank | Δ | ID | Elo | Title | Status |
+|------|---|-----|-----|-------|--------|
+| 1 | - | H-003 | 1580 | Minimax rate for high-dimensional sparse regression | 🔄 Under Review |
+| 2 | ↑1 | H-001 | 1520 | Convergence rate of adaptive estimation | ✅ Verified |
+| 3 | ↓1 | H-007 | 1450 | Optimal bandwidth for nonparametric regression | 📝 Draft |
+| 4 | - | H-005 | 1380 | Asymptotic properties of change point detection | 🔄 Under Review |
+| 5 | - | H-002 | 1200 | Identification of causal effects | ⏸️ On Hold |
 
-## 關鍵決定
+## Key Decisions
 
-- **2024-01-25** 選擇 diff-in-diff 作為主要方法 - 理由：數據結構適合，文獻支持
-- **2024-01-26** 排除 2008 年前數據 - 理由：結構性斷點（金融危機）
-- **2024-01-27** H-002 因數據不可得而擱置 - 理由：無法取得個體層級數據
+- **2024-01-25** Chose diff-in-diff as main method - Reason: Data structure fits, literature supports
+- **2024-01-26** Excluded data before 2008 - Reason: Structural break (financial crisis)
+- **2024-01-27** H-002 on hold due to data unavailability - Reason: Cannot obtain individual-level data
 
-## 待解決問題
+## Issues to Resolve
 
-- [ ] H-003 的樣本量是否足夠？需要 power analysis
-- [ ] 應該用 cluster SE 還是 robust SE？
-- [ ] H-007 的理論基礎需要補強
+- [ ] Is H-003 sample size sufficient? Need power analysis
+- [ ] Should we use cluster SE or robust SE?
+- [ ] H-007 theoretical foundation needs strengthening
 
-## 下次 Session 應該
+## Next Session Should
 
-1. 完成 H-003 的 Methodologist 審查
-2. 更新 Elo 排名（如果通過審查）
-3. 開始 H-007 的深度審查（`/review-hypothesis H-007`）
+1. Complete Methodologist review for H-003
+2. Update Elo rankings (if review passes)
+3. Start deep review of H-007 (`/review-hypothesis H-007`)
 
-## Context 提醒
+## Context Reminders
 
 - **Domain**: domains/stats-theory/
-- **PI 偏好**: 先求理論清晰，再求計算效率
-- **資源限制**:
-  - 數據：只能用公開數據
-  - 時間：3 個月內完成
-  - 計算：單機足夠，無需 cluster
-- **截止日期**: 2024-04-30 投稿目標
+- **PI Preferences**: Prioritize theoretical clarity, then computational efficiency
+- **Resource Constraints**:
+  - Data: Only public data available
+  - Time: Complete within 3 months
+  - Compute: Single machine sufficient, no cluster needed
+- **Deadline**: 2024-04-30 submission target
 
-## 最近完成
+## Recently Completed
 
-- **Session #12** (2024-01-27): H-003 Experimentalist 審查，可行性確認
-- **Session #11** (2024-01-26): H-007 初稿完成，等待審查
-- **Session #10** (2024-01-25): H-001 驗證通過，pass@3 = 95%
+- **Session #12** (2024-01-27): H-003 Experimentalist review, feasibility confirmed
+- **Session #11** (2024-01-26): H-007 draft completed, awaiting review
+- **Session #10** (2024-01-25): H-001 verification passed, pass@3 = 95%
 
-## 風險警示
+## Risk Warnings
 
-- ⚠️ H-003 和 H-007 的理論可能有重疊，需要釐清
-- ⚠️ 4 月截止日期接近，需要加快進度
+- ⚠️ H-003 and H-007 theories may overlap, need clarification
+- ⚠️ April deadline approaching, need to accelerate progress
 
 ---
 
 ## Session Summary
 
-**Session #12 成果**：
-- 完成 H-003 Experimentalist 審查
-- 確認假說可行性和數據充分性
-- 識別潛在的樣本量問題
+**Session #12 Achievements**:
+- Completed H-003 Experimentalist review
+- Confirmed hypothesis feasibility and data adequacy
+- Identified potential sample size issues
 
-**耗時**: 1.5 小時
-**工具調用**: 45 次
+**Duration**: 1.5 hours
+**Tool calls**: 45
 ```
 
-### 6. 保存並確認
+### 6. Save and Confirm
 
-Lab Manager：
+Lab Manager:
 ```
-✅ STATE.md 已更新
+✅ STATE.md updated
 
-摘要：
-- 假說排名：H-003 保持 #1，H-001 升至 #2
-- 新增決定：1 個（擱置 H-002）
-- 待解決問題：3 個
-- 下次任務：3 個
+Summary:
+- Hypothesis rankings: H-003 remains #1, H-001 rose to #2
+- New decisions: 1 (H-002 on hold)
+- Issues to resolve: 3
+- Next tasks: 3
 
-下次 session 建議從：
-📖 讀取 STATE.md 開始，了解當前狀態
-```
-
-## 輸出
-
-1. **更新的 STATE.md** - 完整的當前狀態
-2. **Session 摘要** - 本次 session 的快速總結
-
-## 自動化特性
-
-Lab Manager 可以從以下自動推斷資訊：
-- 工具調用歷史（讀取了哪些文件，執行了哪些命令）
-- 時間戳（session 時長）
-- 文件變更（新增、修改了哪些文件）
-- 假說文件的更新
-
-## 最佳實踐
-
-### 每次更新時
-- ✅ 簡潔記錄完成的工作
-- ✅ 明確記錄決定和理由
-- ✅ 列出具體的下次任務
-- ✅ 提醒重要的 context
-
-### 避免
-- ❌ 過度詳細（細節在 phase 文件中）
-- ❌ 模糊的任務（「繼續分析」太模糊）
-- ❌ 忘記更新假說排名
-- ❌ 不記錄決定的理由
-
-## 與其他 Commands 的關係
-
-```
-任何 command 完成後
-        ↓
-/update-state    ← 記錄進度
-        ↓
-[Session 結束]
-        ↓
-[下次 Session 開始]
-        ↓
-/progress        ← 查看當前狀態
-        ↓
-[繼續工作]
+Next session recommend starting with:
+📖 Read STATE.md to understand current status
 ```
 
-## 範例場景
+## Output
 
-### 場景 1: Lab Meeting 結束後
+1. **Updated STATE.md** - Complete current state
+2. **Session Summary** - Quick summary of this session
+
+## Automation Features
+
+Lab Manager can automatically infer information from:
+- Tool call history (which files were read, which commands executed)
+- Timestamps (session duration)
+- File changes (which files were added or modified)
+- Updates to hypothesis files
+
+## Best Practices
+
+### For Each Update
+- ✅ Concisely record completed work
+- ✅ Clearly record decisions and reasoning
+- ✅ List specific next tasks
+- ✅ Remind important context
+
+### Avoid
+- ❌ Excessive detail (details belong in phase files)
+- ❌ Vague tasks ("continue analysis" is too vague)
+- ❌ Forgetting to update hypothesis rankings
+- ❌ Not recording reasoning for decisions
+
+## Relationship with Other Commands
+
+```
+After any command completes
+        ↓
+/update-state    ← Record progress
+        ↓
+[Session ends]
+        ↓
+[Next session starts]
+        ↓
+/progress        ← View current state
+        ↓
+[Continue work]
+```
+
+## Example Scenarios
+
+### Scenario 1: After Lab Meeting
 
 ```
 User: /update-state
 
 Lab Manager:
-讀取 STATE.md... 當前 Session #11
-讀取 meeting_notes/2024-01-27.md...
+Reading STATE.md... Current Session #11
+Reading meeting_notes/2024-01-27.md...
 
-本次 lab meeting：
-- 審查了 3 個假說
-- H-003 升至 #1（Elo 1450 → 1580）
-- 決定暫緩 H-002
-- 分配了下週任務
+This lab meeting:
+- Reviewed 3 hypotheses
+- H-003 rose to #1 (Elo 1450 → 1580)
+- Decided to postpone H-002
+- Assigned next week's tasks
 
-更新 STATE.md：
-✅ 假說排名已更新
-✅ 關鍵決定已記錄
-✅ 下週任務已列出
+Updating STATE.md:
+✅ Hypothesis rankings updated
+✅ Key decisions recorded
+✅ Next week's tasks listed
 
-下次 session 從：
+Next session start with:
 1. `/review-hypothesis H-007`
-2. 準備 H-003 的分析腳本
+2. Prepare analysis scripts for H-003
 ```
 
-### 場景 2: 分析完成後
+### Scenario 2: After Analysis Completion
 
 ```
-User: 剛完成了 H-001 的主要分析
+User: Just completed main analysis for H-001
 User: /update-state
 
 Lab Manager:
-記錄完成工作... ✅
-檢查 results/ 目錄... 發現新文件
-檢查 hypotheses/H-001.md... 狀態未變
+Recording completed work... ✅
+Checking results/ directory... Found new files
+Checking hypotheses/H-001.md... Status unchanged
 
-更新內容：
-- 最近完成：H-001 主要分析完成
-- 進行中：H-001 待驗證
-- 下一步：運行 `/verify-results H-001`
+Update content:
+- Recently completed: H-001 main analysis completed
+- In progress: H-001 awaiting verification
+- Next step: Run `/verify-results H-001`
 
-STATE.md 已更新 ✅
+STATE.md updated ✅
 ```
 
-## 注意事項
+## Important Notes
 
-- STATE.md 是**摘要**，不是詳細記錄
-- 詳細內容在：
-  - `meeting_notes/` - 會議詳情
-  - `.planning/phases/` - Phase 執行詳情
-  - `hypotheses/` - 假說詳情
-- STATE.md 用於**快速恢復 context**，不是完整檔案
+- STATE.md is a **summary**, not a detailed record
+- Detailed content is in:
+  - `meeting_notes/` - Meeting details
+  - `.planning/phases/` - Phase execution details
+  - `hypotheses/` - Hypothesis details
+- STATE.md is for **quick context recovery**, not a complete archive
 
-## 技巧
+## Tips
 
-### 如果忘記更新
-沒關係，Lab Manager 可以從文件歷史推斷：
+### If You Forget to Update
+No problem, Lab Manager can infer from file history:
 ```
 Lab Manager:
-上次更新是 3 天前，讓我檢查最近的變更...
+Last update was 3 days ago, let me check recent changes...
 
-發現：
-- hypotheses/H-005.md 已更新
-- meeting_notes/2024-01-26.md 已創建
-- results/ 有新文件
+Found:
+- hypotheses/H-005.md was updated
+- meeting_notes/2024-01-26.md was created
+- results/ has new files
 
-讓我幫你更新 STATE.md...
+Let me help you update STATE.md...
 ```
 
-### 頻率建議
-- 理想：每次 session 結束
-- 最低：每週一次
-- 重要時刻：Phase 轉換、關鍵決定後
+### Frequency Recommendations
+- Ideal: End of each session
+- Minimum: Once per week
+- Critical moments: Phase transitions, after key decisions

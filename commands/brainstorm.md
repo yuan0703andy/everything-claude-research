@@ -1,6 +1,6 @@
 ---
 name: brainstorm
-description: 啟動假設生成流程。結構化 brainstorming + Theorist agent invocation。
+description: Launch hypothesis generation workflow. Structured brainstorming + Theorist agent invocation.
 argument-hint: <research question or topic>
 allowed-tools: Read, WebSearch, Bash, Glob, Grep, Write, Task
 ---
@@ -9,27 +9,27 @@ allowed-tools: Read, WebSearch, Bash, Glob, Grep, Write, Task
 
 # /brainstorm Command
 
-針對特定問題進行結構化 brainstorming，生成高品質研究假說。
+Conduct structured brainstorming on a specific question to generate high-quality research hypotheses.
 
-## 目的
+## Purpose
 
-這是一個結構化的假說生成流程，通過多輪次的發散和收斂，產出高品質的研究假說。結合了：
-- **桌面研討式流程**：5 輪次結構化討論
-- **Agent 驅動執行**：自動化 agent invocation
-- **Goal-backward thinking**：從研究目標倒推假說需求
+This is a structured hypothesis generation workflow that produces high-quality research hypotheses through multiple rounds of divergence and convergence. It combines:
+- **Desktop seminar-style process**: 5-round structured discussion
+- **Agent-driven execution**: Automated agent invocation
+- **Goal-backward thinking**: Derive hypothesis requirements from research goals
 
-## 使用時機
-- 開始新專案時
-- 遇到研究瓶頸需要新想法時
-- 文獻回顧後想要形成假說時
-- 有初步數據觀察想要理論化時
+## When to Use
+- Starting a new project
+- Encountering research bottleneck and needing new ideas
+- Forming hypotheses after literature review
+- Theorizing from preliminary data observations
 
-## 前置準備
-確保你已經：
-1. ✅ 閱讀了相關文獻
-2. ✅ 理解了研究問題的背景
-3. ✅ 準備好專案的 DOMAIN.md（領域知識）
-4. ✅ 明確了研究約束條件
+## Prerequisites
+Ensure you have:
+1. ✅ Read relevant literature
+2. ✅ Understood research question background
+3. ✅ Prepared project DOMAIN.md (domain knowledge)
+4. ✅ Clarified research constraints
 
 ---
 
@@ -71,127 +71,189 @@ User: /brainstorm [topic]
 
 ## Execution Steps
 
-### Step 1: Context Loading (自動執行)
+### Step 1: Context Loading (Automatic Execution)
 
-```python
-# Load domain knowledge
-domain_path = get_domain_path_from_project()
-domain_knowledge = read(domain_path + "/DOMAIN.md")
+**CRITICAL**: This step must be executed, not just commented. The following files MUST be read:
 
-# Load project context
-project_md = read("PROJECT.md")
-state_md = read("STATE.md")
+1. **Identify Domain**: Read `PROJECT.md` or `CLAUDE.md` to find the `domain:` field
+2. **Load Domain Knowledge**: Read `/Users/andyhou/research/domains/{domain}/DOMAIN.md`
+3. **Load Project Context**: Read current project's `PROJECT.md`
+4. **Load Current State**: Read `STATE.md` if exists
+5. **Load Existing Hypotheses**: Read `hypotheses/HYPOTHESES.md` if exists
 
-# Load existing hypotheses if any
-existing_hypotheses = read("hypotheses/HYPOTHESES.md") if exists else None
+**Implementation**:
+```markdown
+# STEP 1A: Identify domain from project
+Read PROJECT.md or CLAUDE.md, extract domain field
+Example: domain: stats-theory
+
+# STEP 1B: Load domain knowledge (MUST READ FULL FILE)
+Read /Users/andyhou/research/domains/stats-theory/DOMAIN.md
+Store entire content for injection into agent context
+
+# STEP 1C: Load project context
+Read PROJECT.md for project-specific information
+
+# STEP 1D: Load research state
+Read STATE.md for current phase and status
+
+# STEP 1E: Load existing hypotheses (if any)
+Read hypotheses/HYPOTHESES.md if exists
 ```
 
-**輸出**: Context package ready for agents
+**Output**: Context package containing:
+- Full DOMAIN.md content (600+ lines for stats-theory)
+- Project description and constraints
+- Current research phase
+- Existing hypotheses (if any)
 
 ---
 
 ### Step 2: Structured Brainstorming Rounds
 
-#### Round 1: 發散階段 (10 分鐘)
-**角色**: Theorist 主導
+#### Round 1: Divergent Phase (10 minutes)
+**Lead**: Theorist
 
 **Spawn Theorist with**:
 ```markdown
 <task>
+## Domain Knowledge (AUTO-INJECTED - FULL CONTENT)
+
+[INJECT COMPLETE DOMAIN.md FILE HERE - ALL 600+ LINES]
+
+This includes:
+- Core theoretical frameworks (Decision Theory, Minimax Theory, High-Dimensional Statistics, etc.)
+- Proof techniques toolbox (Fano, Assouad, Le Cam, Concentration Inequalities)
+- Publication standards (Annals of Statistics, JRSSB, etc.)
+- Review criteria and evaluation checklists
+- Red flags and best practices
+- Standard notation and terminology
+
 ## Research Topic
 [User's input topic/question]
 
-## Context
-### Domain Knowledge
-[From DOMAIN.md]
+## Project Context
+[From PROJECT.md - project description, constraints, timeline]
 
-### Project Context
-[From PROJECT.md]
+## Current Research State
+[From STATE.md - current phase, completed work]
 
-### Existing Hypotheses (if any)
-[From HYPOTHESES.md]
+## Existing Hypotheses (if any)
+[From HYPOTHESES.md - list of existing hypothesis IDs and titles]
 
 ## Request
-**Mode**: Exploration (發散思維)
+**Mode**: Exploration (Divergent Thinking)
 
-Generate 5-10 initial ideas following these principles:
-- 不批判，鼓勵大膽嘗試
-- 每個想法包含：
-  - 一句話描述核心主張
-  - 為什麼這個想法值得探索
-  - 初步的理論依據
+Generate 5-10 initial hypothesis ideas following these principles:
 
-Use goal-backward thinking: 從研究目標倒推什麼樣的發現會最有價值。
+1. **No criticism at this stage** - Encourage bold attempts
+2. **Each idea must include**:
+   - One-sentence core claim
+   - Why this idea is worth exploring
+   - Preliminary theoretical basis (citing frameworks from Domain Knowledge above)
+   - Connection to domain evaluation standards
+
+3. **Use goal-backward thinking**:
+   - From research goals, work backward to determine what findings would be most valuable
+   - Consider: "If we prove this hypothesis, then what?"
+   - Prioritize hypotheses that open new research directions
+
+4. **Apply domain-specific thinking** (for stats-theory):
+   - What is the statistical problem?
+   - What is the parameter space and loss function?
+   - What are the expected minimax rates?
+   - Can we prove optimality with lower bounds?
+   - What proof techniques from the toolbox apply?
+
+**Output format**: For each idea, provide:
+- **ID**: Idea-01, Idea-02, etc.
+- **Title**: Brief descriptive title
+- **Core Claim**: One sentence
+- **Theoretical Basis**: Which frameworks/theories support this
+- **Why Worth Exploring**: Research value and potential impact
+- **Initial Thoughts**: Preliminary mechanism or approach
 </task>
 ```
 
-**輸出**: `brainstorm_ideas_initial.md` with 5-10 raw ideas
+**Output**: `brainstorm_ideas_initial.md` with 5-10 raw ideas, each grounded in domain knowledge
 
 ---
 
-#### Round 2: 可行性初篩 (10 分鐘)
-**角色**: Experimentalist 主導
+#### Round 2: Feasibility Screening (10 minutes)
+**Lead**: Experimentalist
 
-**任務**:
-- 快速評估每個想法的可驗證性
-- 標記明顯不可行的（但記錄原因）
-- 識別需要大量資源的
-- 提出可行性疑問
+**Tasks**:
+- Rapidly assess testability of each idea
+- Flag obviously infeasible ones (but document reasons)
+- Identify resource-intensive ideas
+- Raise feasibility questions
 
-**輸出**: 更新 `brainstorm_ideas_initial.md`，加入可行性註記
-- 🟢 可行
-- 🟡 需要額外資源
-- 🔴 當前不可行
+**Spawn Experimentalist with**:
+- Domain knowledge (same injection as Theorist)
+- Initial ideas from Round 1
+- Task: Evaluate feasibility of each idea
 
----
-
-#### Round 3: 深化精煉 (15 分鐘)
-**角色**: Theorist + Experimentalist 協作
-
-**任務**:
-- 選擇 3-5 個最有潛力的想法
-- 將其結構化為正式的假說格式
-- 明確定義：
-  - 核心主張 (Core Claim)
-  - 理論機制 (Mechanism)
-  - 可觀察預測 (Predictions)
-  - 驗證方法 (Testability)
-  - 替代解釋 (Alternative Explanations)
-
-**輸出**: 3-5 個正式的假說提案文件 in `hypotheses/proposals/`
+**Output**: Update `brainstorm_ideas_initial.md` with feasibility annotations
+- 🟢 Feasible
+- 🟡 Requires additional resources
+- 🔴 Currently infeasible
 
 ---
 
-#### Round 4: 方法論審查 (10 分鐘)
-**角色**: Methodologist
+#### Round 3: Refinement and Deepening (15 minutes)
+**Lead**: Theorist + Experimentalist collaboration
 
-**任務**:
-- 對每個假說進行快速方法論審查
-- 識別潛在的偏誤和陷阱
-- 確保符合領域標準
-- 提供改進建議
-- 自評 Novelty, Importance, Testability (各 1-5 分)
+**Tasks**:
+- Select 3-5 most promising ideas
+- Structure them into formal hypothesis format
+- Clearly define:
+  - Core Claim
+  - Theoretical Mechanism
+  - Observable Predictions
+  - Testability / Verification Method
+  - Alternative Explanations
 
-**輸出**: 為每個假說添加方法論註記和自評分數
+**Spawn Both Agents** with domain knowledge and task to formalize selected ideas
+
+**Output**: 3-5 formal hypothesis proposal files in `hypotheses/proposals/`
 
 ---
 
-#### Round 5: 記錄與歸檔 (5 分鐘)
-**角色**: Coordinator
+#### Round 4: Methodological Review (10 minutes)
+**Lead**: Methodologist
 
-**任務**:
-- 所有想法存檔（包括被否定的，註明原因）
-- 為通過的假說分配 ID (H-XXX)
-- 設定初始 Elo 分數 (1200)
-- 記錄 brainstorming session 的元數據
-- 更新 HYPOTHESES.md index
-- 更新 STATE.md
+**Tasks**:
+- Conduct rapid methodological review of each hypothesis
+- Identify potential biases and pitfalls
+- Ensure compliance with domain standards (from DOMAIN.md evaluation checklists)
+- Provide improvement suggestions
+- Self-assess: Novelty, Importance, Testability (each 1-5 scale)
 
-**輸出**:
-- 新假說加入 `hypotheses/proposals/` 目錄
-- 更新 `hypotheses/HYPOTHESES.md`
-- 更新 `STATE.md`
-- 創建 `meeting_notes/brainstorm_session_[date].md` 記錄
+**Spawn Methodologist** with:
+- Domain knowledge (including evaluation checklists)
+- Hypothesis proposals from Round 3
+- Task: Apply domain-specific review criteria
+
+**Output**: Add methodological annotations and self-assessment scores to each hypothesis
+
+---
+
+#### Round 5: Documentation and Archiving (5 minutes)
+**Lead**: Coordinator
+
+**Tasks**:
+- Archive all ideas (including rejected ones with reasons)
+- Assign IDs to accepted hypotheses (H-XXX format)
+- Set initial Elo scores (1200)
+- Record brainstorming session metadata
+- Update HYPOTHESES.md index
+- Update STATE.md
+
+**Output**:
+- New hypotheses added to `hypotheses/proposals/` directory
+- Updated `hypotheses/HYPOTHESES.md`
+- Updated `STATE.md`
+- Created `meeting_notes/brainstorm_session_[date].md` record
 
 ---
 
@@ -232,33 +294,33 @@ Or: `/review-hypothesis H-001` to start formal review
 
 ---
 
-## 輸出結構
+## Output Structure
 
 ### 1. brainstorm_session_[date].md
 ```markdown
 # Brainstorming Session - [Topic]
 
-**日期**: [date]
-**主題**: [topic]
-**參與**: Theorist, Experimentalist, Methodologist, Coordinator
+**Date**: [date]
+**Topic**: [topic]
+**Participants**: Theorist, Experimentalist, Methodologist, Coordinator
 
-## 背景
-[簡要描述為什麼進行這次 brainstorming]
+## Background
+[Brief description of why this brainstorming session was conducted]
 
-## Round 1: 初始想法 (Divergent Thinking)
-1. [想法 1] - Theorist
-2. [想法 2] - Theorist
+## Round 1: Initial Ideas (Divergent Thinking)
+1. [Idea 1] - Theorist
+2. [Idea 2] - Theorist
 ...
 
-## Round 2: 可行性篩選 (Feasibility Filter)
-| 想法 | 可行性 | Experimentalist 評論 |
-|------|--------|---------------------|
-| 1 | 🟢 | 數據可得，方法成熟 |
-| 2 | 🟡 | 需要額外計算資源 |
-| 3 | 🔴 | 數據不可得 |
+## Round 2: Feasibility Screening
+| Idea | Feasibility | Experimentalist Comments |
+|------|-------------|--------------------------|
+| 1 | 🟢 | Data available, methods mature |
+| 2 | 🟡 | Requires additional computational resources |
+| 3 | 🔴 | Data unavailable |
 
-## Round 3: 精煉假說 (Refinement)
-[列出選中的 3-5 個假說，結構化格式]
+## Round 3: Hypothesis Refinement
+[List selected 3-5 hypotheses in structured format]
 
 ### H-001: [Title]
 **Core Claim**: [...]
@@ -266,22 +328,22 @@ Or: `/review-hypothesis H-001` to start formal review
 **Predictions**: [...]
 **Testability**: [...]
 
-## Round 4: 方法論審查 (Methods Review)
+## Round 4: Methodological Review
 ### H-001
-- **Methodologist 評估**:
+- **Methodologist Assessment**:
   - Novelty: 4/5
   - Importance: 5/5
   - Testability: 3/5
-- **潛在問題**: [...]
-- **建議**: [...]
+- **Potential Issues**: [...]
+- **Recommendations**: [...]
 
-## Round 5: 文檔化 (Documentation)
-- **接受假說**: H-001, H-002, H-003
-- **擱置想法**: [4, 5] - 原因: [...]
+## Round 5: Documentation
+- **Accepted Hypotheses**: H-001, H-002, H-003
+- **Shelved Ideas**: [4, 5] - Reasons: [...]
 - **Initial Elo**: All set to 1200
 
-## 決議
-- ✅ H-001, H-002, H-003 進入假說 pipeline
+## Resolution
+- ✅ H-001, H-002, H-003 entered into hypothesis pipeline
 - 🔄 Next action: `/review-hypothesis H-001` for formal review
 - 📊 STATE.md updated with new hypotheses
 ```
@@ -292,7 +354,7 @@ Or: `/review-hypothesis H-001` to start formal review
 ```markdown
 ---
 id: H-XXX
-title: "[標題]"
+title: "[Title]"
 status: draft
 created: [date]
 elo: 1200
@@ -303,53 +365,54 @@ self_assessment:
   testability: X/5
 ---
 
-# Hypothesis H-XXX: [標題]
+# Hypothesis H-XXX: [Title]
 
 ## Core Claim
-[一句話核心主張]
+[One-sentence core claim]
 
 ## Theoretical Basis
-[理論依據，為什麼這個假說在理論上合理]
+[Theoretical justification - why this hypothesis is theoretically sound]
+[Must reference specific frameworks from DOMAIN.md]
 
 ## Mechanism
-[因果機制說明，X 如何導致 Y]
+[Causal mechanism explanation - how X leads to Y]
 
 ## Predictions
-如果假說為真，我們應該觀察到：
-1. [具體可觀察的預測 1]
-2. [具體可觀察的預測 2]
-3. [具體可觀察的預測 3]
+If the hypothesis is true, we should observe:
+1. [Specific observable prediction 1]
+2. [Specific observable prediction 2]
+3. [Specific observable prediction 3]
 
 ## Testability
-**驗證方法**:
+**Verification Method**:
 - Data needed: [...]
 - Analysis approach: [...]
 - Expected timeline: [...]
 
-**Feasibility**: [Experimentalist 初步評估]
+**Feasibility**: [Experimentalist preliminary assessment]
 
 ## Alternative Explanations
-除了本假說，還有哪些可能解釋觀察結果：
-1. [替代解釋 1] - 如何排除
-2. [替代解釋 2] - 如何排除
+Besides this hypothesis, what else could explain the observations:
+1. [Alternative explanation 1] - How to rule out
+2. [Alternative explanation 2] - How to rule out
 
 ## Boundary Conditions
-假說在什麼條件下成立：
-- [條件 1]
-- [條件 2]
+Under what conditions does the hypothesis hold:
+- [Condition 1]
+- [Condition 2]
 
 ## Key References
-1. [文獻 1] - 提供理論基礎
-2. [文獻 2] - 相關實證證據
+1. [Reference 1] - Provides theoretical foundation
+2. [Reference 2] - Related empirical evidence
 
 ## Initial Assessment (from Round 4)
-- **Novelty**: [X/5] - [理由]
-- **Importance**: [X/5] - [理由]
-- **Testability**: [X/5] - [理由]
+- **Novelty**: [X/5] - [Justification]
+- **Importance**: [X/5] - [Justification]
+- **Testability**: [X/5] - [Justification]
 - **Initial Elo**: 1200
 
 ## Notes
-[任何額外註記]
+[Any additional notes]
 ```
 
 ---
@@ -386,6 +449,38 @@ Add new hypotheses to the index:
 
 ---
 
+## 🎯 Next Steps & Approval Gate
+
+After hypotheses are generated, the system presents them to the user and waits for direction:
+
+**⏸️ WAITING FOR USER DIRECTION**
+
+The system will NOT automatically proceed to review. User must choose action:
+
+**To proceed with review**:
+- "Review H-001" → Launch formal review process via `/review-hypothesis H-001`
+- "Review all" → Review all generated hypotheses sequentially
+- "Prioritize H-003" → Mark as priority (+50 Elo boost)
+
+**To generate more**:
+- "More ideas" → Generate additional hypotheses with different angles
+- "More variety" → Request more diverse approaches
+- "Different angle" → Reframe the research question
+
+**To refine existing**:
+- "Expand on H-002" → Deep dive into specific hypothesis
+- "Combine H-001 and H-002" → Synthesize multiple hypotheses
+- "Revise H-003" → Send back to Theorist for refinement
+
+**To reject and restart**:
+- "None of these work" → Provide feedback, adjust approach
+- "Different domain" → Pivot to different theoretical framework
+- "Start over" → Complete reset with new research question
+
+**CRITICAL**: Hypotheses remain in "Draft" status until user decides next action. No automatic review launch.
+
+---
+
 ## User Interactions
 
 | User Says | Action |
@@ -399,22 +494,22 @@ Add new hypotheses to the index:
 
 ---
 
-## 使用範例
+## Usage Example
 
 ```bash
-# 在專案目錄下
+# In project directory
 cd ~/research/projects/my-project
 
-# 啟動 brainstorming
-/brainstorm "統計推論在高維度下的基本限制"
+# Launch brainstorming
+/brainstorm "Fundamental limits of statistical inference in high dimensions"
 
-# 系統會自動：
-# 1. ✅ 載入 domains/stats-theory/DOMAIN.md
-# 2. ✅ 召集研究團隊進行 5 輪討論
-# 3. ✅ 產出 meeting_notes/brainstorm_session_[date].md
-# 4. ✅ 創建新的假說文件在 hypotheses/proposals/
-# 5. ✅ 更新 HYPOTHESES.md index
-# 6. ✅ 更新 STATE.md
+# System will automatically:
+# 1. ✅ Load domains/stats-theory/DOMAIN.md (full content)
+# 2. ✅ Convene research team for 5-round discussion
+# 3. ✅ Generate meeting_notes/brainstorm_session_[date].md
+# 4. ✅ Create new hypothesis files in hypotheses/proposals/
+# 5. ✅ Update HYPOTHESES.md index
+# 6. ✅ Update STATE.md
 ```
 
 ---
@@ -439,49 +534,49 @@ project/
 
 ---
 
-## 最佳實踐
+## Best Practices
 
-### 時間管理
-- 一次 brainstorming 不要超過一個小時
-- 如果卡住，先做文獻閱讀再回來
-- "需要更多背景知識" 是有效結論
+### Time Management
+- One brainstorming session should not exceed one hour
+- If stuck, do literature reading first and return
+- "Need more background knowledge" is a valid conclusion
 
-### 質量標準
-- 重質不重量，3 個好假說勝過 10 個勉強的假說
-- 每個假說都要有明確的可觀察預測
-- 不要害怕瘋狂想法，但要能說明為什麼值得探索
+### Quality Standards
+- Quality over quantity: 3 good hypotheses beat 10 mediocre ones
+- Each hypothesis must have clear observable predictions
+- Don't fear crazy ideas, but must explain why worth exploring
 
-### 記錄習慣
-- 被否定的想法也要記錄原因，避免重複
-- 定期回顧被擱置的想法，技術進步可能讓它們變得可行
-- 記錄思考過程，不只是結論
+### Documentation Habits
+- Record rejected ideas with reasons to avoid repetition
+- Regularly review shelved ideas - technological progress may make them feasible
+- Document thinking process, not just conclusions
 
 ### Goal-Backward Thinking
-- 從研究目標倒推：什麼樣的發現會最有價值？
-- 考慮：如果我們證明了這個假說，然後呢？
-- 優先考慮能開啟新研究方向的假說
+- Work backward from research goals: What findings would be most valuable?
+- Consider: "If we prove this hypothesis, then what?"
+- Prioritize hypotheses that open new research directions
 
 ---
 
-## 注意事項
+## Important Warnings
 
-⚠️ **這不是替代深度文獻閱讀的工具**
-- Brainstorming 前應該已經有紮實的文獻基礎
-- 如果對領域不熟悉，先用 Literature-RA 做系統性文獻回顧
+⚠️ **This is NOT a substitute for deep literature reading**
+- Should have solid literature foundation before brainstorming
+- If unfamiliar with domain, use Literature-RA for systematic lit review first
 
-⚠️ **產出是初步的**
-- Brainstorming 產出的假說需要後續精煉
-- 通過 `/review-hypothesis` 進行正式審查
-- 預期多輪迭代
+⚠️ **Output is preliminary**
+- Brainstorming output requires subsequent refinement
+- Conduct formal review via `/review-hypothesis`
+- Expect multiple iterations
 
-⚠️ **沒有產出也是有效結果**
-- 如果一次 brainstorming 沒有產出可行假說，這是正常的
-- 可能意味著需要更多背景閱讀或換個角度
+⚠️ **No output is also a valid result**
+- If a brainstorming session produces no viable hypotheses, this is normal
+- May indicate need for more background reading or different angle
 
-⚠️ **保持開放心態**
-- 不要過早否定想法
-- 鼓勵跨領域連結
-- 記錄所有想法，包括"不可行"的
+⚠️ **Maintain open mindset**
+- Don't reject ideas prematurely
+- Encourage cross-disciplinary connections
+- Record all ideas, including "infeasible" ones
 
 ---
 

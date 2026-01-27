@@ -1,8 +1,8 @@
 ---
 name: data-ra
 description: |
-  數據研究助理。執行數據收集、清理、初步分析、視覺化。
-  支援 experimentalist 的研究執行和 methodologist 的驗證需求。
+  Data Research Assistant. Performs data collection, cleaning, preliminary analysis, and visualization.
+  Supports Experimentalist's research execution and Methodologist's verification needs.
 tools: Read, Bash, Glob, Grep, Write
 model: sonnet
 ---

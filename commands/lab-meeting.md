@@ -1,6 +1,6 @@
 ---
 name: lab-meeting
-description: 週會：review 進度、Elo tournament、更新排名、規劃下週工作。
+description: Weekly lab meeting - Progress review, Elo tournament, ranking updates, next week planning
 argument-hint: [optional: specific agenda or --emergency/--project-kickoff/--project-closure]
 allowed-tools: Read, WebSearch, Bash, Glob, Grep, Write, Task
 ---
@@ -9,24 +9,24 @@ allowed-tools: Read, WebSearch, Bash, Glob, Grep, Write, Task
 
 # /lab-meeting Command
 
-執行虛擬 Lab Meeting，審查進度、討論假說、更新排名。
+Execute virtual Lab Meeting to review progress, discuss hypotheses, update rankings.
 
-## 目的
+## Purpose
 
-這是研究團隊的定期同步機制，結合了：
-- **標準議程**：8個固定議題的結構化會議
-- **Elo Tournament**：基於成對比較的假說排名系統
-- **GSD Goal-backward Review**：檢查是否真正達成研究目標
-- **決策記錄**：明確的行動項目和責任人
+This is the research team's regular synchronization mechanism, combining:
+- **Standard Agenda**: Structured meeting with 8 fixed topics
+- **Elo Tournament**: Pairwise comparison-based hypothesis ranking system
+- **GSD Goal-backward Review**: Check whether research goals are truly being achieved
+- **Decision Recording**: Clear action items and owners
 
-確保所有人對專案狀態、假說優先級、資源分配有共識。
+Ensures all team members have consensus on project status, hypothesis priorities, and resource allocation.
 
-## 使用時機
-- ✅ 建議每週固定時間執行（例如每週一早上）
-- ✅ 重大專案里程碑時
-- ✅ 需要團隊集體決策時
-- ✅ 有新假說需要審查時
-- ✅ Elo 排名需要更新時
+## When to Use
+- ✅ Recommended: Weekly at fixed time (e.g., Monday morning)
+- ✅ Major project milestones
+- ✅ When team collective decisions are needed
+- ✅ When new hypotheses need review
+- ✅ When Elo rankings need updating
 
 ---
 
@@ -41,12 +41,14 @@ User: /lab-meeting
     │  - Pull from STATE.md                   │
     │  - Aggregate hypothesis status          │
     │  - Calculate metrics                    │
+    │  - Check domain-specific signals        │
     └─────────────────────────────────────────┘
           │
           ▼
     ┌─────────────────────────────────────────┐
     │  Step 2: Hypothesis Tournament          │
     │  - Compare top hypotheses pairwise      │
+    │  - Apply domain-aware criteria          │
     │  - Update Elo rankings                  │
     │  - Track match history (W-L-D)          │
     │  - Identify priorities                  │
@@ -58,6 +60,7 @@ User: /lab-meeting
     │  - Surface blockers                     │
     │  - Present decisions to PI              │
     │  - Goal-backward check                  │
+    │  - Domain standards compliance check    │
     └─────────────────────────────────────────┘
           │
           ▼
@@ -72,129 +75,216 @@ User: /lab-meeting
 
 ---
 
-## 標準議程
+## Standard Agenda
 
-### 1. 開場與行動項目回顧 (5 分鐘)
-**主持**: Coordinator
+### 1. Opening & Action Item Review (5 minutes)
+**Chair**: Coordinator
 
-**內容**:
-- 回顧上週會議的決議
-- 檢查行動項目完成情況
-- 未完成項目的障礙識別
+**Content**:
+- Review last week's meeting decisions
+- Check action item completion status
+- Identify obstacles for incomplete items
 
-**格式**:
+**Format**:
 ```markdown
-### 已完成
-- [x] [項目] - 負責人 - ✅ Done
+### Completed
+- [x] [Item] - Owner - ✅ Done
 
-### 未完成
-- [ ] [項目] - 負責人
-  - 原因: [...]
-  - 新截止日期: [...]
-  - 需要支援: [...]
+### Incomplete
+- [ ] [Item] - Owner
+  - Reason: [...]
+  - New deadline: [...]
+  - Support needed: [...]
 ```
 
 ---
 
-### 2. 專案狀態報告 (5-10 分鐘)
-**主持**: Coordinator
-**參與**: 所有成員
+### 2. Project Status Reports (5-10 minutes)
+**Chair**: Coordinator
+**Participants**: All members
 
-**內容**:
-- 每個活躍專案的狀態更新
-- 進度百分比
-- 本週完成的里程碑
-- 遇到的問題和風險
-- 資源使用情況
+**Content**:
+- Status update for each active project
+- Progress percentage
+- Milestones completed this week
+- Issues and risks encountered
+- Resource utilization
+- **Domain-specific signals** (e.g., "lower bound derived", "identification strategy validated")
 
-**格式**:
+**Format**:
 ```
-專案 A:
-- 狀態: 🟢 On track / 🟡 At risk / 🔴 Blocked
-- 進度: XX%
-- 本週: [完成了什麼]
-- 下週: [計畫做什麼]
-- 風險: [有什麼障礙]
-- Goal check: [是否朝目標前進？]
+Project A:
+- Status: 🟢 On track / 🟡 At risk / 🔴 Blocked
+- Progress: XX%
+- This Week: [What was accomplished]
+- Next Week: [What is planned]
+- Risks: [Any blockers]
+- Goal check: [Are we advancing toward the goal?]
+- Domain signals: [Critical domain-specific status]
+  - For stats-theory: Lower bound status, proof completeness, simulation progress
+  - For policy-making: Identification strategy status, data access, mechanism testing
 ```
 
 ---
 
-### 3. 假說審查 (20-30 分鐘)
-**主持**: 依假說類型選擇合適的 Senior Postdoc
+### 3. Hypothesis Review (20-30 minutes)
+**Chair**: Appropriate Senior Postdoc based on hypothesis type
 
-對新假說或有重大更新的假說進行審查：
+Review new hypotheses or those with major updates:
 
-#### 3.1 假說報告
-**Theorist** 報告：
-- 假說的理論動機
-- 核心主張和機制
-- 與現有文獻的關係
-- 為什麼這個假說重要
+#### 3.1 Context Loading (Automatic Execution)
 
-#### 3.2 可行性評估
-**Experimentalist** 評估：
-- 驗證方案
-- 資源需求（數據、時間、計算）
-- 技術風險
-- 預期時間線
+**CRITICAL**: Before reviewing any hypothesis, the system must load and inject domain knowledge.
 
-#### 3.3 方法論意見
-**Methodologist** 提供：
-- 方法論適當性
-- 潛在偏誤和陷阱
-- 是否符合領域標準
-- 預期審稿人關注點
+**Step 3.1A: Identify hypothesis and domain**
+```markdown
+1. Read hypothesis file: hypotheses/proposals/H-XXX-*.md
+2. Extract domain field from hypothesis frontmatter
+3. Identify which domain knowledge to load
+```
 
-#### 3.4 討論與決議
-**全體** 討論：
-- 優勢和劣勢
-- 與其他假說的比較（為 Elo tournament 準備）
-- 優先級判斷
-- 資源分配
+**Step 3.1B: Load domain knowledge (MUST READ FULL FILE)**
+```markdown
+Read /Users/andyhou/research/domains/{domain}/DOMAIN.md
 
-**決議**:
-- ✅ 推進：分配資源開始驗證
-- 🔄 修改：需要調整後再審查
-- ⏸️ 擱置：暫時不推進，但保留
-- ❌ 放棄：不再考慮
+This file contains (600+ lines):
+- Core theoretical frameworks
+- Proof techniques / Research methods
+- Publication standards
+- Domain-specific evaluation criteria
+- Red flags and acceptance signals
+```
+
+**Step 3.1C: Package domain knowledge for agents**
+```markdown
+Domain knowledge will be injected into agent context when spawning team members for hypothesis discussion.
+```
+
+#### 3.2 Hypothesis Report
+**Theorist** reports (with domain knowledge):
+- Theoretical motivation of hypothesis
+- Core claim and mechanism
+- Relationship to existing literature
+- Why this hypothesis is important
+- **Domain-specific**: What theoretical framework applies? (e.g., minimax for stats, mechanism theory for policy)
+
+#### 3.3 Feasibility Assessment
+**Experimentalist** assesses (with domain knowledge):
+- Verification plan
+- Resource requirements (data, time, computation)
+- Technical risks
+- Expected timeline
+- **Domain-specific**:
+  - For stats-theory: Can the estimator be implemented? Simulation design? Numerical stability?
+  - For policy-making: Data access feasible? Case selection? Measurement validity?
+
+#### 3.4 Methodological Opinion
+**Methodologist** provides (with domain knowledge):
+- Methodological appropriateness
+- Potential biases and pitfalls
+- Domain standard compliance
+- Expected reviewer concerns
+- **Domain-specific evaluation**:
+  - For stats-theory: Proof completeness? Lower bound? Assumptions stated?
+  - For policy-making: Identification strategy? Confounders addressed? Mechanism observable?
+
+#### 3.5 Discussion & Decision
+**All members** discuss:
+- Strengths and weaknesses
+- Comparison with other hypotheses (prepare for Elo tournament)
+- Priority assessment
+- Resource allocation
+- **Domain standard compliance**: Does this meet field-specific publication standards?
+
+**Decision**:
+- ✅ Proceed: Allocate resources, begin verification
+- 🔄 Revise: Needs adjustment before proceeding
+- ⏸️ Defer: Not pursuing now, but keep on record
+- ❌ Abandon: No longer consider
+
+**Domain-Specific Decision Criteria**:
+```markdown
+For stats-theory:
+- ✅ Proceed if: Clear theorem, rate derived, lower bound strategy identified, assumptions stated
+- ❌ Reject if: No lower bound plan, proof has gaps, assumptions unstated (red flags from DOMAIN.md)
+
+For policy-making:
+- ✅ Proceed if: Clear mechanism, identification strategy specified, threats to validity discussed
+- ❌ Reject if: No identification strategy, confounders ignored, mechanism not observable (red flags from DOMAIN.md)
+```
 
 ---
 
-### 4. 假說排名更新 - **Elo Tournament System** (10-15 分鐘)
-**主持**: Coordinator
-**方法**: 成對比較 + Elo 計算
+### 4. Hypothesis Ranking Update - **Elo Tournament System** (10-15 minutes)
+**Chair**: Coordinator
+**Method**: Pairwise comparison + Elo calculation
 
-#### 4.1 Tournament 流程
+#### 4.1 Tournament Flow
 
-如果有多個假說需要排名：
+If multiple hypotheses need ranking:
 
-**Step 1**: 選擇比較對
-- 優先比較 Elo 接近的假說
-- 或新假說 vs 已排名的假說
-- 每次會議進行 2-4 場比賽
+**Step 1**: Select comparison pairs
+- Prioritize hypotheses with similar Elo
+- Or new hypothesis vs established hypothesis
+- Run 2-4 matches per meeting
 
-**Step 2**: 多維度投票
-團隊根據以下維度評估：
+**Step 2**: Multi-dimensional evaluation with domain awareness
+Team evaluates based on the following dimensions:
 
-| 維度 | 權重 | 評估問題 |
-|------|------|---------|
-| **Novelty** | 25% | 這個假說有多新穎？是否開闢新方向？ |
-| **Importance** | 25% | 如果為真，對領域的影響有多大？ |
-| **Testability** | 20% | 驗證的可行性如何？資源需求合理嗎？ |
-| **Progress** | 15% | 目前進展如何？是否卡住？ |
-| **Confidence** | 15% | 我們對這個假說的信心有多高？ |
+| Dimension | Weight | Evaluation Question | Domain Considerations |
+|-----------|--------|---------------------|----------------------|
+| **Novelty** | 25% | How novel is this hypothesis? Does it open new directions? | Does it challenge existing theoretical frameworks? |
+| **Importance** | 25% | If true, what is the impact on the field? | **DOMAIN-AWARE**: For stats, does it achieve optimal rates? For policy, does it explain major policy outcomes? |
+| **Testability** | 20% | How feasible is verification? Are resource requirements reasonable? | Can domain standards be met with available resources? |
+| **Progress** | 15% | What is current progress? Is it stuck? | **DOMAIN-AWARE**: For stats, is lower bound derived? For policy, is identification clear? |
+| **Confidence** | 15% | How confident are we in this hypothesis? | Based on theoretical rigor and preliminary evidence |
 
-**Step 3**: 計算結果
+**Domain-Specific Scoring Guidance**:
+
+```markdown
+## For Statistical Theory Projects:
+
+**Importance scoring**:
+- 5/5: Achieves minimax optimal rate + tight constant, matching lower bound
+- 4/5: Achieves optimal rate but sub-optimal constant
+- 3/5: Rate is sub-optimal by log factor
+- 2/5: Rate is sub-optimal by polynomial factor
+- 1/5: No clear rate optimality
+
+**Progress scoring**:
+- 5/5: Lower bound proven + upper bound achieved + simulation complete
+- 4/5: Lower bound proven + upper bound achieved
+- 3/5: Lower bound proven OR upper bound achieved
+- 2/5: Rate derived but no proof
+- 1/5: Still working on problem formulation
+
+## For Policy Research Projects:
+
+**Importance scoring**:
+- 5/5: Challenges dominant theory + explains major policy outcomes
+- 4/5: Extends existing theory + important policy implications
+- 3/5: Incremental theoretical contribution
+- 2/5: Confirms existing theory
+- 1/5: Limited theoretical contribution
+
+**Progress scoring**:
+- 5/5: Identification validated + mechanism tested + robustness checks passed
+- 4/5: Identification strategy specified + preliminary evidence
+- 3/5: Identification strategy proposed
+- 2/5: Mechanism articulated but identification unclear
+- 1/5: Still developing theoretical framework
+```
+
+**Step 3**: Calculate results
 ```python
-# 加權計分
+# Weighted scoring
 h1_score = sum(score[dim] * weight[dim] for dim in dimensions)
 h2_score = sum(score[dim] * weight[dim] for dim in dimensions)
 
 winner = h1 if h1_score > h2_score else h2
 margin = abs(h1_score - h2_score)
 
-# Elo 更新
+# Elo update
 K = 32  # K-factor
 expected_h1 = 1 / (1 + 10^((elo_h2 - elo_h1) / 400))
 
@@ -206,7 +296,7 @@ else:
     elo_h2_new = elo_h2 + K * (1 - (1 - expected_h1))
 ```
 
-#### 4.2 Tournament 輸出格式
+#### 4.2 Tournament Output Format
 
 ```markdown
 ## 🏆 Hypothesis Tournament
@@ -214,89 +304,150 @@ else:
 ### This Week's Matches
 
 **Match 1: H-003 vs H-001**
-| Criterion | H-003 | H-001 | Winner |
-|-----------|-------|-------|--------|
-| Novelty (25%) | 4/5 | 3/5 | H-003 |
-| Importance (25%) | 5/5 | 4/5 | H-003 |
-| Testability (20%) | 3/5 | 4/5 | H-001 |
-| Progress (15%) | 4/5 | 3/5 | H-003 |
-| Confidence (15%) | 4/5 | 3/5 | H-003 |
-| **Weighted Total** | **4.10** | **3.55** | **H-003** |
+**Domain**: stats-theory
+
+| Criterion | H-003 | H-001 | Winner | Rationale |
+|-----------|-------|-------|--------|-----------|
+| Novelty (25%) | 4/5 | 3/5 | H-003 | New sparsity regime |
+| Importance (25%) | 5/5 | 4/5 | H-003 | **Minimax optimal + matching lower bound** |
+| Testability (20%) | 3/5 | 4/5 | H-001 | H-001 easier to simulate |
+| Progress (15%) | 4/5 | 3/5 | H-003 | **Lower bound already proven** |
+| Confidence (15%) | 4/5 | 3/5 | H-003 | Strong theoretical foundation |
+| **Weighted Total** | **4.10** | **3.55** | **H-003** | |
+
+**Domain Analysis**:
+- H-003 has proven lower bound (critical for stats-theory)
+- H-003 achieves minimax optimal rate
+- H-001 lacks lower bound (red flag per DOMAIN.md)
 
 **Elo Update**:
 - H-003: 1780 → 1810 (+30)
 - H-001: 1850 → 1820 (-30)
 
-**Rationale**: H-003 有更高的理論重要性和新穎性，雖然 H-001 在可驗證性上略勝一籌，但整體來看 H-003 優先級更高。
+**Rationale**: H-003 has higher theoretical importance and novelty. While H-001 is slightly more testable, H-003 meets critical domain standards (lower bound proven) which is essential for publication in top theory journals.
 
 ---
 
 **Match 2: H-007 vs H-002**
-[Same structure]
+**Domain**: policy-making
+
+| Criterion | H-007 | H-002 | Winner | Rationale |
+|-----------|-------|-------|--------|-----------|
+| Novelty (25%) | 5/5 | 3/5 | H-007 | Challenges dominant theory |
+| Importance (25%) | 5/5 | 4/5 | H-007 | **Explains major policy outcome** |
+| Testability (20%) | 4/5 | 3/5 | H-007 | **Clear identification via RDD** |
+| Progress (15%) | 4/5 | 3/5 | H-007 | **Identification strategy validated** |
+| Confidence (15%) | 3/5 | 4/5 | H-002 | H-002 more established |
+| **Weighted Total** | **4.40** | **3.40** | **H-007** | |
+
+**Domain Analysis**:
+- H-007 has clear identification strategy (RDD)
+- H-007 addresses confounders explicitly
+- H-002 identification strategy weaker
+
+**Elo Update**:
+- H-007: 1650 → 1685 (+35)
+- H-002: 1680 → 1645 (-35)
 
 ### Updated Rankings (Top 10)
 
-| Rank | Δ | ID | Elo | 標題 | 狀態 | W-L-D |
-|------|---|-----|-----|------|------|-------|
-| 1 | ↑1 | H-003 | 1810 | [Title] | Ready | 6-1-0 |
-| 2 | ↓1 | H-001 | 1820 | [Title] | Review | 5-2-1 |
-| 3 | → | H-007 | 1720 | [Title] | Draft | 4-2-0 |
-| 4 | ↑2 | H-002 | 1680 | [Title] | Testing | 3-1-0 |
-| 5 | ↓1 | H-009 | 1650 | [Title] | Draft | 2-2-1 |
-| ... | | | | | | |
+| Rank | Δ | ID | Elo | Title | Status | W-L-D | Domain |
+|------|---|-----|-----|-------|--------|-------|--------|
+| 1 | ↑1 | H-003 | 1810 | [Title] | Ready | 6-1-0 | stats-theory |
+| 2 | ↓1 | H-001 | 1820 | [Title] | Review | 5-2-1 | stats-theory |
+| 3 | → | H-007 | 1685 | [Title] | Draft | 5-2-0 | policy-making |
+| 4 | ↑2 | H-002 | 1645 | [Title] | Testing | 3-2-0 | policy-making |
+| 5 | ↓1 | H-009 | 1650 | [Title] | Draft | 2-2-1 | stats-theory |
+| ... | | | | | | | |
 
 ### Tournament Summary
 - **Matches this week**: 2
-- **Biggest mover**: H-002 (+50 Elo, ↑2 ranks)
+- **Biggest mover**: H-007 (+35 Elo, ↑2 ranks)
 - **Most wins**: H-003 (6-1-0)
 - **New entrant**: H-012 (Initial Elo: 1200)
+- **Domain distribution**: 6 stats-theory, 4 policy-making in top 10
+
+### Domain-Specific Rankings
+
+**Stats Theory Top 3**:
+1. H-003 (1810) - Lower bound proven ✓
+2. H-001 (1820) - Lower bound missing ✗
+3. H-009 (1650) - Lower bound in progress
+
+**Policy Making Top 3**:
+1. H-007 (1685) - Identification clear (RDD) ✓
+2. H-002 (1645) - Identification unclear ✗
+3. H-011 (1590) - Mechanism specified ✓
 ```
 
 ---
 
-### 5. 問題討論 (10-15 分鐘)
-**主持**: PI (或最相關的 Senior Postdoc)
+### 5. Problem Discussion (10-15 minutes)
+**Chair**: PI (or most relevant Senior Postdoc)
 
-討論需要集體智慧的問題：
-- 卡住的技術問題
-- 方向性疑問
-- 資源衝突
-- 跨專案協調
+Discuss issues requiring collective wisdom:
+- Technical problems that are stuck
+- Directional questions
+- Resource conflicts
+- Cross-project coordination
+- **Domain-specific concerns** (e.g., "Can we relax this assumption?", "Is this identification strategy credible?")
 
 **Goal-Backward Check**:
-- 我們的行動是否真正朝研究目標前進？
-- 還是只是完成任務但沒有達成目標？
+- Are our actions truly advancing research goals?
+- Or are we just completing tasks without achieving goals?
+
+**Domain-Aware Problem Identification**:
+```markdown
+## Critical Issues (Red Flags)
+
+**Stats Theory**:
+- Hypothesis lacks lower bound (critical blocker)
+- Proof has logical gaps
+- Assumptions unrealistic or unstated
+- Computational complexity ignored
+
+**Policy Making**:
+- No identification strategy specified
+- Selection bias not addressed
+- Confounders not discussed
+- Mechanism not observable or testable
+```
 
 ---
 
-### 6. 資源與時間線 (5 分鐘)
-**主持**: Coordinator
+### 6. Resources & Timeline (5 minutes)
+**Chair**: Coordinator
 
-- 資源分配檢視
-- 即將到來的截止日期
-- 下週重點任務
-- 需要外部協助的事項
-
----
-
-### 7. 下週計畫 (5 分鐘)
-**主持**: Coordinator
-
-每位成員簡要說明下週目標：
-- **Theorist**: [下週任務]
-- **Experimentalist**: [下週任務]
-- **Methodologist**: [下週任務]
-- **Coordinator**: [下週任務]
+- Resource allocation review
+- Upcoming deadlines
+- Next week's priority tasks
+- External assistance needed
+- **Domain-specific resource needs** (e.g., computational resources for simulations, data access for policy research)
 
 ---
 
-### 8. 結束與記錄 (5 分鐘)
-**主持**: Coordinator
+### 7. Next Week Plan (5 minutes)
+**Chair**: Coordinator
 
-- 總結決議事項
-- 確認行動項目和責任人
-- 設定下次會議時間
-- 建議是否需要 `/compact` (strategic compaction)
+Each member briefly states next week's goals:
+- **Theorist**: [Next week tasks]
+- **Experimentalist**: [Next week tasks]
+- **Methodologist**: [Next week tasks]
+- **Coordinator**: [Next week tasks]
+
+**Domain-aware task prioritization**:
+- For stats-theory: Prioritize lower bound derivation over simulation if not yet proven
+- For policy-making: Prioritize identification strategy over data collection if not yet clear
+
+---
+
+### 8. Closing & Documentation (5 minutes)
+**Chair**: Coordinator
+
+- Summarize decisions
+- Confirm action items and owners
+- Set next meeting time
+- Suggest strategic compaction (`/compact`) if appropriate
 
 ---
 
@@ -324,50 +475,75 @@ Draft (3) → Review (2) → Ready (5) → Testing (1) → Complete (4)
 1. [Accomplishment]
 2. [Accomplishment]
 
+### Domain-Specific Highlights
+**Stats Theory**:
+- H-003: Lower bound proven using Fano's method ✓
+- H-005: Simulation 75% complete
+
+**Policy Making**:
+- H-007: Data access granted for RDD analysis ✓
+- H-011: Mechanism testing in progress
+
 ─────────────────────────────────────────────────────
 
 ## 🏆 Hypothesis Tournament
 
 ### Current Top 5 (by Elo)
-| Rank | ID | Title | Elo | Change |
-|------|----|-------|-----|--------|
-| 1 | H-003 | [Title] | 1810 | ↑1 (+30) |
-| 2 | H-001 | [Title] | 1820 | ↓1 (-30) |
-| 3 | H-007 | [Title] | 1720 | → |
-| 4 | H-002 | [Title] | 1680 | ↑2 (+50) |
-| 5 | H-009 | [Title] | 1650 | ↓1 |
+| Rank | ID | Title | Elo | Change | Domain |
+|------|----|-------|-----|--------|--------|
+| 1 | H-003 | [Title] | 1810 | ↑1 (+30) | stats-theory |
+| 2 | H-001 | [Title] | 1820 | ↓1 (-30) | stats-theory |
+| 3 | H-007 | [Title] | 1685 | ↑2 (+35) | policy-making |
+| 4 | H-002 | [Title] | 1645 | ↓1 (-35) | policy-making |
+| 5 | H-009 | [Title] | 1650 | ↓1 | stats-theory |
 
 ### This Week's Matches
 
-**Match 1: H-003 vs H-001**
-Comparison: [5 criteria, weighted]
+**Match 1: H-003 vs H-001** (stats-theory)
+Comparison: [5 criteria, weighted, domain-aware]
 Winner: H-003
 Elo Change: H-003 +30, H-001 -30
-Reason: [Why H-003 won]
+Reason: H-003 has proven lower bound (critical for stats theory), achieves minimax optimal rate
+Domain Impact: H-003 meets publication standards, H-001 lacks lower bound (red flag)
 
-**Match 2: H-007 vs H-002**
-[Same structure]
+**Match 2: H-007 vs H-002** (policy-making)
+Comparison: [5 criteria, weighted, domain-aware]
+Winner: H-007
+Elo Change: H-007 +35, H-002 -35
+Reason: H-007 has clear identification strategy (RDD), H-002 identification unclear
+Domain Impact: H-007 meets causal inference standards
 
 ### Tournament Statistics
 - Total hypotheses ranked: 15
 - Matches played this week: 2
 - Cumulative matches: 47
 - Biggest upset: [If any]
+- Domain-aware upsets: H-001 dropped despite higher Elo due to missing lower bound
 
 ─────────────────────────────────────────────────────
 
 ## 🚧 Blockers & Decisions
 
 ### Current Blockers
-| Blocker | Impact | Needed From | Deadline |
-|---------|--------|-------------|----------|
-| [Description] | [What's blocked] | [Who can resolve] | [Date] |
+| Blocker | Impact | Needed From | Deadline | Domain Issue |
+|---------|--------|-------------|----------|--------------|
+| [Description] | [What's blocked] | [Who can resolve] | [Date] | [Domain flag if applicable] |
+
+### Domain-Specific Blockers
+**Stats Theory**:
+- H-001: Missing lower bound (CRITICAL - publication blocker)
+- H-009: Proof gap in convergence argument
+
+**Policy Making**:
+- H-002: Identification strategy unclear (CRITICAL)
+- H-011: Data access delayed
 
 ### Decisions for PI
 
 **Decision 1: [Question]**
 - Option A: [Description] - Pros: [...] - Cons: [...]
 - Option B: [Description] - Pros: [...] - Cons: [...]
+- **Domain considerations**: [How each option aligns with domain standards]
 - **Recommendation**: [Which option and why]
 
 **Decision 2: [Question]**
@@ -381,13 +557,29 @@ Reason: [Why H-003 won]
 1. [Goal 1]
    - Progress: ✅ On track / ⚠️ Needs attention / ❌ Off track
    - Evidence: [What shows progress?]
+   - Domain standard: [Are we meeting field-specific requirements?]
 
 2. [Goal 2]
    - Progress: [Status]
    - Evidence: [...]
 
+### Domain Standard Compliance Check
+
+**Stats Theory Goals**:
+- [ ] Lower bounds proven for main results
+- [ ] Proofs complete and rigorous
+- [ ] Assumptions explicitly stated
+- [ ] Computational complexity analyzed
+
+**Policy Making Goals**:
+- [ ] Identification strategies specified
+- [ ] Causal mechanisms clearly articulated
+- [ ] Threats to validity discussed
+- [ ] Measurement approaches justified
+
 ### Misalignments Identified
 - [Activity that's not advancing goals]
+- [Activity that violates domain standards]
 - [Suggested correction]
 
 ─────────────────────────────────────────────────────
@@ -395,10 +587,20 @@ Reason: [Why H-003 won]
 ## 📅 Plan for Next Week
 
 ### Priority Tasks
-| # | Task | Owner | Target | Depends On | Goal Link |
-|---|------|-------|--------|------------|-----------|
-| 1 | [Task] | [Agent] | [Date] | - | [Which goal] |
-| 2 | [Task] | [Agent] | [Date] | Task 1 | [Which goal] |
+| # | Task | Owner | Target | Depends On | Goal Link | Domain Priority |
+|---|------|-------|--------|------------|-----------|-----------------|
+| 1 | [Task] | [Agent] | [Date] | - | [Which goal] | [If domain-critical] |
+| 2 | [Task] | [Agent] | [Date] | Task 1 | [Which goal] | [If domain-critical] |
+
+### Domain-Prioritized Tasks
+
+**High Priority (Domain Critical)**:
+- [ ] [Stats]: Derive lower bound for H-001 (publication blocker)
+- [ ] [Policy]: Specify identification strategy for H-002 (publication blocker)
+
+**Medium Priority**:
+- [ ] [Task]
+- [ ] [Task]
 
 ### Goals
 - [ ] [Goal 1]
@@ -413,14 +615,21 @@ Reason: [Why H-003 won]
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-## 決議摘要
+## Decision Summary
 1. [Decision 1]
 2. [Decision 2]
 3. [Decision 3]
 
-## 行動項目
-- [ ] [Task] - [Owner] - [Deadline]
-- [ ] [Task] - [Owner] - [Deadline]
+## Action Items
+- [ ] [Task] - [Owner] - [Deadline] - Priority: [High/Med/Low]
+- [ ] [Task] - [Owner] - [Deadline] - Priority: [High/Med/Low]
+
+## Domain-Specific Action Items
+**Stats Theory**:
+- [ ] [Critical task - e.g., "Prove lower bound for H-001"]
+
+**Policy Making**:
+- [ ] [Critical task - e.g., "Specify identification for H-002"]
 
 **Next Meeting**: [Date and Time]
 **Compaction Suggestion**: Yes / No - [Rationale]
@@ -439,10 +648,18 @@ Reason: [Why H-003 won]
 [Updated rankings from tournament]
 
 ### Elo History (Last 10 Changes)
-| Date | Match | Winner | Loser | Δ |
-|------|-------|--------|-------|---|
-| [Date] | H-003 vs H-001 | H-003 | H-001 | +30/-30 |
-| [Date] | H-007 vs H-002 | H-002 | H-007 | +25/-25 |
+| Date | Match | Winner | Loser | Δ | Domain | Reason |
+|------|-------|--------|-------|---|--------|--------|
+| [Date] | H-003 vs H-001 | H-003 | H-001 | +30/-30 | stats | Lower bound proven |
+| [Date] | H-007 vs H-002 | H-007 | H-002 | +35/-35 | policy | Clear identification (RDD) |
+
+### Domain-Specific Rankings
+
+**Stats Theory Top 5**:
+[List with domain compliance status]
+
+**Policy Making Top 5**:
+[List with domain compliance status]
 ```
 
 ### 2. Update STATE.md
@@ -455,9 +672,14 @@ Key Decisions:
 2. [Decision]
 
 ## Elo Rankings (Top 3)
-1. H-003: 1810
-2. H-001: 1820
-3. H-007: 1720
+1. H-003: 1810 (stats-theory) - Lower bound ✓
+2. H-001: 1820 (stats-theory) - Lower bound ✗
+3. H-007: 1685 (policy-making) - Identification ✓
+
+## Domain Compliance Alerts
+**Critical Issues**:
+- H-001: Missing lower bound (stats-theory red flag)
+- H-002: Unclear identification (policy-making red flag)
 
 ## Next Week's Plan
 [From meeting output]
@@ -474,89 +696,99 @@ During lab meeting, PI can:
 
 | Command | Action |
 |---------|--------|
-| "Compare H-001 and H-005" | Run head-to-head comparison |
-| "Why is H-003 ranked first?" | Explain Elo position and match history |
+| "Compare H-001 and H-005" | Run head-to-head comparison with domain-aware criteria |
+| "Why is H-003 ranked first?" | Explain Elo position, match history, and domain compliance |
 | "Prioritize H-007" | Manually boost priority (+50 Elo bonus) |
 | "Drop H-002" | Archive hypothesis, remove from rankings |
-| "What's blocking H-001?" | Show blockers for specific hypothesis |
+| "What's blocking H-001?" | Show blockers including domain-specific issues |
 | "Plan for [topic]" | Adjust next week's plan |
-| "Replay H-003 vs H-001" | Re-evaluate past match |
+| "Replay H-003 vs H-001" | Re-evaluate past match with updated information |
+| "Check domain standards for H-001" | Review domain compliance checklist |
 
 ---
 
-## 特殊情況
+## Special Situations
 
-### 緊急會議
-如果有緊急問題需要即時討論：
+### Emergency Meeting
+For urgent issues requiring immediate discussion:
 ```bash
-/lab-meeting --emergency "問題描述"
+/lab-meeting --emergency "Issue description"
 ```
-- 使用簡化議程
-- 只處理緊急問題
-- 快速決策，記錄在案
+- Use simplified agenda
+- Focus only on urgent issue
+- Quick decision-making, document decisions
+- May skip tournament if time-critical
 
-### 專案啟動會議
-新專案開始時：
+### Project Kickoff Meeting
+When starting new project:
 ```bash
-/lab-meeting --project-kickoff "[專案名]"
+/lab-meeting --project-kickoff "[Project name]"
 ```
-- 專注於專案目標、資源分配、時間線設定
-- 初始假說排名（如果有）
-- 設定里程碑
+- Focus on project goals, resource allocation, timeline setting
+- Initial hypothesis ranking (if any)
+- Set milestones
+- **Load domain knowledge** for project's domain
+- Establish domain-specific success criteria
 
-### 專案結案會議
-專案結束時：
+### Project Closure Meeting
+When completing project:
 ```bash
-/lab-meeting --project-closure "[專案名]"
+/lab-meeting --project-closure "[Project name]"
 ```
-- 回顧成果
-- 總結經驗
-- 更新知識庫（DOMAIN.md）
-- 最終 Elo 排名
-- 發表成功的假說
+- Review outcomes
+- Summarize lessons learned
+- Update knowledge base (DOMAIN.md if needed)
+- Final Elo rankings
+- Publish successful hypotheses
+- **Document domain-specific insights** for future projects
 
 ---
 
 ## Meeting Cadence
 
-- **Weekly**: Full lab meeting (所有 8 個議程)
-- **Daily (optional)**: Quick standup via `/progress` (5 分鐘快速同步)
+- **Weekly**: Full lab meeting (all 8 agenda items)
+- **Daily (optional)**: Quick standup via `/progress` (5-minute sync)
 - **Ad-hoc**: `/lab-meeting --emergency` for critical decisions
 
 ---
 
-## 最佳實踐
+## Best Practices
 
-### 會議效率
-- ⏱️ 控制時間，嚴格按議程進行
-- 🔍 技術細節討論可以會後單獨進行
-- ⏭️ 如果討論超時，標記為待辦事項
-- 📊 使用視覺化輔助（圖表、表格）
+### Meeting Efficiency
+- ⏱️ Control time, strictly follow agenda
+- 🔍 Technical details can be discussed offline
+- ⏭️ If discussion goes over time, mark as pending task
+- 📊 Use visualization aids (charts, tables)
 
-### Elo Tournament 最佳實踐
-- 🎯 每次會議進行 2-4 場比賽（不要太多）
-- ⚖️ 優先比較 Elo 接近的假說（更有意義的比較）
-- 📝 記錄比較理由（未來可以回顧）
-- 🔄 定期重新評估高排名假說（避免 Elo 通脹）
-- 🆕 新假說初始 Elo 1200，通過比賽找到位置
+### Elo Tournament Best Practices
+- 🎯 Run 2-4 matches per meeting (don't overdo it)
+- ⚖️ Prioritize comparing hypotheses with similar Elo (more meaningful)
+- 📝 Record comparison rationale (for future review)
+- 🔄 Periodically re-evaluate high-ranking hypotheses (avoid Elo inflation)
+- 🆕 New hypotheses start at Elo 1200, find position through matches
+- **🎓 Apply domain-aware criteria** (lower bound for stats, identification for policy)
+- **🚩 Recognize domain red flags** that should override Elo
 
-### 決策品質
-- ✅ 所有決議都要有明確的行動項目和責任人
-- ❓ 不確定時承認不確定，避免倉促決策
-- 📄 記錄不同意見，不強求共識
-- 🎯 使用 Goal-backward thinking：這個決定真的幫助達成目標嗎？
+### Decision Quality
+- ✅ All decisions must have clear action items and owners
+- ❓ When uncertain, admit uncertainty, avoid hasty decisions
+- 📄 Document dissenting opinions, don't force consensus
+- 🎯 Use Goal-backward thinking: Does this decision truly help achieve goals?
+- **🎓 Domain standard compliance**: Does this meet field-specific publication standards?
 
-### 團隊協作
-- 🔄 輪流讓不同人主持不同議題
-- 💬 鼓勵建設性批評
-- 🎉 慶祝進展和里程碑
-- 🤝 跨 agent 協作機會
+### Team Collaboration
+- 🔄 Rotate facilitation of different topics among team members
+- 💬 Encourage constructive criticism
+- 🎉 Celebrate progress and milestones
+- 🤝 Cross-agent collaboration opportunities
+- **🎓 Respect domain expertise**: Defer to Methodologist on domain standards
 
-### 持續改進
-- 📅 每月回顧會議流程的有效性
-- 🔧 根據專案需求調整議程
-- 🎨 保持靈活性
-- 📊 追蹤會議指標（時長、決策數、行動項目完成率）
+### Continuous Improvement
+- 📅 Monthly review of meeting process effectiveness
+- 🔧 Adjust agenda based on project needs
+- 🎨 Maintain flexibility
+- 📊 Track meeting metrics (duration, decision count, action item completion rate)
+- **🎓 Update domain criteria** as field standards evolve
 
 ---
 
@@ -564,16 +796,17 @@ During lab meeting, PI can:
 
 ### Why Elo for Research?
 
-傳統研究優先級排序問題：
-- ❌ 主觀評分容易受近因效應影響
-- ❌ 絕對評分難以校準
-- ❌ 新假說與舊假說難以比較
+Traditional research priority ranking problems:
+- ❌ Subjective scoring susceptible to recency bias
+- ❌ Absolute scores hard to calibrate
+- ❌ New vs old hypotheses hard to compare
 
-Elo 系統優勢：
-- ✅ **Relative comparison**: 成對比較更容易做出準確判斷
-- ✅ **Dynamic**: 排名隨著進展動態更新
-- ✅ **Robust**: 少數比賽就能找到合理排名
-- ✅ **Transparent**: 每次排名變化都有理由
+Elo system advantages:
+- ✅ **Relative comparison**: Pairwise comparison easier to judge accurately
+- ✅ **Dynamic**: Rankings update dynamically with progress
+- ✅ **Robust**: Few matches needed to find reasonable ranking
+- ✅ **Transparent**: Every ranking change has rationale
+- ✅ **Domain-aware**: Can incorporate field-specific criteria
 
 ### Elo Calculation Details
 
@@ -599,48 +832,59 @@ def update_elo(elo_a, elo_b, score_a):
 
 ### When to Use Draws (0.5-0.5)
 
-使用平局的情況：
-- 兩個假說同樣重要但測試不同方面
-- 團隊無法達成共識
-- 兩個假說是互補而非競爭
+Use draws when:
+- Two hypotheses equally important but test different aspects
+- Team cannot reach consensus
+- Two hypotheses are complementary rather than competitive
+- Both hypotheses fail to meet domain standards (both get draw vs penalty)
 
 ### Elo Interpretation
 
 | Elo Range | Interpretation |
 |-----------|----------------|
-| 1800+ | 頂級假說，應該優先投入資源 |
-| 1600-1800 | 優秀假說，值得認真考慮 |
-| 1400-1600 | 中等假說，可以排隊等待 |
-| 1200-1400 | 新假說或尚未證明價值的假說 |
-| < 1200 | 較弱假說，可能需要重新思考 |
+| 1800+ | Top hypotheses, should prioritize resources |
+| 1600-1800 | Excellent hypotheses, worth serious consideration |
+| 1400-1600 | Medium hypotheses, can queue |
+| 1200-1400 | New hypotheses or unproven value |
+| < 1200 | Weaker hypotheses, may need rethinking |
+
+**Domain-Aware Interpretation**:
+- **Stats theory**: Elo 1800+ should have lower bound proven or clear path to proof
+- **Policy making**: Elo 1800+ should have clear identification strategy
 
 ---
 
-## 注意事項
+## Important Notes
 
-⚠️ **Lab Meeting 不是研討會**
-- 不要深入技術討論
-- 重點是同步資訊、做出決策、分配任務
+⚠️ **Lab Meeting is not a seminar**
+- Don't dive deep into technical discussions
+- Focus on information sync, decision-making, task allocation
 
-⚠️ **Elo 是工具，不是目的**
-- Elo 幫助決策，但不能替代判斷
-- 有時候低 Elo 假說因為戰略原因也值得推進
-- Elo 反映當前共識，但共識可能錯誤
+⚠️ **Elo is a tool, not the goal**
+- Elo helps decision-making but doesn't replace judgment
+- Sometimes low-Elo hypotheses worth pursuing for strategic reasons
+- Elo reflects current consensus, but consensus can be wrong
 
-⚠️ **避免 Elo Gaming**
-- 不要為了提高 Elo 而選擇容易的對手
-- 定期重新評估高排名假說
-- 記錄比較理由以供審查
+⚠️ **Domain standards override Elo**
+- A high-Elo stats hypothesis without lower bound is still problematic
+- A high-Elo policy hypothesis without identification is still weak
+- Use domain red flags to identify critical issues regardless of ranking
 
-⚠️ **系統性問題識別**
-- 如果連續幾週沒有實質進展，需要反思
-- 如果同一個假說一直卡在某個階段，需要介入
-- 如果資源分配與 Elo 排名長期不一致，需要檢討
+⚠️ **Avoid Elo gaming**
+- Don't select easy opponents to boost Elo
+- Periodically re-evaluate high-ranking hypotheses
+- Record comparison rationale for audit trail
 
-⚠️ **會議記錄時效性**
-- 會議記錄要及時整理，最好會後 24 小時內完成
-- 行動項目要立即分發給負責人
-- HYPOTHESES.md 和 STATE.md 必須在會議結束時更新
+⚠️ **Identify systemic issues**
+- If no substantial progress for several weeks, need reflection
+- If same hypothesis stuck at same stage, need intervention
+- If resource allocation consistently misaligned with Elo, need review
+- **If domain standards consistently violated, need process fix**
+
+⚠️ **Meeting notes timeliness**
+- Meeting notes should be organized promptly, ideally within 24 hours
+- Action items should be distributed to owners immediately
+- HYPOTHESES.md and STATE.md must be updated by meeting end
 
 ---
 
@@ -649,15 +893,18 @@ def update_elo(elo_a, elo_b, score_a):
 **Before lab-meeting**:
 - 📊 `/progress` - Get quick status overview
 - 📝 Review STATE.md for context
+- **📚 Check DOMAIN.md** for current domain standards
 
 **During lab-meeting**:
 - 🔍 `/review-hypothesis H-XXX` - If detailed review needed
 - ✅ `/verify-results H-XXX` - If goal-backward check needed
+- **🎓 Reference DOMAIN.md** for standards compliance
 
 **After lab-meeting**:
 - 📈 Check updated HYPOTHESES.md Elo rankings
 - ✅ Assign action items to team
 - 🗜️ Consider `/compact` if suggested by Coordinator
+- **📝 Update domain alerts** if critical issues identified
 
 ---
 
@@ -667,19 +914,76 @@ def update_elo(elo_a, elo_b, score_a):
 # Start meeting
 /lab-meeting
 
-# System loads STATE.md, HYPOTHESES.md
-# Generates status report
+# System automatically:
+# 1. Loads STATE.md, HYPOTHESES.md
+# 2. Identifies domains of active hypotheses
+# 3. Loads relevant DOMAIN.md files (if multiple domains)
+# 4. Generates status report with domain signals
 
 # PI can interrupt for specific actions:
-"Compare H-003 and H-001"  # Triggers tournament match
-"Why is H-007 stuck?"      # Investigate blocker
+"Compare H-003 and H-001"  # Triggers domain-aware tournament match
+"Why is H-007 stuck?"      # Investigate blocker with domain context
 "Prioritize H-005"         # Manual Elo boost
+"Check domain standards for H-001"  # Review compliance
+
+# For hypothesis review (Section 3):
+# System automatically injects domain knowledge into Theorist,
+# Experimentalist, and Methodologist context
 
 # Meeting ends with:
-# - Updated HYPOTHESES.md (new Elo rankings)
-# - Updated STATE.md (decisions, next week plan)
+# - Updated HYPOTHESES.md (new Elo rankings + domain compliance status)
+# - Updated STATE.md (decisions, next week plan, domain alerts)
 # - meeting_notes/lab_meeting_[date].md
-# - Action items distributed
+# - Action items distributed with domain priorities flagged
 ```
+
+---
+
+## Domain-Specific Meeting Variants
+
+### Stats Theory Focus Meeting
+
+When most active hypotheses are stats-theory:
+
+**Agenda modifications**:
+- Section 3: Emphasize proof technique discussion, lower bound strategies
+- Section 4: Tournament criteria weight Importance (minimax optimality) higher
+- Section 5: Focus on proof gaps, assumption justification, computational feasibility
+- Goal-backward: Check against publication standards (Annals, JRSSB, JASA)
+
+**Key questions**:
+- What is the minimax rate?
+- Is the lower bound proven?
+- Are assumptions realistic?
+- Is the proof complete?
+
+### Policy Making Focus Meeting
+
+When most active hypotheses are policy-making:
+
+**Agenda modifications**:
+- Section 3: Emphasize identification strategies, causal mechanisms
+- Section 4: Tournament criteria weight Importance (policy impact) and Testability (data access) higher
+- Section 5: Focus on identification challenges, confounders, measurement validity
+- Goal-backward: Check against publication standards (APSR, AJPS, Policy Studies Journal)
+
+**Key questions**:
+- What is the causal mechanism?
+- How is the effect identified?
+- What are the threats to validity?
+- Are policy implications thoughtful?
+
+### Multi-Domain Meeting
+
+When hypotheses span multiple domains:
+
+**Agenda modifications**:
+- Section 4: Compare within-domain first, then cross-domain if needed
+- Different scoring criteria by domain
+- Maintain separate domain-specific rankings alongside overall Elo
+- Acknowledge that cross-domain comparisons are inherently harder
+
+**Best practice**:
+"H-003 (stats) vs H-007 (policy)" comparisons should focus on strategic importance to project rather than intrinsic quality, since domain standards differ.
 
 </lab_meeting_command>

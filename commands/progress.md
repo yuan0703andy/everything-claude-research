@@ -1,392 +1,392 @@
 ---
 name: progress
-description: 快速查看研究進度和狀態
+description: Quickly view research progress and status
 ---
 
 # /progress
 
-快速顯示當前研究狀態，用於 session 開始或需要快速了解進度時。
+Quickly display current research status, used at session start or when you need to quickly understand progress.
 
-## 目的
+## Purpose
 
-提供**一目了然**的進度總覽：
-- 當前在哪個階段
-- 假說排名狀況
-- 最近的關鍵決定
-- 待解決問題
-- 建議下一步
+Provide an **at-a-glance** progress overview:
+- Current phase/stage
+- Hypothesis ranking status
+- Recent key decisions
+- Open issues
+- Suggested next steps
 
-## 使用時機
+## When to Use
 
-**推薦場景**：
-- ✅ 新 session 開始時（最常用）
-- ✅ 離開一段時間後回來
-- ✅ 需要快速回顧時
-- ✅ 向 PI/collaborator 報告前
-- ✅ 不確定該做什麼時
+**Recommended scenarios**:
+- ✅ At the start of a new session (most common)
+- ✅ After being away for a while
+- ✅ When you need a quick review
+- ✅ Before reporting to PI/collaborator
+- ✅ When unsure what to do next
 
-## 流程
+## Workflow
 
-### 1. 讀取核心文件
+### 1. Read Core Files
 
-Lab Manager 讀取：
+Lab Manager reads:
 ```
-必讀：
+Must read:
 - STATE.md
 - hypotheses/HYPOTHESES.md
 - PROJECT.md
 
-選讀：
-- RESEARCH_PLAN.md（如果存在）
-- .planning/phases/latest（最近的 phase）
-- meeting_notes/latest（最近的會議）
+Optional:
+- RESEARCH_PLAN.md (if exists)
+- .planning/phases/latest (most recent phase)
+- meeting_notes/latest (most recent meeting)
 ```
 
-### 2. 生成進度報告
+### 2. Generate Progress Report
 
 ```markdown
-# 研究進度報告
+# Research Progress Report
 
-**專案**: [專案名稱]
-**生成時間**: 2024-01-27 15:30
+**Project**: [Project Name]
+**Generated**: 2024-01-27 15:30
 **Session**: #12
 
 ---
 
-## 📍 當前位置
+## 📍 Current Position
 
-**階段**: Phase 2 - 假說驗證 (40% 完成)
+**Phase**: Phase 2 - Hypothesis Validation (40% complete)
 
-**進行中**:
-- H-003 完成 Experimentalist 審查，待 Methodologist
-- H-007 草稿完成，等待審查
+**In Progress**:
+- H-003 completed Experimentalist review, awaiting Methodologist
+- H-007 draft completed, awaiting review
 
-**下一步**:
-1. 🎯 完成 H-003 Methodologist 審查（優先）
-2. 🔄 更新 Elo 排名
-3. 📝 開始 H-007 深度審查
+**Next Steps**:
+1. 🎯 Complete H-003 Methodologist review (priority)
+2. 🔄 Update Elo rankings
+3. 📝 Start H-007 deep review
 
 ---
 
-## 🏆 假說排名 (Top 5)
+## 🏆 Hypothesis Rankings (Top 5)
 
-| # | Δ | ID | Elo | 標題 | 狀態 | 進度 |
+| # | Δ | ID | Elo | Title | Status | Progress |
 |---|---|-----|-----|------|------|------|
-| 1 | - | H-003 | 1580 | 高維稀疏迴歸的 minimax rate | 🔄 審查中 | ████░░ 67% |
-| 2 | ↑1 | H-001 | 1520 | 自適應估計的收斂速度 | ✅ 已驗證 | ██████ 100% |
-| 3 | ↓1 | H-007 | 1450 | 非參數回歸的最優帶寬 | 📝 草稿 | ██░░░░ 33% |
-| 4 | - | H-005 | 1380 | 變點檢測的漸近性質 | 🔄 審查中 | ███░░░ 50% |
-| 5 | - | H-002 | 1200 | 因果效應的識別 | ⏸️ 擱置 | ░░░░░░ 0% |
+| 1 | - | H-003 | 1580 | Minimax rates for high-dimensional sparse regression | 🔄 Under Review | ████░░ 67% |
+| 2 | ↑1 | H-001 | 1520 | Convergence rates for adaptive estimation | ✅ Validated | ██████ 100% |
+| 3 | ↓1 | H-007 | 1450 | Optimal bandwidth for nonparametric regression | 📝 Draft | ██░░░░ 33% |
+| 4 | - | H-005 | 1380 | Asymptotic properties of change point detection | 🔄 Under Review | ███░░░ 50% |
+| 5 | - | H-002 | 1200 | Identification of causal effects | ⏸️ On Hold | ░░░░░░ 0% |
 
-**總計**: 7 個假說（2 已驗證，3 審查中，1 草稿，1 擱置）
+**Total**: 7 hypotheses (2 validated, 3 under review, 1 draft, 1 on hold)
 
 ---
 
-## 🎯 專案進度
+## 🎯 Project Progress
 
 ```
-Phase 1: Context        ████████████ 100% ✅ (2024-01-15 完成)
-Phase 2: Hypothesis     ████████░░░░  67% 🔄 (進行中)
-Phase 3: Analysis       ░░░░░░░░░░░░   0% 📝 (待開始)
-Phase 4: Writeup        ░░░░░░░░░░░░   0% 📝 (待開始)
+Phase 1: Context        ████████████ 100% ✅ (Completed 2024-01-15)
+Phase 2: Hypothesis     ████████░░░░  67% 🔄 (In Progress)
+Phase 3: Analysis       ░░░░░░░░░░░░   0% 📝 (Not Started)
+Phase 4: Writeup        ░░░░░░░░░░░░   0% 📝 (Not Started)
 
-整體進度: ████░░░░░░░░ 33%
+Overall Progress: ████░░░░░░░░ 33%
 ```
 
-**預計時間線**:
-- Phase 2 完成: 2024-02-15 (剩餘 2 週)
-- Phase 3 完成: 2024-03-31 (剩餘 6 週)
-- Phase 4 完成: 2024-04-30 (剩餘 9 週) 🎯 投稿目標
+**Projected Timeline**:
+- Phase 2 completion: 2024-02-15 (2 weeks remaining)
+- Phase 3 completion: 2024-03-31 (6 weeks remaining)
+- Phase 4 completion: 2024-04-30 (9 weeks remaining) 🎯 Submission target
 
 ---
 
-## ✅ 最近完成 (近 3 次 session)
+## ✅ Recently Completed (Last 3 sessions)
 
-- **Session #12** (2024-01-27): H-003 Experimentalist 審查完成
-- **Session #11** (2024-01-26): H-007 初稿完成
-- **Session #10** (2024-01-25): H-001 驗證通過（pass@3 = 95%）
-
----
-
-## 🔑 關鍵決定 (近期)
-
-- **2024-01-27** H-002 因數據不可得而擱置
-- **2024-01-26** 排除 2008 年前數據（結構性斷點）
-- **2024-01-25** 選擇 diff-in-diff 作為主要方法
+- **Session #12** (2024-01-27): H-003 Experimentalist review completed
+- **Session #11** (2024-01-26): H-007 draft completed
+- **Session #10** (2024-01-25): H-001 validation passed (pass@3 = 95%)
 
 ---
 
-## ❓ 待解決問題 (3 個)
+## 🔑 Key Decisions (Recent)
 
-**優先級 HIGH**:
-- [ ] H-003 的樣本量是否足夠？需要 power analysis
-
-**優先級 MEDIUM**:
-- [ ] 應該用 cluster SE 還是 robust SE？
-- [ ] H-007 的理論基礎需要補強
+- **2024-01-27** H-002 put on hold due to data unavailability
+- **2024-01-26** Excluded pre-2008 data (structural break)
+- **2024-01-25** Selected diff-in-diff as primary method
 
 ---
 
-## 💡 建議下一步
+## ❓ Open Issues (3)
 
-### 立即行動 (本次 session)
-1. **完成 H-003 審查** - `/review-hypothesis H-003` 完成 Methodologist 部分
-2. **更新排名** - 如果通過審查，更新 Elo 分數
-3. **Power analysis** - 解決樣本量疑慮
+**Priority HIGH**:
+- [ ] Is sample size sufficient for H-003? Need power analysis
 
-### 本週計畫
-- 完成 H-007 的深度審查
-- 開始 Top 2 假說的分析腳本準備
-- 解決 cluster vs robust SE 問題
-
-### 下週 Lab Meeting 前
-- 準備 H-003 和 H-007 的進度報告
-- 更新所有假說狀態
-- 準備下階段計畫
+**Priority MEDIUM**:
+- [ ] Should we use cluster SE or robust SE?
+- [ ] H-007 theoretical foundation needs strengthening
 
 ---
 
-## ⚠️ 風險與警示
+## 💡 Suggested Next Steps
 
-- **🔴 HIGH**: 4 月截止日期接近，Phase 2 需要加快
-- **🟡 MEDIUM**: H-003 和 H-007 理論可能重疊，需釐清
-- **🟢 LOW**: 計算資源充足
+### Immediate Actions (this session)
+1. **Complete H-003 review** - `/review-hypothesis H-003` complete Methodologist portion
+2. **Update rankings** - If review passes, update Elo scores
+3. **Power analysis** - Address sample size concerns
+
+### This Week's Plan
+- Complete deep review of H-007
+- Begin preparing analysis scripts for Top 2 hypotheses
+- Resolve cluster vs robust SE issue
+
+### Before Next Week's Lab Meeting
+- Prepare progress report for H-003 and H-007
+- Update all hypothesis statuses
+- Prepare next phase plan
 
 ---
 
-## 📊 統計
+## ⚠️ Risks & Warnings
 
-- **Session 次數**: 12
-- **工作時數**: ~18 小時
-- **假說生成數**: 7
-- **已驗證假說**: 2
-- **通過率**: 28.6% (2/7)
-- **平均 Elo**: 1425
+- **🔴 HIGH**: April deadline approaching, need to accelerate Phase 2
+- **🟡 MEDIUM**: H-003 and H-007 theory may overlap, needs clarification
+- **🟢 LOW**: Computational resources sufficient
 
 ---
 
-## 📚 Context 提醒
+## 📊 Statistics
 
-- **Domain**: domains/stats-theory/ (高維統計理論)
-- **PI 偏好**: 理論清晰 > 計算效率
-- **資源限制**: 公開數據only，單機計算足夠
-- **方法論**: Frequentist 為主，Bayesian 為輔
+- **Session count**: 12
+- **Work hours**: ~18 hours
+- **Hypotheses generated**: 7
+- **Validated hypotheses**: 2
+- **Pass rate**: 28.6% (2/7)
+- **Average Elo**: 1425
+
+---
+
+## 📚 Context Reminder
+
+- **Domain**: domains/stats-theory/ (high-dimensional statistical theory)
+- **PI preference**: Theoretical clarity > computational efficiency
+- **Resource constraints**: Public data only, single-machine computation sufficient
+- **Methodology**: Frequentist primary, Bayesian supplementary
 ```
 
-### 3. 互動式問答（可選）
+### 3. Interactive Q&A (Optional)
 
-Lab Manager 可以詢問：
+Lab Manager can ask:
 ```
-📊 進度報告已生成
+📊 Progress report generated
 
-想要查看詳情嗎？
-- [1] 查看特定假說詳情（例如：H-003）
-- [2] 查看最近的 phase 記錄
-- [3] 查看完整的假說列表
-- [4] 查看時間線和截止日期
-- [5] 直接開始工作
+Want to view details?
+- [1] View specific hypothesis details (e.g., H-003)
+- [2] View recent phase records
+- [3] View complete hypothesis list
+- [4] View timeline and deadlines
+- [5] Start working directly
 
-你的選擇：_
-```
-
-## 輸出格式
-
-### 簡潔版（默認）
-適合快速瀏覽：
-```
-# 進度快照
-
-📍 Phase 2 - 假說驗證 (67%)
-🎯 進行中：H-003 審查
-🏆 Top 假說：H-003 (1580 Elo)
-✅ 最近完成：H-001 驗證通過
-
-⏭️ 下一步：
-1. 完成 H-003 Methodologist 審查
-2. 更新 Elo 排名
-3. 開始 H-007 審查
-
-⚠️ 風險：4月截止日期接近
+Your choice: _
 ```
 
-### 詳細版
-包含所有資訊（如上面的完整報告）
+## Output Format
 
-## 使用範例
+### Concise Version (Default)
+Suitable for quick scanning:
+```
+# Progress Snapshot
 
-### 場景 1: Session 開始
+📍 Phase 2 - Hypothesis Validation (67%)
+🎯 In Progress: H-003 review
+🏆 Top Hypothesis: H-003 (1580 Elo)
+✅ Recently Completed: H-001 validation passed
+
+⏭️ Next Steps:
+1. Complete H-003 Methodologist review
+2. Update Elo rankings
+3. Start H-007 review
+
+⚠️ Risk: April deadline approaching
+```
+
+### Detailed Version
+Includes all information (as in the complete report above)
+
+## Usage Examples
+
+### Scenario 1: Session Start
 
 ```
 User: /progress
 
 Lab Manager:
-[生成進度報告]
+[Generate progress report]
 
-歡迎回來！上次是 2 天前（Session #11）
+Welcome back! Last time was 2 days ago (Session #11)
 
-現在的狀態：
-- Phase 2 進行中（67%）
-- H-003 等待你的 Methodologist 審查
-- 2 個待解決問題
+Current status:
+- Phase 2 in progress (67%)
+- H-003 awaiting your Methodologist review
+- 2 open issues
 
-建議從：
+Suggested starting point:
 /review-hypothesis H-003
 
-需要先回顧什麼嗎？
+Need to review anything first?
 ```
 
-### 場景 2: 不確定該做什麼
-
-```
-User: /progress
-
-Lab Manager:
-[生成進度報告]
-
-當前最優先的任務：
-1. 🔥 完成 H-003 審查（優先級 HIGH）
-2. 解決樣本量問題
-3. 準備下週 Lab Meeting
-
-你想從哪個開始？
-```
-
-### 場景 3: 向 PI 報告
+### Scenario 2: Unsure What to Do
 
 ```
 User: /progress
 
 Lab Manager:
-[生成詳細版報告]
+[Generate progress report]
 
-這份報告包含：
-- 7 個假說，2 個已驗證
-- Phase 2 進度 67%
-- 3 個待解決問題
-- 風險警示
+Current top priority tasks:
+1. 🔥 Complete H-003 review (priority HIGH)
+2. Resolve sample size issue
+3. Prepare for next week's Lab Meeting
 
-你可以：
-- 導出為 PDF 報告
-- 複製到會議準備文件
-- 生成 slides 大綱
+Which one would you like to start with?
 ```
 
-## 進階功能
+### Scenario 3: Reporting to PI
 
-### 篩選選項
+```
+User: /progress
+
+Lab Manager:
+[Generate detailed report]
+
+This report includes:
+- 7 hypotheses, 2 validated
+- Phase 2 progress 67%
+- 3 open issues
+- Risk warnings
+
+You can:
+- Export as PDF report
+- Copy to meeting prep document
+- Generate slides outline
+```
+
+## Advanced Features
+
+### Filter Options
 
 ```bash
-# 只看高優先級假說
+# Only show high priority hypotheses
 /progress --priority high
 
-# 只看特定狀態
-/progress --status "審查中"
+# Only show specific status
+/progress --status "Under Review"
 
-# 只看風險和問題
+# Only show risks and issues
 /progress --warnings
 
-# 只看下一步建議
+# Only show next step suggestions
 /progress --next-steps
 ```
 
-### 對比功能
+### Comparison Feature
 
 ```bash
-# 與上週比較
+# Compare with last week
 /progress --compare last-week
 
-# 與目標比較
+# Compare with target
 /progress --compare target
 
-輸出：
-進度變化：
-- 假說數：5 → 7 (+2)
-- 已驗證：1 → 2 (+1)
-- 平均 Elo：1350 → 1425 (+75)
+Output:
+Progress changes:
+- Hypotheses: 5 → 7 (+2)
+- Validated: 1 → 2 (+1)
+- Average Elo: 1350 → 1425 (+75)
 ```
 
-### 導出功能
+### Export Feature
 
 ```bash
-# 導出為 Markdown
+# Export as Markdown
 /progress --export md
 
-# 導出為簡報大綱
+# Export as slides outline
 /progress --export slides
 
-# 產生週報
+# Generate weekly report
 /progress --export weekly-report
 ```
 
-## 與其他 Commands 的關係
+## Relationship with Other Commands
 
 ```
-[Session 開始]
+[Session Start]
         ↓
-/progress           ← 查看當前狀態
+/progress           ← View current status
         ↓
-[選擇要做的工作]
+[Choose work to do]
         ↓
-[執行 commands：brainstorm, review, execute, verify]
+[Execute commands: brainstorm, review, execute, verify]
         ↓
-[Session 結束前]
+[Before Session End]
         ↓
-/update-state      ← 更新狀態
+/update-state      ← Update status
         ↓
-[下次 Session]
+[Next Session]
         ↓
-/progress          ← 循環
+/progress          ← Loop
 ```
 
-## 資料來源優先級
+## Data Source Priority
 
-如果文件衝突，優先級為：
-1. **STATE.md** - 最高優先級（最新的單一真相來源）
-2. **hypotheses/HYPOTHESES.md** - 假說排名
-3. **.planning/phases/** - Phase 詳情
-4. **RESEARCH_PLAN.md** - 計畫和時間線
-5. **meeting_notes/** - 會議決定
+If files conflict, priority is:
+1. **STATE.md** - Highest priority (most recent single source of truth)
+2. **hypotheses/HYPOTHESES.md** - Hypothesis rankings
+3. **.planning/phases/** - Phase details
+4. **RESEARCH_PLAN.md** - Plans and timeline
+5. **meeting_notes/** - Meeting decisions
 
-## 自動提醒
+## Automatic Reminders
 
-Lab Manager 會在 `/progress` 時檢查並提醒：
+Lab Manager will check and remind during `/progress`:
 
-- ⏰ 截止日期接近（<2 週）
-- 📉 進度落後於計畫
-- ⚠️ 有 HIGH 優先級問題未解決
-- 📅 Lab Meeting 時間到了
-- 🎯 里程碑達成
+- ⏰ Deadlines approaching (<2 weeks)
+- 📉 Progress behind schedule
+- ⚠️ HIGH priority issues unresolved
+- 📅 Lab Meeting time
+- 🎯 Milestones achieved
 
-## 最佳實踐
+## Best Practices
 
-### 每次 Session 開始
+### Every Session Start
 ```
-1. /progress          # 快速了解狀態
-2. [讀取建議的下一步]
-3. [選擇任務並開始]
-```
-
-### Session 中途迷失
-```
-1. /progress --next-steps   # 看看應該做什麼
-2. [回到正軌]
+1. /progress          # Quick status check
+2. [Read suggested next steps]
+3. [Choose task and begin]
 ```
 
-### 需要報告時
+### Lost Mid-Session
+```
+1. /progress --next-steps   # See what should be done
+2. [Get back on track]
+```
+
+### When Reporting Needed
 ```
 1. /progress --export weekly-report
-2. [生成格式化的進度報告]
-3. [分享給團隊/PI]
+2. [Generate formatted progress report]
+3. [Share with team/PI]
 ```
 
-## 注意事項
+## Notes
 
-- `/progress` **只讀取**，不修改任何文件
-- 資訊來自 STATE.md 和相關文件
-- 如果 STATE.md 過時，先運行 `/update-state`
-- 建議每次 session 開始都運行一次
+- `/progress` is **read-only**, does not modify any files
+- Information comes from STATE.md and related files
+- If STATE.md is outdated, run `/update-state` first
+- Recommended to run once at the start of each session
 
-## 輸出示例（簡潔版）
+## Output Example (Concise Version)
 
 ```
 ╔══════════════════════════════════════════╗
