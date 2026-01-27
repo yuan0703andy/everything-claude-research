@@ -174,7 +174,7 @@ task methodologist "Methodological review of H-001-B-refined"
                     └─────────────┘
 ```
 
-#### Theorist Enhanced (理論博後 - 強化版) 🆕
+#### Theorist Enhanced 🆕
 - **Standard Mode**: Generate single hypotheses with literature review
 - **Multi Mode**: Generate 3-5 competing hypotheses from different angles
 - **Debate Mode**: Simulate expert panel (3-5 turns) to refine hypotheses
@@ -182,26 +182,26 @@ task methodologist "Methodological review of H-001-B-refined"
 - Uses **iterative-retrieval** for systematic literature search
 - Model: Opus
 
-#### Verifier Enhanced (驗證專家 - 強化版) 🆕
+#### Verifier Enhanced 🆕
 - **Goal-Backward Verification**: Ensures research achieves real goals
 - **Novelty Verification**: Deep comparison against literature corpus (5-point scale)
 - **Observation Matching**: Check if hypothesis explains known results
 - **Assumption Decomposition**: Systematically validate all assumptions
 - Model: Opus
 
-#### Experimentalist (實驗博後)
+#### Experimentalist
 - Evaluates hypothesis feasibility
 - Designs verification strategies
 - Runs **verification-loop** (Build → Functionality → Quality)
 - Model: Opus
 
-#### Methodologist (方法論專家)
+#### Methodologist
 - Reviews methodology and rigor
 - Runs **eval-harness** for formal evaluation
 - Calculates pass@k metrics
 - Model: Opus
 
-#### Lab Manager (實驗室管理員)
+#### Lab Manager
 - Tracks project progress
 - Maintains Elo ranking system
 - Suggests **strategic-compact** timing

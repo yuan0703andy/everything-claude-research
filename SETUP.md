@@ -269,10 +269,10 @@ Fill in your research question:
 ```markdown
 # My First Research Project
 
-## 研究問題
-探索高維統計中的理論界限...
+## Research Question
+Exploring theoretical bounds in high-dimensional statistics...
 
-## 研究目標
+## Research Objectives
 1. ...
 2. ...
 ```
@@ -283,10 +283,10 @@ Specify which domain to use:
 
 ```markdown
 ## Domain
-使用領域知識：domains/stats-theory/
+Using domain knowledge: domains/stats-theory/
 
-## 專案資訊
-參考本目錄下的 PROJECT.md
+## Project Information
+Refer to PROJECT.md in this directory
 ```
 
 ### 5. Start Research
@@ -376,13 +376,13 @@ Edit `DOMAIN.md`:
 ```markdown
 # My Domain Knowledge
 
-## 領域概述
+## Domain Overview
 ...
 
-## 核心理論框架
+## Core Theoretical Framework
 ...
 
-## 方法論傳統
+## Methodological Traditions
 ...
 ```
 
@@ -416,10 +416,10 @@ description: What it does
 
 # /my-command
 
-## 目的
+## Purpose
 ...
 
-## 流程
+## Workflow
 ...
 ```
 
@@ -457,7 +457,7 @@ Make sure your project's `CLAUDE.md` correctly points to the domain:
 
 ```markdown
 ## Domain
-使用領域知識：domains/stats-theory/  # ← Check this path
+Using domain knowledge: domains/stats-theory/  # ← Check this path
 ```
 
 ---

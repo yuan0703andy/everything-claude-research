@@ -107,10 +107,10 @@ model: opus
 
 # Agent Name
 
-## 身份
+## Identity
 ...
 
-## 核心能力
+## Core Capabilities
 ...
 ```
 
@@ -124,13 +124,13 @@ description: Brief description
 
 # /command-name
 
-## 目的
+## Purpose
 ...
 
-## 流程
+## Workflow
 ...
 
-## 輸出
+## Output
 ...
 ```
 
@@ -139,16 +139,16 @@ description: Brief description
 ```markdown
 # [Domain] Domain Knowledge
 
-## 領域概述
+## Domain Overview
 ...
 
-## 核心理論框架
+## Core Theoretical Frameworks
 ...
 
-## 方法論傳統
+## Methodological Traditions
 ...
 
-## 品質標準
+## Quality Standards
 ...
 ```
 
@@ -229,25 +229,25 @@ domains/
 ```markdown
 # [Domain] Domain Knowledge
 
-## 領域概述
+## Domain Overview
 [What this field studies]
 
-## 核心理論框架
+## Core Theoretical Frameworks
 [Major theoretical traditions]
 
-## 方法論傳統
+## Methodological Traditions
 [Common methodological approaches]
 
-## 品質標準
+## Quality Standards
 [What makes good research in this field]
 
-## 發表生態
+## Publication Ecosystem
 [Publication venues, review process]
 
-## 常見陷阱
+## Common Pitfalls
 [Common mistakes or pitfalls]
 
-## 專業術語
+## Terminology
 [Key domain-specific terms]
 ```
 

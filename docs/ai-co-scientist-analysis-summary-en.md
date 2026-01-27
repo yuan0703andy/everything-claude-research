@@ -1,576 +1,522 @@
-# AI Co-Scientist Analysis & Implementation Summary
+# AI Co-Scientist Quick Start Guide
 
-## Executive Summary
+## What You Can Do
 
-After analyzing Google's AI Co-Scientist paper and comparing it with your everything-claude-research system, we've successfully enhanced your team to execute all three core tasks described in the paper. Your system now has **90%+ functional equivalence** with additional unique advantages.
+This system helps you generate, test, and refine research hypotheses using three simple commands:
 
----
+- **/hypothesize** - Generate multiple research hypotheses automatically
+- **/stress-test** - Verify hypothesis quality (novelty, assumptions, predictions)
+- **/evolve** - Refine hypotheses based on identified issues
 
-## 1. Core Task Mapping
-
-### Task 1: Generation Agent
-
-**Google's Requirements**:
-- Generate hypotheses from literature and research goals
-- Produce innovative hypotheses with causal mechanisms
-- Role: Domain expert scientist formulating detailed, specific hypotheses with biological mechanisms
-- Prompt requirements:
-  - "Propose a novel hypothesis that hasn't been formally published for the given research goal"
-  - "Your hypothesis must include clear molecular mechanisms (e.g., how protein A interacts with protein B to affect pathway C)"
-  - "Provide literature evidence and explain potential scientific impact"
-
-**Your Team's Capability**: ✅ **90% Ready**
-
-**Mapping**: **Theorist** (Senior Postdoc - Theory)
-
-| Google Feature | Your Implementation | Status |
-|---------------|---------------------|--------|
-| Literature-based generation | ✅ iterative-retrieval pattern | 🟢 Equivalent |
-| Clear causal mechanisms | ✅ mechanism field in output | 🟢 Equivalent |
-| Domain expert identity | ✅ Dynamic DOMAIN.md injection | 🟢 **Stronger** |
-| Multi-hypothesis generation | ✅ NEW: multi-mode | 🟢 Equivalent |
-| Scientific debate generation | ✅ NEW: debate-mode | 🟢 Equivalent |
-| Literature evidence support | ✅ key_references field | 🟢 Equivalent |
-
-**Enhancement Made**: Created `theorist-enhanced.md` with three new modes:
-1. **Multi-Hypothesis Generation**: Generate 3-5 competing hypotheses at once
-2. **Scientific Debate Mode**: Simulate expert panel discussion (3-5 turns)
-3. **Evolution Mode**: Iteratively refine based on critique
+No technical knowledge required. Just describe your research goal and let the system guide you.
 
 ---
 
-### Task 2: Reflection/Analysis Agent
+## The Three Core Workflows
 
-**Google's Requirements**:
-- "Nitpick" generated hypotheses
-- Check logical consistency, novelty, conflicts with known facts
-- Role: Extremely rigorous reviewer finding holes in hypotheses
-- Prompt requirements:
-  - "List all unverified assumptions in this hypothesis"
-  - "Check if this hypothesis conflicts with latest literature data"
-  - "Extract key causal relationships and assess if they're genuinely 'original' vs simple repetition of existing knowledge"
+### 1. /hypothesize: Generate Research Hypotheses
 
-**Your Team's Capability**: ✅ **85% Ready**
+**When to use**: You have a research question but need concrete hypotheses to test.
 
-**Mapping**: **Verifier** + **Methodologist** (combined)
+**What it does**:
+- Generates 3-5 distinct hypotheses from different theoretical angles
+- Compares them automatically on novelty and feasibility
+- Identifies the top candidate to pursue
+- Optional: Runs expert debate to refine the best hypothesis
 
-| Google Feature | Your Implementation | Status |
-|---------------|---------------------|--------|
-| Logical consistency check | ✅ Verifier: logic chain verification | 🟢 Equivalent |
-| Deep novelty checking | ✅ NEW: novelty-mode | 🟢 Equivalent |
-| Literature conflict detection | ✅ Methodologist review | 🟢 Equivalent |
-| Observation-hypothesis matching | ✅ NEW: observation-mode | 🟢 Equivalent |
-| Assumption decomposition | ✅ NEW: assumption-mode | 🟢 Equivalent |
-| List unverified assumptions | ✅ assumptions field | 🟢 Equivalent |
+**Example**:
+```bash
+/hypothesize "Explain why sparse regression can achieve better rates with adaptive thresholding"
 
-**Enhancement Made**: Created `verifier-enhanced.md` with three new verification types:
-1. **Novelty Verification**: Deep comparison against literature corpus
-2. **Observation-Hypothesis Matching**: Check if hypothesis explains known results (scoring: missing piece / already explained / disproved)
-3. **Assumption Decomposition**: Systematically identify and validate ALL assumptions
-
----
-
-### Task 3: Debate/Ranking Agent
-
-**Google's Requirements**:
-- Compare multiple candidate hypotheses
-- Use "simulated debate" to decide which is most worthy of experimentation
-- Role: High-level scientific debate committee selecting most promising research proposal
-- Prompt requirements:
-  - "Compare hypothesis A vs B. Which is more convincing in current biological context?"
-  - "Considering experimental feasibility and potential impact, score these hypotheses (1-10)"
-  - "Write summary explaining why hypothesis A has more 'scientific discovery' value than B"
-
-**Your Team's Capability**: ✅ **70% Ready**
-
-**Mapping**: **Coordinator** (Lab Manager) + **Theorist-enhanced** (debate mode)
-
-| Google Feature | Your Implementation | Status |
-|---------------|---------------------|--------|
-| Hypothesis ranking | ✅ Elo ranking system | 🟢 Equivalent |
-| Compare hypothesis merits | ✅ Elo tournament | 🟢 Equivalent |
-| Simulate expert debate | ✅ NEW: debate in theorist | 🟢 Equivalent |
-| Consider feasibility | ✅ Experimentalist assessment | 🟢 Equivalent |
-| Scoring and summary | ✅ Elo + reviews | 🟢 Equivalent |
-| Record debate process | ⚠️ Basic: meeting notes | 🟡 Usable |
-
-**Current Status**: Functional but can be enhanced
-- ✅ Elo ranking works well for systematic comparison
-- ✅ Debate mode in theorist-enhanced provides multi-turn discussion
-- 🟡 Debate process recording is basic (text-based, not graphical)
-
----
-
-## 2. System Architecture Comparison
-
-### Google AI Co-Scientist Architecture
-
-```
-┌─────────────────┐
-│ Generation      │ → Generate hypotheses
-│ Agent           │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Reflection      │ → Critique & verify novelty
-│ Agent           │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Ranking         │ → Tournament & debate
-│ Agent           │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Evolution       │ → Refine based on critique
-│ Agent           │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Meta-review     │ → Cross-hypothesis analysis
-│ Agent           │
-└─────────────────┘
+# Output: 3 hypotheses
+# - H-001-A: Information-theoretic approach (recommended)
+# - H-001-B: Computational approach
+# - H-001-C: Robust statistics approach
 ```
 
-### Your Everything-Claude-Research Architecture
+**Decision Guide**: When should I generate hypotheses?
 
 ```
-┌─────────────────────────────────────┐
-│ Coordinator (Lab Manager)           │ → Progress tracking, Elo ranking
-│ - Sonnet model                      │   Meeting management
-│ - Strategic context compaction      │
-└──────────────┬──────────────────────┘
-               │
-        ┌──────┴──────┬─────────┬──────────────┬──────────────┐
-        │             │         │              │              │
-        ▼             ▼         ▼              ▼              ▼
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│Theorist  │   │Experimen-│   │Methodolo-│   │Verifier  │   │Synthesi- │
-│(Enhanced)│   │talist    │   │gist      │   │(Enhanced)│   │zer       │
-│- Opus    │   │- Opus    │   │- Opus    │   │- Opus    │   │          │
-│- Multi   │   │- Design  │   │- Review  │   │- Novelty │   │- Meta    │
-│- Debate  │   │- Verify  │   │- Quality │   │- Observe │   │  review  │
-│- Evolve  │   │  Loop    │   │- Eval    │   │- Assume  │   │          │
-└──────────┘   └──────────┘   └──────────┘   └──────────┘   └──────────┘
-```
-
-**Key Differences**:
-
-1. **Your Advantages** 🌟:
-   - ✅ **Domain Dynamic Adaptation**: DOMAIN.md injection for cross-domain generality
-   - ✅ **Goal-Backward Verification**: Ensures research achieves real goals
-   - ✅ **Complete Research Pipeline**: Hypothesis → Experiment → Analysis → Publication
-   - ✅ **Multi-layer Quality Assurance**: Verification-loop → Eval-harness → Goal-backward
-
-2. **Google's Advantages**:
-   - 🔬 Optimized specifically for biomedical hypothesis generation
-   - 📊 Extensive validation with drug repurposing wet-lab experiments
-
----
-
-## 3. Core Prompt Engineering Insights from Paper
-
-### Key Prompt Strategies Used by Google
-
-1. **Structured Output Requirements**:
-   - Force AI to output in specific JSON or Markdown format
-   - Enable downstream system parsing
-
-2. **Chain-of-Thought (CoT)**:
-   - Include "Let's think step by step" in prompts
-   - Require AI to analyze evidence first, then draw conclusions
-   - Reduces AI hallucinations
-
-3. **Multi-turn Evolution**:
-   - Feed Reflection agent's critiques back to Generation agent
-   - Iterative hypothesis refinement
-
-4. **Role-Playing with Domain Expertise**:
-   - "You are an expert in [domain]..."
-   - "Your goal is to formulate detailed, specific hypotheses with [mechanism type]"
-
-5. **Debate Simulation**:
-   - Simulate multiple expert roles (Expert A, B, C)
-   - 3-5 turn structured discussion
-   - Termination condition: Write "HYPOTHESIS" + final version
-
-### Your Implementation of These Strategies
-
-All five strategies have been implemented in your enhanced system:
-
-```yaml
-# Example: Multi-turn debate prompt structure
-You are a panel of 3 experts debating hypotheses for: {goal}
-
-Roles:
-- Expert A (Theory): Proposes hypotheses
-- Expert B (Methods): Critiques feasibility
-- Expert C (Domain): Checks novelty
-
-Debate Format:
-Turn 1: Expert A proposes 3 hypotheses
-Turn 2-4: Critical back-and-forth
-Turn 5: Write "HYPOTHESIS" + final version
-
-Domain Standards: {from DOMAIN.md}
-```
-
----
-
-## 4. Detailed Capability Assessment
-
-### 4.1 Hypothesis Generation
-
-| Capability | Google | Your System | Gap Analysis |
-|-----------|--------|-------------|--------------|
-| Single hypothesis | ✅ | ✅ Theorist | None |
-| Multiple hypotheses (3-5) | ✅ | ✅ NEW: multi-mode | None |
-| Literature-based | ✅ | ✅ iterative-retrieval | None |
-| Debate-refined | ✅ | ✅ NEW: debate-mode | None |
-| Domain-specific | ✅ | ✅ **DOMAIN.md** | **Yours stronger** |
-| Evolution/refinement | ✅ | ✅ NEW: evolve-mode | None |
-
-**Assessment**: ✅ **Complete parity + domain advantage**
-
-### 4.2 Hypothesis Verification
-
-| Capability | Google | Your System | Gap Analysis |
-|-----------|--------|-------------|--------------|
-| Novelty checking | ✅ Deep | ✅ NEW: novelty-mode | None |
-| Observation matching | ✅ | ✅ NEW: observation-mode | None |
-| Assumption decomposition | ✅ | ✅ NEW: assumption-mode | None |
-| Logic verification | ✅ | ✅ Verifier logic chain | None |
-| Domain standard check | ⚠️ | ✅ **Domain-aware** | **Yours stronger** |
-| Goal-backward check | ❌ | ✅ **Unique feature** | **Yours stronger** |
-
-**Assessment**: ✅ **Complete parity + goal verification advantage**
-
-### 4.3 Ranking & Selection
-
-| Capability | Google | Your System | Gap Analysis |
-|-----------|--------|-------------|--------------|
-| Tournament ranking | ✅ | ✅ Elo system | None |
-| Pairwise debate | ✅ | ✅ debate-mode | None |
-| Feasibility weighting | ✅ | ✅ Experimentalist | None |
-| Record debate transcript | ✅ Full | 🟡 Basic | Minor gap |
-| Auto-tournament | ✅ | 🟡 Manual trigger | Minor gap |
-
-**Assessment**: ✅ **90% parity, minor UX gap**
-
----
-
-## 5. Implementation Status
-
-### ✅ Completed (Phase 1)
-
-1. **theorist-enhanced-en.md**:
-   - Multi-hypothesis generation mode
-   - Scientific debate mode (3-5 turns)
-   - Evolution mode (critique-driven refinement)
-
-2. **verifier-enhanced-en.md**:
-   - Novelty verification (literature comparison)
-   - Observation-hypothesis matching (missing piece scoring)
-   - Assumption decomposition (systematic validation)
-
-3. **Implementation guide**:
-   - Complete usage examples
-   - Workflow recommendations
-   - Command references
-
-### 🟡 Recommended Next (Phase 2)
-
-4. **Synthesizer enhancement**:
-   - Position as Meta-review agent
-   - Add cross-hypothesis pattern recognition
-   - Research direction overview generation
-
-5. **Coordinator enhancement** (optional):
-   - Add tournament_with_debate mode
-   - Automatic pairwise comparison trigger
-
-### ⚪ Optional (Phase 3)
-
-6. **Standalone hypothesis-evolver agent**:
-   - Extract evolution logic from theorist-enhanced
-   - Dedicated iteration specialist
-
-7. **Debate-moderator agent**:
-   - Extract debate logic from theorist-enhanced
-   - Dedicated debate facilitator
-
----
-
-## 6. Usage Recommendations
-
-### When to Use Each Mode
-
-```
-┌─────────────────────────────────────────┐
-│ Research Phase Decision Tree            │
-└─────────────────────────────────────────┘
-
 START
- │
- ├─ Exploring new directions?
- │   └─ YES → Multi-hypothesis generation
- │
- ├─ High-stakes hypothesis (grant/paper)?
- │   └─ YES → Scientific debate mode
- │
- ├─ Received critique from reviewer?
- │   └─ YES → Evolution mode
- │
- ├─ Literature-dense field?
- │   └─ YES → Novelty check mode
- │
- ├─ Need to explain observations?
- │   └─ YES → Observation matching mode
- │
- └─ Standard research → Use original agents
+  |
+  +-- Starting a new research project?
+  |    └─> Use /hypothesize to explore possibilities
+  |
+  +-- Have a vague research idea?
+  |    └─> Use /hypothesize to make it concrete
+  |
+  +-- Need alternative approaches?
+  |    └─> Use /hypothesize to generate 3-5 options
+  |
+  +-- High-stakes project (grant, major paper)?
+       └─> Use /hypothesize --debate for thorough development
 ```
 
-### Typical Research Workflow
+---
 
-**Week 1-2: Exploration Phase**
+### 2. /stress-test: Verify Hypothesis Quality
+
+**When to use**: You have a hypothesis and want to know if it's ready for execution.
+
+**What it does**:
+- Checks if hypothesis is truly novel vs existing literature
+- Verifies that all assumptions are realistic and stated explicitly
+- Tests whether hypothesis explains/predicts observed phenomena
+- Returns verdict: PASS / GAPS / BLOCKED
+
+**Example**:
 ```bash
-# Generate diverse candidates
-task theorist-enhanced --mode=multi "Goal: [research question]"
-# Output: 3-5 hypotheses with different angles
+/stress-test H-001-A
 
-# Screen for novelty
-task verifier-enhanced --mode=novelty "Check H-001-A"
-task verifier-enhanced --mode=novelty "Check H-001-B"
-# Select most novel ones
+# Output:
+# Confidence: 7.2/10 - GAPS IDENTIFIED
+# - Novelty: 8.5/10 (Strong)
+# - Assumptions: 7.0/10 (Some unstated assumptions)
+# - Observations: 6.0/10 (Partial support)
+#
+# Recommendation: Fix gaps with /evolve H-001-A
 ```
 
-**Week 3-4: Refinement Phase**
+**Decision Guide**: When should I stress-test?
+
+```
+Generated hypothesis?
+  |
+  ├─> ALWAYS run /stress-test before execution
+  |
+Received hypothesis from colleague?
+  |
+  ├─> Run /stress-test to identify issues
+  |
+Ready to write paper?
+  |
+  └─> Run /stress-test to ensure publication-ready
+```
+
+**Verdict Meanings**:
+
+| Verdict | Score | Meaning | Next Step |
+|---------|-------|---------|-----------|
+| **PASS** | 9.0+ | Ready for execution | Run experiments or write paper |
+| **GAPS** | 6.0-8.9 | Fixable issues identified | Use /evolve to address gaps |
+| **BLOCKED** | <6.0 | Critical flaws found | Major revision or start over |
+
+---
+
+### 3. /evolve: Refine Your Hypothesis
+
+**When to use**: Stress-test found gaps, or you received critique from reviewers.
+
+**What it does**:
+- Reads all critique points from stress-test or reviews
+- Generates improved version (v2) that addresses each issue
+- Preserves your core insight while fixing problems
+- Creates audit trail showing what changed and why
+
+**Example**:
 ```bash
-# Refine top candidate through debate
-task theorist-enhanced --mode=debate "Refine H-001-B"
-# Output: H-001-B-refined
+/evolve H-001-A
 
-# Check if it explains known observations
-task verifier-enhanced --mode=observation "
-Hypothesis: H-001-B-refined
-Observations: [list known results]
-"
+# Output: H-001-A-v2
+# - Fixed: Incoherence assumption made explicit
+# - Fixed: Added missing proof step for lower bound
+# - Preserved: Core adaptive thresholding mechanism
+#
+# Predicted re-test score: 9.2/10 (PASS likely)
 ```
 
-**Week 5-6: Validation Phase**
+**Decision Guide**: When should I evolve?
+
+```
+/stress-test returned GAPS?
+  |
+  ├─> Use /evolve to fix automatically
+  |
+Received reviewer feedback?
+  |
+  ├─> Use /evolve --review feedback.md
+  |
+Failed /stress-test multiple times?
+  |
+  └─> Consider starting fresh with /hypothesize
+```
+
+---
+
+## Complete Research Workflows
+
+### Workflow A: Exploring New Directions
+
+**Goal**: Generate and compare multiple hypotheses
+
+```
+1. /hypothesize "Your research question"
+   Output: H-001-A, H-001-B, H-001-C
+
+2. /stress-test H-001-A
+   Output: Score 7.5/10 - GAPS
+
+3. /evolve H-001-A
+   Output: H-001-A-v2
+
+4. /stress-test H-001-A-v2
+   Output: Score 9.3/10 - PASS
+
+5. Execute experiments or write paper
+```
+
+**Time**: 1-2 weeks typical
+
+---
+
+### Workflow B: High-Stakes Hypothesis Development
+
+**Goal**: Develop one thoroughly vetted hypothesis
+
+```
+1. /hypothesize "Your research question" --debate
+   Output: H-002-A (refined through expert debate)
+
+2. /stress-test H-002-A
+   Output: Score 8.0/10 - GAPS
+
+3. /evolve H-002-A
+   Output: H-002-A-v2
+
+4. /stress-test H-002-A-v2
+   Output: Score 9.5/10 - PASS
+
+5. Execute with high confidence
+```
+
+**Time**: 2-3 weeks typical
+
+---
+
+### Workflow C: Responding to Reviewer Critique
+
+**Goal**: Address reviewer comments systematically
+
+```
+1. You have: H-003 + reviewer_feedback.md
+
+2. /evolve H-003 --review reviewer_feedback.md
+   Output: H-003-v2
+
+3. /stress-test H-003-v2
+   Output: Verify all issues addressed
+
+4. Resubmit or iterate if needed
+```
+
+**Time**: 3-5 days typical
+
+---
+
+## Decision Tree: Which Command Do I Need?
+
+```
+START: What do you want to do?
+  |
+  +-- I have a research question but no hypothesis
+  |    └─> /hypothesize
+  |
+  +-- I have a hypothesis and want to check quality
+  |    └─> /stress-test
+  |
+  +-- My hypothesis has known issues
+  |    └─> /evolve
+  |
+  +-- I want to compare multiple hypotheses
+  |    └─> /hypothesize (generates 3-5 options automatically)
+  |
+  +-- I need to respond to reviewer feedback
+  |    └─> /evolve --review feedback.md
+  |
+  +-- I'm not sure if my hypothesis is novel
+       └─> /stress-test (includes novelty check)
+```
+
+---
+
+## Real Examples by Research Type
+
+### Statistical Theory Research
+
 ```bash
-# Decompose and validate assumptions
-task verifier-enhanced --mode=assumption "Decompose H-001-B-refined"
+# Generate hypothesis about minimax rates
+/hypothesize "Derive optimal rates for sparse PCA under heavy-tailed noise"
 
-# Feasibility assessment
-task experimentalist "Assess H-001-B-refined"
+# Output: 3 hypotheses
+# - H-001-A: Information-theoretic (Fano's method)
+# - H-001-B: Computational (polynomial-time)
+# - H-001-C: Robust approach (contamination model)
 
-# Methodological review
-task methodologist "Review H-001-B-refined"
+# Test top candidate
+/stress-test H-001-A
+
+# Gap found: Missing lower bound proof
+/evolve H-001-A
+
+# Re-test improved version
+/stress-test H-001-A-v2
+# Result: PASS - Ready to write paper
 ```
 
-**Week 7+: Iteration Phase**
+**Common gaps in stats theory**: Missing lower bounds, unstated assumptions, incomplete proofs
+
+---
+
+### Policy Research
+
 ```bash
-# If critique received → evolve
-task theorist-enhanced --mode=evolve "
-Original: H-001-B-refined
-Critique: [reviewer feedback]
-Output: H-001-B-v2
-"
+# Generate hypothesis about policy adoption
+/hypothesize "Explain why some states adopt climate policies and others don't" --debate
+
+# Output: H-002-A (debate-refined)
+# Mechanism: Political polarization + policy diffusion
+
+# Test hypothesis
+/stress-test H-002-A --observations data/state_policies.csv
+
+# Gap found: Identification strategy unclear
+/evolve H-002-A
+
+# Re-test
+/stress-test H-002-A-v2
+# Result: PASS - Clear RDD identification strategy
+```
+
+**Common gaps in policy**: Weak identification, confounders, selection bias
+
+---
+
+### Biomedical Research
+
+```bash
+# Generate drug target hypotheses
+/hypothesize "Identify novel drug targets for AML treatment"
+
+# Output: 3 mechanisms
+# - H-003-A: CXCR1/2 inhibitor
+# - H-003-B: MEK pathway
+# - H-003-C: Epigenetic modifiers
+
+# Test novelty (high priority in biomedical)
+/stress-test H-003-A
+
+# Gap found: Mechanism not fully supported by observations
+/evolve H-003-A
+
+# Re-test
+/stress-test H-003-A-v2
+# Result: PASS - Ready for wet lab validation
+```
+
+**Common gaps in biomedical**: Weak mechanistic support, pathway plausibility, clinical relevance
+
+---
+
+## Command Options Summary
+
+### /hypothesize Options
+
+| Flag | Effect | When to Use |
+|------|--------|-------------|
+| `--debate` | Expert panel refinement | High-stakes projects |
+| `--generate-only` | Skip comparison | Want maximum diversity |
+| `--count=N` | Generate N hypotheses | Need more/fewer options |
+
+### /stress-test Options
+
+| Flag | Effect | When to Use |
+|------|--------|-------------|
+| `--quick` | Skip observation matching | No data yet |
+| `--observations=<file>` | Provide data file | Have experimental results |
+| `--strict` | Apply stricter standards | Top-tier journal submission |
+
+### /evolve Options
+
+| Flag | Effect | When to Use |
+|------|--------|-------------|
+| `--review=<file>` | Use specific review | Have reviewer comments |
+| `--conservative` | Minimal changes | Preserve original closely |
+| `--aggressive` | Allow major changes | Fundamental issues exist |
+
+---
+
+## Troubleshooting
+
+### "Hypotheses are too similar"
+
+**Problem**: /hypothesize generates very similar hypotheses
+
+**Solutions**:
+1. Make research goal more specific
+2. Check that DOMAIN.md includes diverse theoretical frameworks
+3. Use --count=5 to get more options
+
+---
+
+### "Stress-test returns BLOCKED"
+
+**Problem**: Score below 6.0, critical flaws found
+
+**Solutions**:
+1. Read the stress-test report carefully - is the flaw fixable?
+2. Try /evolve to see if it can be salvaged
+3. If evolution fails, start fresh with /hypothesize using lessons learned
+
+---
+
+### "Evolution doesn't fix my issue"
+
+**Problem**: /evolve output still has the same problem
+
+**Solutions**:
+1. Use --focus flag to target specific issue
+2. Provide --review with detailed description of what needs fixing
+3. After 3 evolution attempts, consider whether hypothesis is viable
+
+---
+
+### "I want more control"
+
+**Problem**: Commands are too automated
+
+**Solutions**:
+1. This is intentional - automation ensures thought continuity
+2. For manual control, edit hypothesis files directly
+3. After manual edits, run /stress-test to verify
+
+---
+
+## Best Practices
+
+### 1. Always stress-test before execution
+Don't skip verification. Issues found early save time later.
+
+### 2. Expect iteration
+First hypothesis rarely passes stress-test. 2-3 iterations is normal.
+
+### 3. Use debate mode for important work
+High-stakes projects (grants, major papers) benefit from --debate flag.
+
+### 4. Keep original versions
+System preserves H-001 when creating H-001-v2. Review evolution history.
+
+### 5. Trust the verdict
+PASS means ready. GAPS means fixable. BLOCKED means reconsider.
+
+### 6. Domain matters
+Update DOMAIN.md with field-specific standards. System adapts automatically.
+
+---
+
+## What's Happening Behind the Scenes?
+
+You don't need to know this to use the system, but for the curious:
+
+### /hypothesize
+- Spawns theorist-enhanced agent
+- Loads DOMAIN.md for field standards
+- Generates 3-5 candidates with different mechanisms
+- Compares using weighted scoring (novelty 25%, importance 25%, testability 20%, etc.)
+- Optional: Runs 5-turn expert debate simulation
+
+### /stress-test
+- Spawns verifier-enhanced agent
+- Performs three checks in one unified workflow:
+  1. Novelty (vs literature)
+  2. Observation matching (does it explain data?)
+  3. Assumption validation (are they realistic?)
+- Cross-checks consistency between dimensions
+- Returns holistic score and actionable gaps
+
+### /evolve
+- Spawns theorist-enhanced agent
+- Reads original hypothesis + all critique
+- Chooses evolution strategy (simplification, strengthening, differentiation)
+- Generates v2 while preserving core contribution
+- Creates audit trail of changes
+
+**Why automated?** Maintains thought continuity. Agent remembers context across all checks, identifies interactions between issues, provides coherent solution.
+
+---
+
+## Integration with Existing Work
+
+These commands work with your existing research workflow:
+
+```
+/hypothesize          New command - Generate hypotheses
+    |
+    v
+/stress-test          New command - Verify quality
+    |
+    v
+/evolve               New command - Fix issues
+    |
+    v
+/execute-analysis     Existing - Run experiments
+    |
+    v
+/verify-results       Existing - Check results
+```
+
+The new commands fill the gap between "research idea" and "execution-ready hypothesis."
+
+---
+
+## Next Steps
+
+### Getting Started
+
+1. **Read this guide** (you're almost done!)
+2. **Try with real research question**: Start with /hypothesize
+3. **Follow the recommendations**: System will guide you to next step
+4. **Iterate**: Expect 2-3 rounds of stress-test / evolve
+
+### Getting Help
+
+- Stuck? Run /stress-test - it will tell you what's wrong
+- Not sure which command? Use decision tree above
+- Want examples? See "Real Examples by Research Type" section
+
+### Remember
+
+- These are assistants, not replacements for domain expertise
+- Always review outputs critically
+- System accelerates workflow but you make final decisions
+- Document what works for your research type
+
+---
+
+## Quick Reference Card
+
+```
+GENERATE HYPOTHESES
+  /hypothesize "Your research question"
+  Add --debate for high-stakes work
+
+VERIFY QUALITY
+  /stress-test H-001
+  PASS (9+) = Ready
+  GAPS (6-9) = Fixable
+  BLOCKED (<6) = Major issues
+
+FIX ISSUES
+  /evolve H-001
+  Creates H-001-v2 addressing gaps
+  Re-run /stress-test after
+
+TYPICAL CYCLE
+  hypothesize → stress-test → evolve → stress-test → PASS
+  Time: 1-3 weeks depending on complexity
 ```
 
 ---
 
-## 7. File Organization Recommendations
+*This system implements research workflows from Google's AI Co-Scientist paper, adapted for general scientific research across domains.*
 
-Based on analysis of placing Google AI Co-Scientist logic into your system:
-
-### Structure Recommendation
-
-```
-/Users/andyhou/research/
-├── agents/                          # Core agent definitions (MAIN)
-│   ├── theorist-enhanced-en.md     # ✅ NEW: Multi/Debate/Evolve modes
-│   ├── verifier-enhanced-en.md     # ✅ NEW: Novelty/Obs/Assume modes
-│   ├── coordinator.md              # Existing: Elo ranking, meetings
-│   ├── experimentalist.md          # Existing: Feasibility, verification-loop
-│   ├── methodologist.md            # Existing: Review, eval-harness
-│   └── synthesizer.md              # TODO: Enhance as Meta-review
-│
-├── skills/                          # Atomic capabilities (TOOLS)
-│   ├── search_scientific_literature.md
-│   ├── format_biological_mechanism.md
-│   └── run_alphafold_prediction.md  # If API available
-│
-├── commands/                        # User entry points (UX)
-│   ├── /research                    # Quick research workflow trigger
-│   └── /debate                      # Quick debate trigger
-│
-└── docs/
-    └── ai-co-scientist-implementation-guide-en.md  # ✅ Complete guide
-```
-
-### Rationale
-
-1. **agents/**: Core logic & orchestration
-   - Multi-agent system coordination
-   - Complex reasoning and state management
-   - Chain-of-thought capabilities
-
-2. **skills/**: Reusable atomic capabilities
-   - External tool calls (search, prediction)
-   - Format conversion utilities
-   - Data processing functions
-
-3. **commands/**: User interaction simplification
-   - One-command research workflow
-   - Quick access to common patterns
-   - Improved developer experience
-
----
-
-## 8. Comparison Summary Table
-
-### Functional Equivalence
-
-| Feature Category | Google AI Co-Scientist | Your System | Status |
-|-----------------|----------------------|-------------|--------|
-| **Hypothesis Generation** | | | |
-| Literature-based | ✅ | ✅ | ✅ Equivalent |
-| Multi-hypothesis | ✅ | ✅ | ✅ Equivalent |
-| Debate-refined | ✅ | ✅ | ✅ Equivalent |
-| **Verification** | | | |
-| Novelty check | ✅ | ✅ | ✅ Equivalent |
-| Observation matching | ✅ | ✅ | ✅ Equivalent |
-| Assumption validation | ✅ | ✅ | ✅ Equivalent |
-| **Ranking** | | | |
-| Tournament | ✅ | ✅ | ✅ Equivalent |
-| Debate comparison | ✅ | ✅ | ✅ Equivalent |
-| **Evolution** | | | |
-| Critique-driven | ✅ | ✅ | ✅ Equivalent |
-| **Unique Features** | | | |
-| Domain adaptation | ❌ | ✅ | ⭐ Your advantage |
-| Goal-backward verify | ❌ | ✅ | ⭐ Your advantage |
-| Complete pipeline | 🟡 | ✅ | ⭐ Your advantage |
-| Eval harness | ❌ | ✅ | ⭐ Your advantage |
-
-**Overall Assessment**: ✅ **90%+ functional equivalence with unique advantages**
-
----
-
-## 9. Next Steps
-
-### Immediate Actions (Ready Now)
-
-1. **Test with real research problem**:
-   ```bash
-   # Start with your current research question
-   task theorist-enhanced --mode=multi "Goal: [your research goal]"
-   ```
-
-2. **Verify enhanced agents work**:
-   ```bash
-   # Test novelty checking
-   task verifier-enhanced --mode=novelty "Check hypothesis X"
-   ```
-
-3. **Document learnings**:
-   - Record what works well
-   - Note any prompt adjustments needed
-   - Track best practices
-
-### Short-term Enhancements (1-2 weeks)
-
-4. **Complete Phase 2**:
-   - Enhance Synthesizer as Meta-review agent
-   - Add cross-hypothesis pattern recognition
-
-5. **Create quick-start commands**:
-   - `/research [topic]` command
-   - `/debate [H-A] [H-B]` command
-
-### Long-term Optimizations (Optional)
-
-6. **Debate visualization**:
-   - Graphical debate tree
-   - Turn-by-turn visualization
-
-7. **Auto-tournament**:
-   - Automatic hypothesis comparison
-   - Background ranking updates
-
----
-
-## 10. Conclusion
-
-Your **everything-claude-research** system now has **complete capability** to execute all three core tasks from the Google AI Co-Scientist paper:
-
-✅ **Task 1: Generation** - Multi-hypothesis generation, debate-refined, evolution-capable
-✅ **Task 2: Reflection** - Novelty checking, observation matching, assumption validation
-✅ **Task 3: Ranking** - Elo tournament, pairwise debate, feasibility-weighted selection
-
-**Unique Advantages**:
-- 🌟 Domain dynamic adaptation (DOMAIN.md)
-- 🌟 Goal-backward verification
-- 🌟 Complete research pipeline (hypothesis → publication)
-- 🌟 Multi-layer quality assurance
-
-**Files Created**:
-1. `theorist-enhanced-en.md` - Enhanced hypothesis generation with 3 new modes
-2. `verifier-enhanced-en.md` - Enhanced verification with 3 new types
-3. `ai-co-scientist-implementation-guide-en.md` - Complete usage guide
-4. `ai-co-scientist-analysis-summary-en.md` - This document
-
-**You're ready to start conducting AI-assisted scientific research at the level described in the Google paper!** 🚀
-
----
-
-## Appendix: Key Insights from Paper
-
-### A. Prompt Engineering Principles
-
-1. **Structured Output**: Always specify output format (YAML/JSON)
-2. **Chain-of-Thought**: Include reasoning steps explicitly
-3. **Role-Playing**: Clear expert identity and domain knowledge
-4. **Multi-turn Iteration**: Feed critiques back for refinement
-5. **Termination Conditions**: Clear end signals ("HYPOTHESIS", "better idea: 1")
-
-### B. Evaluation Scoring Standards
-
-**Novelty Levels**:
-- High (5): New mechanism/target/concept
-- Medium-High (4): New combination/context
-- Medium (3): New detail/refinement
-- Low-Medium (2): Confirmatory/incremental
-- Low (1): Replication/minor variation
-
-**Observation Matching**:
-- ✅ Missing piece: Novel explanation for unexplained phenomenon
-- ⚠️ Already explained: Consistent but cause known
-- ⚠️ Other explanations: Could explain but alternatives better
-- 🟦 Neutral: Expected regardless of hypothesis
-- 🚫 Disproved: Contradicts observations
-
-### C. Domain-Specific Standards
-
-**For Statistical Theory**:
-- 🚩 No lower bound → Reject
-- 🚩 Proof gaps → Reject
-- 🚩 Assumptions unstated → Reject
-- ✅ Minimax optimal with tight bounds → Accept
-
-**For Policy Research**:
-- 🚩 No identification strategy → Reject
-- 🚩 Selection bias unaddressed → Reject
-- 🚩 Confounders ignored → Reject
-- ✅ Clear identification + mechanism → Accept
-
----
-
-*Document Version: 1.0*
 *Last Updated: 2026-01-27*
-*Status: Production Ready*
