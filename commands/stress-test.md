@@ -232,7 +232,29 @@ Next: `/evolve H-001` to fix identified gaps
 |---------|---------|------------|-----------|
 | **PASS** ✅ | All checks passed, ready for execution | ≥9.0/10 | `/execute-analysis` |
 | **GAPS** ⚠️ | Issues identified but fixable | 6.0-8.9/10 | `/evolve` to fix |
-| **BLOCKED** ❌ | Critical flaws, hypothesis needs major revision | <6.0/10 | Reconsider or `/hypothesize` anew |
+| **BLOCKED** 🚧 | Critical flaws, hypothesis needs major revision | <6.0/10 AND no contradictions | Reconsider or `/hypothesize` anew |
+| **DISPROVED** ❌ | Hypothesis contradicted by observations/evidence | ANY score if critical contradictions detected | **STOP** - Abandon hypothesis |
+
+### Verdict Priority Logic
+
+**DISPROVED has highest priority** - it overrides all other verdicts:
+
+```python
+def determine_verdict(confidence_score, contradictions):
+    # Step 1: Check for falsification (highest priority)
+    if critical_contradictions_detected(contradictions):
+        return "DISPROVED"  # Falsified by evidence
+
+    # Step 2: Normal scoring system (if not disproved)
+    if confidence_score >= 9.0:
+        return "PASS"
+    elif confidence_score >= 6.0:
+        return "GAPS"
+    else:
+        return "BLOCKED"
+```
+
+**Key insight**: A hypothesis can have high novelty (9/10) and clear mechanism (8/10), but if observations **directly contradict** core predictions, it must be marked **DISPROVED**. Scientific honesty requires abandoning falsified hypotheses, not "evolving" them.
 
 ## Options
 
@@ -300,6 +322,92 @@ Next: `/evolve H-001` to fix identified gaps
 # Focuses on novelty and assumption validity
 # Fast: 2-3 minutes vs 10-15 minutes for full
 ```
+
+### Example 4: DISPROVED Verdict (Critical Contradiction)
+
+```bash
+/stress-test H-007 --observations data/knockout_mice.csv
+
+# Hypothesis claims: "CXCR1/2 inhibition reduces AML progression"
+#
+# Observation found: CXCR1/2 knockout mice show INCREASED AML burden
+#   - Smith et al. 2023, Nature
+#   - KO mice survival: 15 days vs WT: 25 days (p<0.001)
+#
+# Contradiction:
+#   Hypothesis predicts: Inhibition → Less progression
+#   Observation shows:   Inhibition → MORE progression
+#
+# Result: DISPROVED ❌
+# Recommendation: STOP - Do not proceed with this hypothesis
+```
+
+**Output**:
+```markdown
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ STRESS TEST ► H-007: CXCR1/2 Inhibition for AML
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Overall Verdict: DISPROVED ❌
+
+**Critical Issue**: Hypothesis contradicted by experimental evidence
+
+**Confidence Score**: 4.5/10
+- Novelty: 7.5/10 ✓ (Novel mechanism)
+- Observation Match: 2.0/10 ❌ (Direct contradiction)
+- Assumption Validity: 6.5/10 ⚠️ (Mostly valid)
+
+─────────────────────────────────────────────────────
+
+## 🚨 CONTRADICTION DETECTED
+
+### Observation-Hypothesis Mismatch
+
+**Observation**: CXCR1/2 knockout mice show INCREASED AML burden
+- Source: [Smith et al. 2023, Nature]
+- Data: KO mice survival: 15 days vs WT: 25 days (p<0.001)
+- Quality: Tier 1 evidence (published RCT)
+
+**Hypothesis Claim**: CXCR1/2 inhibition reduces AML progression
+
+**Contradiction**:
+Hypothesis predicts: Inhibition → Less progression
+Observation shows: Inhibition (KO) → MORE progression
+
+**Verdict**: 🚫 Disproved - Core prediction contradicted by high-quality evidence
+
+─────────────────────────────────────────────────────
+
+## Recommendation
+
+❌ **DO NOT PROCEED** with this hypothesis
+
+This hypothesis has been **falsified by experimental evidence**.
+
+**Options**:
+1. **Abandon**: Shelve this hypothesis as disproven
+2. **Reframe**: Generate entirely new mechanism explaining opposite effect
+3. **Conditional**: Restrict scope to contexts where KO data doesn't apply
+
+**NOT recommended**: Using `/evolve` to "patch" the contradiction
+- Evolution fixes assumptions or scope issues
+- Evolution cannot fix core falsification by evidence
+- Scientific honesty requires abandoning disproved hypotheses
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Next: `/hypothesize` with refined understanding (avoid this mechanism)
+```
+
+**Important**: DISPROVED is different from BLOCKED:
+- **BLOCKED**: Hypothesis has logical flaws or weak support (fixable via evolution)
+- **DISPROVED**: Hypothesis contradicted by empirical evidence (must be abandoned)
+
+When a hypothesis is DISPROVED, the system automatically:
+1. Marks status as "DISPROVED" in STATE.md
+2. Removes from active consideration
+3. Preserves file for reference (learn from failures)
+4. Suggests alternative research directions
 
 ## Why This Design?
 
@@ -372,6 +480,13 @@ task verifier-enhanced --mode=assumption "Decompose H-001"
 - First stress-test usually finds gaps (normal!)
 - Use `/evolve` → `/stress-test` cycle
 - Typically 2-3 iterations to reach PASS
+
+🛑 **DISPROVED means STOP**
+- If verdict is DISPROVED, do NOT use `/evolve` to fix
+- Falsified hypotheses must be abandoned (scientific honesty)
+- Learn from failure: What assumption was wrong?
+- Generate new hypothesis with corrected understanding
+- **Evolution cannot repair falsification by evidence**
 
 ## Troubleshooting
 
