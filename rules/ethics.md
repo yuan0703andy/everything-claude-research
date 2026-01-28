@@ -17,19 +17,20 @@ Before ANY analysis or publication:
 
 ### Personal Data Protection
 
-```r
+```python
 # NEVER: Keep identifiers with analysis data
-analysis_data <- raw_data  # Has names, emails, etc.
+import pandas as pd
+
+analysis_data = raw_data  # Has names, emails, etc. - BAD!
 
 # ALWAYS: Strip identifiers, keep mapping separate
-analysis_data <- raw_data %>%
-  select(-name, -email, -ssn, -phone) %>%
-  mutate(participant_id = paste0("P", row_number()))
+analysis_data = raw_data.drop(columns=['name', 'email', 'ssn', 'phone']).copy()
+analysis_data['participant_id'] = [f"P{i}" for i in range(len(analysis_data))]
 
 # Keep ID mapping in SEPARATE secure file
-id_mapping <- raw_data %>%
-  select(participant_id = row_number(), name, email)
-write_csv(id_mapping, "secure/id_mapping.csv")  # Not in git!
+id_mapping = raw_data[['name', 'email']].copy()
+id_mapping['participant_id'] = [f"P{i}" for i in range(len(id_mapping))]
+id_mapping.to_csv("secure/id_mapping.csv", index=False)  # Not in git!
 ```
 
 ### De-identification Standards
@@ -58,50 +59,52 @@ data/processed/study_data.csv
 
 ### NEVER
 
-```r
+```python
 # WRONG: p-hacking
-for (control in all_possible_controls) {
-  model <- lm(y ~ x + control, data = data)
-  if (summary(model)$coefficients["x", "Pr(>|t|)"] < 0.05) {
-    print("Found significant result!")
-    break  # Stop and report only this one
-  }
-}
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+for control in all_possible_controls:
+    X = np.column_stack([x, control])
+    model = LinearRegression().fit(X, y)
+    # Compute p-value (simplified)
+    if compute_pvalue(model, X, y) < 0.05:
+        print("Found significant result!")
+        break  # Stop and report only this one - BAD!
 
 # WRONG: HARKing (Hypothesizing After Results Known)
 # See result → make up hypothesis → claim it was predicted
 
 # WRONG: Selective reporting
-if (p_value < 0.05) {
-  write_paper(result)  # Only report significant findings
-}
+if p_value < 0.05:
+    write_paper(result)  # Only report significant findings - BAD!
 ```
 
 ### ALWAYS
 
-```r
+```python
 # CORRECT: Pre-specify analyses
-preregistration <- list(
-  hypothesis = "X increases Y",
-  model = "lm(Y ~ X + age + gender)",
-  sample_size = 200,
-  alpha = 0.05
-)
+preregistration = {
+    'hypothesis': "X increases Y",
+    'model': "LinearRegression(Y ~ X + age + gender)",
+    'sample_size': 200,
+    'alpha': 0.05
+}
 # Register BEFORE data collection/analysis
 
 # CORRECT: Report all analyses
-all_results <- list(
-  main_analysis = run_main(),
-  sensitivity_1 = run_sensitivity_1(),
-  sensitivity_2 = run_sensitivity_2(),
-  failed_analysis = run_alternative()  # Even if p > 0.05
-)
+all_results = {
+    'main_analysis': run_main(),
+    'sensitivity_1': run_sensitivity_1(),
+    'sensitivity_2': run_sensitivity_2(),
+    'failed_analysis': run_alternative()  # Even if p > 0.05
+}
 
 # CORRECT: Distinguish exploratory vs confirmatory
-paper <- list(
-  confirmatory = preregistered_results,
-  exploratory = post_hoc_findings  # Clearly labeled
-)
+paper = {
+    'confirmatory': preregistered_results,
+    'exploratory': post_hoc_findings  # Clearly labeled
+}
 ```
 
 ## Reproducibility Ethics
@@ -145,15 +148,22 @@ MUST meet ALL criteria:
 
 ### Proper Citation
 
-```r
+```python
 # ALWAYS: Cite methods and software
 # In paper:
-# "Analyses conducted in R (R Core Team, 2023) using
-#  tidyverse (Wickham et al., 2019) and lme4 (Bates et al., 2015)"
+# "Analyses conducted in Python (van Rossum, 2023) using
+#  NumPy (Harris et al., 2020), JAX (Bradbury et al., 2018),
+#  and scikit-learn (Pedregosa et al., 2011)"
 
 # In code:
-citation("lme4")
-toBibtex(citation("lme4"))
+# Document versions
+import numpy as np
+import jax
+import sklearn
+
+print(f"NumPy version: {np.__version__}")
+print(f"JAX version: {jax.__version__}")
+print(f"scikit-learn version: {sklearn.__version__}")
 ```
 
 ### Data Sources

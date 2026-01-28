@@ -1,68 +1,68 @@
-# 研究基本原則
+# Research Principles
 
 ## Reproducibility
-- 所有分析必須可重現
-- 隨機種子必須固定並記錄
-- 數據處理步驟必須文檔化
-- 版本控制所有程式碼和分析腳本
+- All analyses must be reproducible
+- Random seeds must be fixed and documented
+- Data processing steps must be documented
+- Version control all code and analysis scripts
 
-## 誠實與嚴謹
-- 不做 p-hacking
-- 報告所有跑過的分析，不只是顯著的
-- 清楚區分探索性 vs 驗證性分析
-- 預先註冊重要假說驗證（當適用時）
-- 誠實報告失敗和無效結果
+## Honesty and Rigor
+- No p-hacking
+- Report all analyses run, not just significant ones
+- Clearly distinguish exploratory vs confirmatory analyses
+- Pre-register important hypothesis tests (when applicable)
+- Honestly report failures and null results
 
-## 文獻態度
-- 公平引用，包括反對意見
-- 不過度聲稱新穎性
-- 準確描述他人工作
-- 識別並引用奠基性研究
-- 對批評性文獻給予應有的重視
+## Literature Conduct
+- Fair citation, including opposing views
+- Do not overclaim novelty
+- Accurately describe others' work
+- Identify and cite foundational research
+- Give appropriate weight to critical literature
 
-## 程式碼規範
-- 優先 functional programming
-- 模組提供低階函數
-- main.py 保留清晰的研究步驟
-- 函數命名清晰描述用途
-- 複雜邏輯必須加註釋
-- 避免 magic numbers，使用命名常數
+## Code Standards
+- Prefer functional programming
+- Modules provide low-level functions
+- main.py preserves clear research steps
+- Function names clearly describe purpose
+- Complex logic must have comments
+- Avoid magic numbers, use named constants
 
-## 寫作原則
-- 清晰優先於華麗
-- 每段一個主要論點
-- 圖表要能獨立閱讀（完整的標題和註釋）
-- 避免誇大聲稱
-- 承認研究限制
+## Writing Principles
+- Clarity over elegance
+- One main point per paragraph
+- Figures must be self-contained (complete captions and annotations)
+- Avoid exaggerated claims
+- Acknowledge research limitations
 
-## 數據處理
-- 原始數據永不修改，保留副本
-- 數據清理步驟必須文檔化和可審計
-- 異常值處理必須有明確理由
-- 缺失值處理方法必須報告
+## Data Handling
+- Never modify raw data, keep backups
+- Data cleaning steps must be documented and auditable
+- Outlier treatment must have clear justification
+- Missing value handling method must be reported
 
-## 理論發展
-- 假說必須可證偽
-- 明確區分假說、預測、結果
-- 保持理論的簡潔性（Occam's Razor）
-- 識別理論的邊界條件
+## Theory Development
+- Hypotheses must be falsifiable
+- Clearly distinguish hypothesis, prediction, and results
+- Maintain theoretical parsimony (Occam's Razor)
+- Identify theory's boundary conditions
 
-## 審查標準
-- 對自己的工作保持批判態度
-- 主動尋找反面證據
-- 在團隊內部進行同行審查
-- 接受建設性批評
-- 不因個人投入而固守錯誤觀點
+## Review Standards
+- Maintain critical attitude toward own work
+- Actively seek contradictory evidence
+- Conduct internal peer review within team
+- Accept constructive criticism
+- Do not cling to wrong views due to personal investment
 
-## 倫理原則
-- 尊重數據來源和參與者
-- 保護敏感信息
-- 不操縱結果以符合預期
-- 適當聲明利益衝突
-- 公平對待合作者和貢獻者
+## Ethical Principles
+- Respect data sources and participants
+- Protect sensitive information
+- Do not manipulate results to fit expectations
+- Appropriately disclose conflicts of interest
+- Treat collaborators and contributors fairly
 
-## 資源管理
-- 合理評估時間需求
-- 不過度承諾
-- 及時識別並報告障礙
-- 尊重資源限制
+## Resource Management
+- Reasonably assess time requirements
+- Do not over-commit
+- Promptly identify and report obstacles
+- Respect resource constraints
